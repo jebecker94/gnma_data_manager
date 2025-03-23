@@ -1279,73 +1279,59 @@ if __name__ == '__main__' :
 
     # Set Folder Structure
     DATA_DIR = config.DATA_DIR
+    RAW_DIR = config.RAW_DIR
+    CLEAN_DIR = config.CLEAN_DIR
 
     # Make Data Directory
     os.makedirs(DATA_DIR)
+    os.makedirs(RAW_DIR)
+    os.makedirs(CLEAN_DIR)
 
     # Set Formatting Files
-    FORMATTING_FILE = config.DATA_DIR / 'dictionary_files/gnma_file_layouts.csv'
-    NIMON_FILE = config.DATA_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
+    FORMATTING_FILE = DATA_DIR / 'dictionary_files/gnma_file_layouts.csv'
+    NIMON_FILE = DATA_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
 
     # Import Ginnie Mae Data
-    DATA_FOLDER = config.DATA_DIR / 'raw'
-    SAVE_FOLDER = config.DATA_DIR / 'clean'
-    for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :# 'hllmon1', 'hllmon2'] :
-        unzip_gnma_data(DATA_FOLDER, SAVE_FOLDER, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='L')
+    for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :
+        unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='L')
     for FILE_PREFIX in ['dailyllmni', 'hdailyllmni'] :
-        unzip_gnma_data(DATA_FOLDER, SAVE_FOLDER, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='P')
+        unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='P')
     for FILE_PREFIX in ['nissues'] :
-        unzip_gnma_nissues_data(DATA_FOLDER, SAVE_FOLDER, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='D')
+        unzip_gnma_nissues_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='D')
     for FILE_PREFIX in ['nimonSFPS'] :
-        unzip_gnma_nimon_data(DATA_FOLDER, SAVE_FOLDER, NIMON_FILE, file_prefix=FILE_PREFIX, record_type='PS')
+        unzip_gnma_nimon_data(RAW_DIR, CLEAN_DIR, NIMON_FILE, file_prefix=FILE_PREFIX, record_type='PS')
 
     ## SUMMARY
     # Combine GNMA Issuance Data
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    combine_gnma_data(DATA_FOLDER, SAVE_FOLDER, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
-    # combine_gnma_data(DATA_FOLDER, SAVE_FOLDER, file_prefix='hdailyllmni', record_type='L', file_suffix='201407-202502')
-    combine_gnma_pools(DATA_FOLDER, SAVE_FOLDER, file_suffix='201309-202502')
-    # combine_gnma_data(DATA_FOLDER, SAVE_FOLDER, file_prefix='nissues', record_type='D', file_suffix='201202-202010')
-    combine_gnma_data(DATA_FOLDER, SAVE_FOLDER, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
+    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='hdailyllmni', record_type='L', file_suffix='201407-202502')
+    combine_gnma_pools(CLEAN_DIR, DATA_DIR, file_suffix='201309-202502')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nissues', record_type='D', file_suffix='201202-202010')
+    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
 
     # Get GNMA Liquidation Reasons
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    get_liquidation_reasons(DATA_FOLDER, SAVE_FOLDER, file_suffix='_201309-202502')
+    get_liquidation_reasons(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
 
     # Create Final Dataset
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    create_final_dataset(DATA_FOLDER, SAVE_FOLDER, file_suffix='_201309-202502')
+    create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
 
     ## PERFORMANCE
     # Create GNMA Yearly Performance Files
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR / 'clean'
     for FILE_PREFIX in ['llmon1', 'llmon2'] :
-        create_yearly_gnma_performance_files(DATA_FOLDER, SAVE_FOLDER, file_prefix=FILE_PREFIX)
-    # create_performance_summary_final(DATA_FOLDER, SAVE_FOLDER, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
-    # create_performance_summaries(DATA_FOLDER, SAVE_FOLDER, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
+        create_yearly_gnma_performance_files(CLEAN_DIR, CLEAN_DIR, file_prefix=FILE_PREFIX)
+    # create_performance_summary_final(CLEAN_DIR, CLEAN_DIR, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
+    # create_performance_summaries(CLEAN_DIR, CLEAN_DIR, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
 
     # Combine Performance Summaries
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    # combine_performance_summaries(DATA_FOLDER, SAVE_FOLDER, file_suffix='_1983-2025')
+    # combine_performance_summaries(CLEAN_DIR, DATA_DIR, file_suffix='_1983-2025')
 
     ## ISSUERS
     # Combine Ginnie Issuers
-    DATA_FOLDER = config.DATA_DIR / 'raw'
-    SAVE_FOLDER = config.DATA_DIR / 'clean'
-    # combine_gnma_issuer_files(DATA_FOLDER, SAVE_FOLDER, FORMATTING_FILE, file_prefix='issrinfo', file_suffix='201804-202412')
-    # combine_gnma_issuer_files(DATA_FOLDER, SAVE_FOLDER, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202411')
+    # combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issrinfo', file_suffix='201804-202412')
+    # combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202411')
 
     # Clean Ginnie Issuers
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    # clean_gnma_issuers(DATA_FOLDER, SAVE_FOLDER, issrinfo_suffix='201804-202412', issuers_suffix='201208-202411')
+    # clean_gnma_issuers(CLEAN_DIR, DATA_DIR, issrinfo_suffix='201804-202412', issuers_suffix='201208-202411')
 
     # Get GNMA Servicer Changes
-    DATA_FOLDER = config.DATA_DIR / 'clean'
-    SAVE_FOLDER = config.DATA_DIR
-    # import_gnma_servicer_changes(DATA_FOLDER, SAVE_FOLDER, file_suffix='_201309-202412')
+    # import_gnma_servicer_changes(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202412')
