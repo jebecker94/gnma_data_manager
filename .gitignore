@@ -11,3 +11,6 @@ data/*
 
 # Dictionary Files (PDF)
 dictionary_files/*.pdf
+
+# Config Files
+.env
