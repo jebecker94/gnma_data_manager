@@ -21,7 +21,7 @@ import pyarrow.parquet as pq
 from io import StringIO
 import config
 
-#%% Local Functions
+#%% UNZIPPING
 # Skip Row (For Handling Reading Errors)
 def skip_row(row) :
     """
@@ -44,14 +44,14 @@ def skip_row(row) :
 # Convert MBS/HMBS Files to Compressed CSV
 def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
     """
-    Unzip files from GNMA disclosure data collection, and create gzipped csvs.
+    Unzip files from GNMA disclosure data collection, and create parquet files.
 
     Parameters
     ----------
     data_folder : string
         Folder containing raw data in zip archives.
     save_folder : string
-        Folder to save gzipped csvs.
+        Folder to save parquet files.
     formatting_file : string
         File path of GNMA formatting files.
     file_prefix : string, optional
@@ -103,7 +103,7 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
                         p.wait()
 
                     # Open File
-                    newfilename = data_folder + '/' + file
+                    newfilename = f'{data_folder}/{file}'
                     with open(newfilename, encoding = 'iso-8859-1') as f :
                         lines = f.readlines()
 
@@ -132,7 +132,176 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
                     dt = pa.Table.from_pandas(df)
                     pq.write_table(dt, save_file_name)
 
-## SUMMARY
+# Convert MBS/HMBS Files to Compressed CSV
+def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
+    """
+    Unzip files from GNMA disclosure data collection, and create gzipped csvs.
+
+    Parameters
+    ----------
+    data_folder : string
+        Folder containing raw data in zip archives.
+    save_folder : string
+        Folder to save gzipped csvs.
+    formatting_file : string
+        File path of GNMA formatting files.
+    file_prefix : string, optional
+        Prefix of files to clean. The default is 'dailyllmni'.
+    replace_files : boolean, optional
+        Whether to replace clean files if already exist. The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
+
+    # Get Formatting
+    formatting = pd.read_csv(formatting_file)
+    formatting = formatting[formatting['File Prefix'] == file_prefix]
+
+    # Get Zip Folders
+    folders = glob.glob(f'{data_folder}/{file_prefix}_*.zip')
+    for folder in folders :
+
+        # Get Year-Month Suffix
+        ym = int(folder.split(f'{file_prefix}_')[1].split('.zip')[0])
+        save_file_name = f'{save_folder}/{file_prefix}_{ym}{record_type}.parquet'
+
+        if not os.path.exists(save_file_name) or replace_files :
+
+            with zipfile.ZipFile(folder) as z :
+
+                # Only Worry about .txt Files
+                txt_files = [x for x in z.namelist() if ".txt" in x.lower()]
+
+                for file in txt_files :
+
+                    # Get Specific Format
+                    formats = formatting[(formatting['First Month'] <= ym) & (formatting['Last Month'] >= ym) & (formatting['Record Type'] == record_type)]
+
+                    # Extract and Create Temporary File
+                    if verbose :
+                        print('Extracting File:', file, 'Year/Month:', ym)
+                    try :
+                        z.extract(file, path = data_folder)
+                    except :
+                        if verbose :
+                            print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
+                        unzip_string = "C:/Program Files/7-Zip/7z.exe"
+                        p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
+                        p.wait()
+
+                    # Open File
+                    newfilename = f'{data_folder}/{file}'
+                    with open(newfilename, encoding = 'iso-8859-1') as f :
+                        lines = f.readlines()
+
+                    # Read Data
+                    df = pd.DataFrame([])
+                    for _, field in formats.iterrows() :
+
+                        # Read Format File
+                        field_name = field['Data Item'].strip()
+                        begin_char = field['Begin'] - 1
+                        end_char = field['End']
+
+                        # Display Progress and Read Lines
+                        if verbose :
+                            print("Reading in Field:", field_name)
+                        df[field_name] = [x[begin_char:end_char].strip() for x in lines if x[18:19] == record_type]
+
+                        # Convert if Numeric
+                        if field['Type'] == 'Numeric' :
+                            df[field_name] = pd.to_numeric(df[field_name], errors = 'coerce')
+
+                    # Remove Temporary File
+                    os.remove(newfilename)
+
+                    # Save
+                    dt = pa.Table.from_pandas(df)
+                    pq.write_table(dt, save_file_name)
+
+# Convert MBS/HMBS Files to Compressed CSV
+def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix = 'nimonSFPS', replace_files = False, record_type = 'PS', verbose = False) :
+    """
+    Unzip files from GNMA disclosure data collection, and create gzipped csvs.
+
+    Parameters
+    ----------
+    data_folder : string
+        Folder containing raw data in zip archives.
+    save_folder : string
+        Folder to save gzipped csvs.
+    formatting_file : string
+        File path of GNMA formatting files.
+    file_prefix : string, optional
+        Prefix of files to clean. The default is 'dailyllmni'.
+    replace_files : boolean, optional
+        Whether to replace clean files if already exist. The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
+
+    # Get Formatting
+    cols = pd.read_csv(formatting_file)
+    # cols = cols[cols['File Prefix'] == file_prefix]
+    cols = cols.drop_duplicates(subset = ['Record Type', 'Item'])
+    cols = cols.loc[cols['Record Type'] == record_type]
+    
+    #
+    folders = glob.glob(f'{data_folder}/{file_prefix}_*.zip')
+    for folder in folders :
+
+        # Get Year-Month Suffix
+        ym = int(folder.split(f'{file_prefix}_')[1].split('.zip')[0])
+        save_file_name = f'{save_folder}/{file_prefix}_{ym}{record_type}.parquet'
+
+        if not os.path.exists(save_file_name) or replace_files :
+
+            with zipfile.ZipFile(folder) as z :
+
+                # Only Worry about .txt Files
+                txt_files = [x for x in z.namelist() if ".txt" in x.lower()]
+                for file in txt_files :
+                    
+                    # Get Specific Format
+                    # formats = formatting[(formatting['First Month'] <= ym) & (formatting['Last Month'] >= ym) & (formatting['Record Type'] == record_type)]
+
+                    # Extract and Create Temporary File
+                    if verbose :
+                        print('Extracting File:', file, 'Year/Month:', ym)
+                    try :
+                        z.extract(file, path = data_folder)
+                    except :
+                        if verbose :
+                            print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
+                        unzip_string = "C:/Program Files/7-Zip/7z.exe"
+                        p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
+                        p.wait()
+
+                    # Open File
+                    newfilename = f'{data_folder}/{file}'
+                    with open(newfilename, encoding = 'iso-8859-1') as f :
+                        lines = f.readlines()
+                    lines = [x for x in lines if x.startswith(record_type)]
+                    content = ''.join(lines)
+                    df = pd.read_csv(StringIO(content), sep = '|', header = None)
+                    
+                    # Rename Columns
+                    df.columns = list(cols['Data Element'])
+                    
+                    # Save
+                    df = pa.Table.from_pandas(df, preserve_index = False)
+                    pq.write_table(df, save_file_name)
+
+                    # Remove Temporary File
+                    os.remove(newfilename)
+
+#%% SUMMARY
 # Combine Ginnie Mae Data
 def combine_gnma_data(data_folder, save_folder, file_prefix = 'dailyllmni', record_type = 'L', file_suffix = '') :
     """
@@ -766,7 +935,7 @@ def create_performance_time_series(data_folder, save_folder) :
         dt = pa.Table.from_pandas(df_js, preserve_index = True)
         pq.write_table(dt, DATA_DIR / f'gnma_performance_time_series_{year}.parquet')
 
-## ISSUERS
+#%% ISSUERS
 # Combine Ginnie Mae Issuer Files
 def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_prefix = 'issrinfo', file_suffix = '') :
     """
@@ -951,6 +1120,7 @@ def clean_gnma_issuers(data_folder, save_folder, issrinfo_suffix = '', issuers_s
               index = False,
               )
 
+#%% MISCELLANEOUS
 # Import GNMA Servicer Changes
 def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', verbose = False) :
     """
@@ -1105,175 +1275,6 @@ def match_gnma_loan_modifications(gnma_file) :
     # Return Potential Matches
     return df
 
-# Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
-    """
-    Unzip files from GNMA disclosure data collection, and create gzipped csvs.
-
-    Parameters
-    ----------
-    data_folder : string
-        Folder containing raw data in zip archives.
-    save_folder : string
-        Folder to save gzipped csvs.
-    formatting_file : string
-        File path of GNMA formatting files.
-    file_prefix : string, optional
-        Prefix of files to clean. The default is 'dailyllmni'.
-    replace_files : boolean, optional
-        Whether to replace clean files if already exist. The default is False.
-
-    Returns
-    -------
-    None.
-
-    """
-
-    # Get Formatting
-    formatting = pd.read_csv(formatting_file)
-    formatting = formatting[formatting['File Prefix'] == file_prefix]
-
-    # Get Zip Folders
-    folders = glob.glob(f'{data_folder}/{file_prefix}_*.zip')
-    for folder in folders :
-
-        # Get Year-Month Suffix
-        ym = int(folder.split(f'{file_prefix}_')[1].split('.zip')[0])
-        save_file_name = f'{save_folder}/{file_prefix}_{ym}{record_type}.parquet'
-
-        if not os.path.exists(save_file_name) or replace_files :
-
-            with zipfile.ZipFile(folder) as z :
-
-                # Only Worry about .txt Files
-                txt_files = [x for x in z.namelist() if ".txt" in x.lower()]
-
-                for file in txt_files :
-
-                    # Get Specific Format
-                    formats = formatting[(formatting['First Month'] <= ym) & (formatting['Last Month'] >= ym) & (formatting['Record Type'] == record_type)]
-
-                    # Extract and Create Temporary File
-                    if verbose :
-                        print('Extracting File:', file, 'Year/Month:', ym)
-                    try :
-                        z.extract(file, path = data_folder)
-                    except :
-                        if verbose :
-                            print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
-                        unzip_string = "C:/Program Files/7-Zip/7z.exe"
-                        p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
-                        p.wait()
-
-                    # Open File
-                    newfilename = data_folder + '/' + file
-                    with open(newfilename, encoding = 'iso-8859-1') as f :
-                        lines = f.readlines()
-
-                    # Read Data
-                    df = pd.DataFrame([])
-                    for _, field in formats.iterrows() :
-
-                        # Read Format File
-                        field_name = field['Data Item'].strip()
-                        begin_char = field['Begin'] - 1
-                        end_char = field['End']
-
-                        # Display Progress and Read Lines
-                        if verbose :
-                            print("Reading in Field:", field_name)
-                        df[field_name] = [x[begin_char:end_char].strip() for x in lines if x[18:19] == record_type]
-
-                        # Convert if Numeric
-                        if field['Type'] == 'Numeric' :
-                            df[field_name] = pd.to_numeric(df[field_name], errors = 'coerce')
-
-                    # Remove Temporary File
-                    os.remove(newfilename)
-
-                    # Save
-                    dt = pa.Table.from_pandas(df)
-                    pq.write_table(dt, save_file_name)
-
-# Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix = 'nimonSFPS', replace_files = False, record_type = 'PS', verbose = False) :
-    """
-    Unzip files from GNMA disclosure data collection, and create gzipped csvs.
-
-    Parameters
-    ----------
-    data_folder : string
-        Folder containing raw data in zip archives.
-    save_folder : string
-        Folder to save gzipped csvs.
-    formatting_file : string
-        File path of GNMA formatting files.
-    file_prefix : string, optional
-        Prefix of files to clean. The default is 'dailyllmni'.
-    replace_files : boolean, optional
-        Whether to replace clean files if already exist. The default is False.
-
-    Returns
-    -------
-    None.
-
-    """
-
-    # Get Formatting
-    cols = pd.read_csv(formatting_file)
-    # cols = cols[cols['File Prefix'] == file_prefix]
-    cols = cols.drop_duplicates(subset = ['Record Type', 'Item'])
-    cols = cols.loc[cols['Record Type'] == record_type]
-    
-    #
-    folders = glob.glob(f'{data_folder}/{file_prefix}_*.zip')
-    for folder in folders :
-
-        # Get Year-Month Suffix
-        ym = int(folder.split(f'{file_prefix}_')[1].split('.zip')[0])
-        save_file_name = f'{save_folder}/{file_prefix}_{ym}{record_type}.parquet'
-
-        if not os.path.exists(save_file_name) or replace_files :
-
-            with zipfile.ZipFile(folder) as z :
-
-                # Only Worry about .txt Files
-                txt_files = [x for x in z.namelist() if ".txt" in x.lower()]
-                for file in txt_files :
-                    
-                    # Get Specific Format
-                    # formats = formatting[(formatting['First Month'] <= ym) & (formatting['Last Month'] >= ym) & (formatting['Record Type'] == record_type)]
-
-                    # Extract and Create Temporary File
-                    if verbose :
-                        print('Extracting File:', file, 'Year/Month:', ym)
-                    try :
-                        z.extract(file, path = data_folder)
-                    except :
-                        if verbose :
-                            print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
-                        unzip_string = "C:/Program Files/7-Zip/7z.exe"
-                        p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
-                        p.wait()
-
-                    # Open File
-                    newfilename = f'{data_folder}/{file}'
-                    with open(newfilename, encoding = 'iso-8859-1') as f :
-                        lines = f.readlines()
-                    lines = [x for x in lines if x.startswith(record_type)]
-                    content = ''.join(lines)
-                    df = pd.read_csv(StringIO(content), sep = '|', header = None)
-                    
-                    # Rename Columns
-                    df.columns = list(cols['Data Element'])
-                    
-                    # Save
-                    df = pa.Table.from_pandas(df, preserve_index = False)
-                    pq.write_table(df, save_file_name)
-
-                    # Remove Temporary File
-                    os.remove(newfilename)
-
 #%% Main Routine
 if __name__ == '__main__' :
 
@@ -1281,18 +1282,23 @@ if __name__ == '__main__' :
     DATA_DIR = config.DATA_DIR
     RAW_DIR = config.RAW_DIR
     CLEAN_DIR = config.CLEAN_DIR
+    PROJECT_DIR = config.PROJECT_DIR
 
     # Make Data Directory
-    os.makedirs(DATA_DIR)
-    os.makedirs(RAW_DIR)
-    os.makedirs(CLEAN_DIR)
+    if not os.path.exists(DATA_DIR) :
+        os.makedirs(DATA_DIR)
+    if not os.path.exists(RAW_DIR) :
+        os.makedirs(RAW_DIR)
+    if not os.path.exists(CLEAN_DIR) :
+        os.makedirs(CLEAN_DIR)
 
     # Set Formatting Files
-    FORMATTING_FILE = DATA_DIR / 'dictionary_files/gnma_file_layouts.csv'
-    NIMON_FILE = DATA_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
+    FORMATTING_FILE = PROJECT_DIR / 'dictionary_files/gnma_file_layouts.csv'
+    NIMON_FILE = PROJECT_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
 
     # Import Ginnie Mae Data
-    for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :
+    # for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :
+    for FILE_PREFIX in ['dailyllmni', 'hdailyllmni'] :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='L')
     for FILE_PREFIX in ['dailyllmni', 'hdailyllmni'] :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='P')
@@ -1303,22 +1309,22 @@ if __name__ == '__main__' :
 
     ## SUMMARY
     # Combine GNMA Issuance Data
-    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
     # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='hdailyllmni', record_type='L', file_suffix='201407-202502')
-    combine_gnma_pools(CLEAN_DIR, DATA_DIR, file_suffix='201309-202502')
+    # combine_gnma_pools(CLEAN_DIR, DATA_DIR, file_suffix='201309-202502')
     # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nissues', record_type='D', file_suffix='201202-202010')
-    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
 
     # Get GNMA Liquidation Reasons
-    get_liquidation_reasons(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
+    # get_liquidation_reasons(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
 
     # Create Final Dataset
-    create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
+    # create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
 
     ## PERFORMANCE
     # Create GNMA Yearly Performance Files
-    for FILE_PREFIX in ['llmon1', 'llmon2'] :
-        create_yearly_gnma_performance_files(CLEAN_DIR, CLEAN_DIR, file_prefix=FILE_PREFIX)
+    # for FILE_PREFIX in ['llmon1', 'llmon2'] :
+    #     create_yearly_gnma_performance_files(CLEAN_DIR, CLEAN_DIR, file_prefix=FILE_PREFIX)
     # create_performance_summary_final(CLEAN_DIR, CLEAN_DIR, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
     # create_performance_summaries(CLEAN_DIR, CLEAN_DIR, file_prefixes=['llmon1','llmon2'], DELTA=.98, min_year=1983, max_year=2025)
 
