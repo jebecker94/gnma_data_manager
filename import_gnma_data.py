@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on: Sat Dec 3 09:49:44 2022
-Last updated on: Sunday March 23 09:30:00 2025
+Last updated on: Friday May 2 23:21:00 2025
 @author: Jonathan E. Becker
 """
 
@@ -42,7 +42,7 @@ def skip_row(row) :
     return 'skip'
 
 # Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
+def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dailyllmni', replace_files=False, record_type='L', verbose=False) :
     """
     Unzip files from GNMA disclosure data collection, and create parquet files.
 
@@ -83,7 +83,6 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
 
                 # Only Worry about .txt Files
                 txt_files = [x for x in z.namelist() if ".txt" in x.lower()]
-
                 for file in txt_files :
 
                     # Get Specific Format
@@ -93,8 +92,7 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
                     if verbose :
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
-                        z.extract(file, path = data_folder)
-                        print('Successful extraction!')
+                        z.extract(file, path=data_folder)
                     except :
                         if verbose :
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
@@ -104,8 +102,9 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
 
                     # Open File
                     newfilename = f'{data_folder}/{file}'
-                    with open(newfilename, encoding = 'iso-8859-1') as f :
+                    with open(newfilename, encoding='iso-8859-1') as f :
                         lines = f.readlines()
+                    lines = [x for x in lines if x[0]==record_type]
 
                     # Read Data
                     df = pd.DataFrame([])
@@ -113,24 +112,23 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix = 'da
 
                         # Read Format File
                         field_name = field['Data Item'].strip()
-                        begin_char = field['Begin'] - 1
+                        begin_char = field['Begin']-1
                         end_char = field['End']
 
                         # Display Progress and Read Lines
                         if verbose :
                             print("Reading in Field:", field_name)
-                        df[field_name] = [x[begin_char:end_char].strip() for x in lines if x[0:1] == record_type]
+                        df[field_name] = [x[begin_char:end_char].strip() for x in lines]
 
                         # Convert if Numeric
                         if field['Type'] == 'Numeric' :
-                            df[field_name] = pd.to_numeric(df[field_name], errors = 'coerce')
+                            df[field_name] = pd.to_numeric(df[field_name], errors='coerce')
 
                     # Remove Temporary File
                     os.remove(newfilename)
 
                     # Save
-                    dt = pa.Table.from_pandas(df)
-                    pq.write_table(dt, save_file_name)
+                    df.to_parquet(save_file_name, index=False)
 
 # Convert MBS/HMBS Files to Compressed CSV
 def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
@@ -196,6 +194,7 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                     newfilename = f'{data_folder}/{file}'
                     with open(newfilename, encoding = 'iso-8859-1') as f :
                         lines = f.readlines()
+                    lines = [x for x in lines if x[18:19]==record_type]
 
                     # Read Data
                     df = pd.DataFrame([])
@@ -209,7 +208,7 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                         # Display Progress and Read Lines
                         if verbose :
                             print("Reading in Field:", field_name)
-                        df[field_name] = [x[begin_char:end_char].strip() for x in lines if x[18:19] == record_type]
+                        df[field_name] = [x[begin_char:end_char].strip() for x in lines]
 
                         # Convert if Numeric
                         if field['Type'] == 'Numeric' :
@@ -223,7 +222,7 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                     pq.write_table(dt, save_file_name)
 
 # Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix = 'nimonSFPS', replace_files = False, record_type = 'PS', verbose = False) :
+def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix='nimonSFPS', replace_files=False, record_type='PS', verbose=False) :
     """
     Unzip files from GNMA disclosure data collection, and create gzipped csvs.
 
@@ -236,7 +235,7 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
     formatting_file : string
         File path of GNMA formatting files.
     file_prefix : string, optional
-        Prefix of files to clean. The default is 'dailyllmni'.
+        Prefix of files to clean. The default is 'nimonSFPS'.
     replace_files : boolean, optional
         Whether to replace clean files if already exist. The default is False.
 
@@ -289,14 +288,13 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
                         lines = f.readlines()
                     lines = [x for x in lines if x.startswith(record_type)]
                     content = ''.join(lines)
-                    df = pd.read_csv(StringIO(content), sep = '|', header = None)
+                    df = pd.read_csv(StringIO(content), sep='|', header=None)
                     
                     # Rename Columns
-                    df.columns = list(cols['Data Element'])
+                    df.columns = list(cols['Data Element'])[:len(df.columns)] # May want to adjust this... just making a concession to the formatting file
                     
                     # Save
-                    df = pa.Table.from_pandas(df, preserve_index = False)
-                    pq.write_table(df, save_file_name)
+                    df.to_parquet(save_file_name, index=False)
 
                     # Remove Temporary File
                     os.remove(newfilename)
@@ -937,7 +935,7 @@ def create_performance_time_series(data_folder, save_folder) :
 
 #%% ISSUERS
 # Combine Ginnie Mae Issuer Files
-def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_prefix = 'issrinfo', file_suffix = '') :
+def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_prefix='issrinfo', file_suffix='') :
     """
     Combine GNMA issuer files for either issrinfo or issuer (active) prefixes.
 
@@ -974,7 +972,7 @@ def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_pr
 
         # Display Progress
         print('Adding issuers from file:', file)
-        ym = file.split(f'{data_folder}/{file_prefix}_')[1].split('.txt')[0]
+        ym = os.path.basename(file).split(f'{file_prefix}_')[1].split('.txt')[0]
 
         # Read File
         with open(file, encoding = 'iso-8859-1') as f :
@@ -994,7 +992,7 @@ def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_pr
             
             # Convert if Numeric
             if field['Type'] == 'Numeric' :
-                df[field_name] = pd.to_numeric(df[field_name], errors = 'coerce')
+                df[field_name] = pd.to_numeric(df[field_name], errors='coerce')
 
         # Append Monthly Issuers
         df['Year/Month'] = int(ym)
@@ -1003,12 +1001,11 @@ def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_pr
     # Combine and Save
     issuers = pd.concat(issuers)
     filler_columns = [x for x in issuers.columns if 'Filler' in x]
-    issuers.drop(columns = filler_columns, inplace = True)
-    issuers.to_csv(f'{save_folder}/{file_prefix}_combined_{file_suffix}.csv.gz',
-                   compression = 'gzip',
-                   sep = '|',
-                   index = False,
-                   )
+    issuers = issuers.drop(columns=filler_columns)
+    issuers.to_parquet(
+        f'{save_folder}/{file_prefix}_combined_{file_suffix}.parquet',
+        index = False,
+    )
 
 # Clean GNMA Issuers
 def clean_gnma_issuers(data_folder, save_folder, issrinfo_suffix = '', issuers_suffix = '') :
@@ -1128,14 +1125,14 @@ def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', ver
 
     Parameters
     ----------
-    data_folder : TYPE
-        DESCRIPTION.
-    save_folder : TYPE
-        DESCRIPTION.
-    file_suffix : TYPE, optional
-        DESCRIPTION. The default is ''.
-    verbose : TYPE, optional
-        DESCRIPTION. The default is False.
+    data_folder : str
+        Folder where data is stored as parquet files.
+    save_folder : str
+        Folder where the combined servicing transfer file will be saved.
+    file_suffix : str, optional
+        String to add to the end of the combined file paths. The default is ''.
+    verbose : bool, optional
+        Whether to print progress while loading. The default is False.
 
     Returns
     -------
@@ -1144,13 +1141,19 @@ def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', ver
     """
 
     # Read and Write Options
-    convert_options = csv.ConvertOptions(include_columns = ['Disclosure Sequence Number', 'As of Date', 'Issuer ID', 'Seller Issuer ID', 'Loan Age', 'First Payment Date', 'Third-Party Origination Type'])
-    parse_options = csv.ParseOptions(delimiter = ',')
-    write_options = csv.WriteOptions(delimiter = '|')
+    columns = [
+        'Disclosure Sequence Number',
+        'As of Date',
+        'Issuer ID',
+        'Seller Issuer ID',
+        'Loan Age',
+        'First Payment Date',
+        'Third-Party Origination Type',
+    ]
 
     # Get Performance Files
-    files = glob.glob(f'{data_folder}/llmon1_*.csv.gz')
-    files += glob.glob(f'{data_folder}/llmon2_*.csv.gz')
+    files = glob.glob(f'{data_folder}/llmon1_*.parquet')
+    files += glob.glob(f'{data_folder}/llmon2_*.parquet')
     files.sort(reverse = True)
 
     # Read Monthly Servicer Changes
@@ -1162,11 +1165,11 @@ def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', ver
             print('Importing servicer changes from file:', file)
 
         try :
-            df_a = csv.read_csv(file, convert_options = convert_options, parse_options = parse_options).to_pandas()
-            df_a = df_a.loc[~pd.isna(df_a['Seller Issuer ID'])]
+            df_a = pd.read_parquet(file, columns=columns, filters=[('Seller Issuer ID','not in',[None, np.nan])])
             df_a['As of Date'] = pd.to_datetime(df_a['As of Date'], format='%Y%m')
             df_a['First Payment Date'] = pd.to_datetime(df_a['First Payment Date'], format='%Y%m%d')
             df.append(df_a)
+            del df_a
         except :
             pass
 
@@ -1174,38 +1177,35 @@ def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', ver
     df = pd.concat(df)
 
     # Combine and Save (Write with PyArrow)
-    save_file = f'{save_folder}/gnma_combined_loan_servicer_changes{file_suffix}.csv.gz'
-    dt = pa.Table.from_pandas(df, preserve_index = False)
-    with pa.CompressedOutputStream(save_file, "gzip") as out :
-        csv.write_csv(dt, out, write_options = write_options)
-        
+    save_file = f'{save_folder}/gnma_combined_loan_servicer_changes{file_suffix}.parquet'
+    df.to_parquet(save_file, index=False)
+
     # Replace Loan Age Where Missing
     df['Loan Age (New)'] = [relativedelta.relativedelta(x['As of Date'],x['First Payment Date']) for i,x in df.iterrows()]
-    df['Loan Months'] = [x['Loan Age (New)'].months + 12*x['Loan Age (New)'].years + 1 for i,x in df.iterrows()]
+    df['Loan Months'] = [x['Loan Age (New)'].months + 12*x['Loan Age (New)'].years + 1 for _,x in df.iterrows()]
     df['Loan Age'] = df['Loan Age'].fillna(df['Loan Months'])
-    df = df.drop(columns = ['Loan Age (New)', 'Loan Months'])
+    df = df.drop(columns=['Loan Age (New)','Loan Months'])
 
     # Rank
-    df = df.sort_values(by = ['Disclosure Sequence Number', 'First Payment Date', 'Loan Age'])
+    df = df.sort_values(by=['Disclosure Sequence Number','First Payment Date','Loan Age'])
     df['Rank'] = df.groupby(['Disclosure Sequence Number','First Payment Date'])['Loan Age'].transform('rank')
 
     # Combine
-    df_master = df.loc[df['Rank'] == 1][['Disclosure Sequence Number', 'First Payment Date']]
+    df_master = df.query('Rank == 1')[['Disclosure Sequence Number','First Payment Date']]
     for rank in range(1, int(np.max(df['Rank'])) + 1) :
-        df_a = df.loc[df['Rank'] == rank]
-        df_a = df_a.drop(columns = ['Rank'])
+        df_a = df.query(f'Rank == {rank}')
+        df_a = df_a[['Disclosure Sequence Number','As of Date','Issuer ID','Seller Issuer ID','Loan Age','First Payment Date']]
         for column in ['As of Date', 'Issuer ID', 'Seller Issuer ID', 'Loan Age'] :
             df_a = df_a.rename(columns = {column: f'{column} {rank}'})
-        df_master = df_master.merge(df_a,
-                                    on = ['Disclosure Sequence Number','First Payment Date'],
-                                    how = 'outer',
-                                    )
+        df_master = df_master.merge(
+            df_a,
+            on=['Disclosure Sequence Number','First Payment Date'],
+            how='left',
+        )
 
     # Save Wide
-    df_master.to_csv(f"{save_folder}/gnma_combined_loan_servicer_changes_wide{file_suffix}.csv.gz",
-              sep = '|',
-              )
-    
+    df_master.to_parquet(f'{save_folder}/gnma_combined_loan_servicer_changes_wide{file_suffix}.parquet', index=False)
+
 # Match Modified and Non-modified Loans
 def match_gnma_loan_modifications(gnma_file) :
     """
@@ -1223,13 +1223,9 @@ def match_gnma_loan_modifications(gnma_file) :
     """
 
     # Load Data
-    gnma_file = "/project/cl/external_data/securities_data/gnma/gnma_combined_data_201309-202312.parquet"
-    df = pq.read_table(gnma_file,
-                       filters = [('Loan Origination Date','>=',20180101)],
-                       ).to_pandas(date_as_object = False)
+    gnma_file = DATA_DIR / 'gnma_combined_data_201309-202502.parquet'
+    df = pd.read_parquet(gnma_file, filters = [('Loan Origination Date','>=',20180101)])
 
-    df = df.loc[df['Loan Origination Date'] >= 20180101]
-    
     # Sort Data
     group_columns = ['Loan Origination Date', 'Original Principal Balance', 'State', 'Agency', 'Loan Interest Rate']
     df['idx'] = df.groupby(group_columns).ngroup()
@@ -1284,7 +1280,7 @@ if __name__ == '__main__' :
     CLEAN_DIR = config.CLEAN_DIR
     PROJECT_DIR = config.PROJECT_DIR
 
-    # Make Data Directory
+    # Make Data Directories if missing
     if not os.path.exists(DATA_DIR) :
         os.makedirs(DATA_DIR)
     if not os.path.exists(RAW_DIR) :
@@ -1297,8 +1293,7 @@ if __name__ == '__main__' :
     NIMON_FILE = PROJECT_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
 
     # Import Ginnie Mae Data
-    # for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :
-    for FILE_PREFIX in ['dailyllmni', 'hdailyllmni'] :
+    for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni', 'hdailyllmni'] :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='L')
     for FILE_PREFIX in ['dailyllmni', 'hdailyllmni'] :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='P')
@@ -1310,7 +1305,6 @@ if __name__ == '__main__' :
     ## SUMMARY
     # Combine GNMA Issuance Data
     # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
-    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='hdailyllmni', record_type='L', file_suffix='201407-202502')
     # combine_gnma_pools(CLEAN_DIR, DATA_DIR, file_suffix='201309-202502')
     # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nissues', record_type='D', file_suffix='201202-202010')
     # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
@@ -1320,6 +1314,9 @@ if __name__ == '__main__' :
 
     # Create Final Dataset
     # create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
+
+    ## HMBS
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='hdailyllmni', record_type='L', file_suffix='201407-202502')
 
     ## PERFORMANCE
     # Create GNMA Yearly Performance Files
@@ -1334,7 +1331,7 @@ if __name__ == '__main__' :
     ## ISSUERS
     # Combine Ginnie Issuers
     # combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issrinfo', file_suffix='201804-202412')
-    # combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202411')
+    # combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202502')
 
     # Clean Ginnie Issuers
     # clean_gnma_issuers(CLEAN_DIR, DATA_DIR, issrinfo_suffix='201804-202412', issuers_suffix='201208-202411')
