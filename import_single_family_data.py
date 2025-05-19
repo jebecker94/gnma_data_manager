@@ -244,7 +244,6 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
 
     # Get Formatting
     cols = pd.read_csv(formatting_file)
-    # cols = cols[cols['File Prefix'] == file_prefix]
     cols = cols.drop_duplicates(subset = ['Record Type', 'Item'])
     cols = cols.loc[cols['Record Type'] == record_type]
     
@@ -334,7 +333,7 @@ def combine_gnma_data(data_folder, save_folder, file_prefix = 'dailyllmni', reco
     pq.write_table(df, f'{save_folder}/{file_prefix}_combined_{file_suffix}{record_type}.parquet')
 
 # Combine Ginnie Mae Data
-def combine_gnma_pools(data_folder, save_folder, file_suffix = '') :
+def combine_gnma_pools(data_folder, save_folder, file_suffix='') :
     """
     Combine GNMA pools data from issuance files.
 
