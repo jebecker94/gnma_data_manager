@@ -13,6 +13,37 @@ import pandas as pd
 import numpy as np
 import config
 
+#%% Import Functions
+# Import mfpldaily
+def import_mfpldaily() :
+
+    pass
+
+# Import mfpldailymni
+def import_mfpldailymni() :
+
+    pass
+
+# Import mfplmon
+def import_mfplmon() :
+
+    pass
+
+# Import mfppprpt
+def import_mfppprpt() :
+
+    pass
+
+# Import mfpppmon
+def import_mfpppmon() :
+
+    pass
+
+# Import mftermpools
+def import_mftermpools() :
+
+    pass
+
 ## Main Routine
 if __name__ == '__main__' :
 

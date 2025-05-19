@@ -6,6 +6,7 @@ Last updated on: Friday May 2 23:21:00 2025
 @author: Jonathan E. Becker
 """
 
+#%% Setup
 # Import Packages
 import os
 import glob
@@ -13,7 +14,58 @@ import pandas as pd
 import numpy as np
 import config
 
-## Main Routine
+#%% Import Functions
+# Import platdailyPPS
+def import_platdailyPPS() :
+
+    pass
+
+# Import platdailyPS
+def import_platdailyPS() :
+
+    pass
+
+# Import platdcoll
+def import_platdcoll() :
+
+    pass
+
+# Import platmonPPS
+def import_platmonPPS() :
+
+    pass
+
+# Import platmonPS
+def import_platmonPS() :
+
+    pass
+
+# Import platcoll
+def import_platcoll() :
+
+    pass
+
+# Import hplatdailyPS
+def import_hplatdailyPS() :
+
+    pass
+
+# Import hplatdailyS
+def import_hplatdailyS() :
+
+    pass
+
+# Import hplatmonPS
+def import_hplatmonPS() :
+
+    pass
+
+# Import hplatmonS
+def import_hplatmonS() :
+
+    pass
+
+#%% Main Routine
 if __name__ == '__main__' :
 
     # Set Folder Structure

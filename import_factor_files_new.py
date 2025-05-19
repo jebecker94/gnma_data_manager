@@ -4,6 +4,7 @@ import pathlib
 import glob
 import polars as pl
 
+#%% Support Functions
 # Read Text from Zips
 def read_text_from_zip(zip_file_path, encoding='utf-8'):
     """
@@ -221,7 +222,50 @@ def convert_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header
     # Save to Parquet
     df.write_parquet(fwf_name.replace('.txt', '.parquet'))
 
-## Main Routine
+#%% Import and Combine Factor Files
+# Import Factor Files
+def import_factor_files() :
+
+    pass
+
+# Combine Factor Files
+def combine_factor_files() :
+
+    pass
+
+#%% Import and Combine Remic Files
+# Import Remic Files
+def import_remic_files() :
+
+    pass
+
+# Combine Remic Files
+def combine_remic_files() :
+
+    pass
+
+#%% Import and Combine FRR/SRF Datasets
+# Import FRR Data
+def import_frr_data() :
+
+    pass
+
+# Import SRF Data
+def import_srf_data() :
+
+    pass
+
+# Combine FRR Data
+def combine_frr_data() :
+
+    pass
+
+# Combine SRF Data
+def combine_srf_data() :
+
+    pass
+
+#%% Main Routine
 if __name__ == "__main__":
 
     # Process Zip Files
