@@ -1,7 +1,8 @@
 # Import Packages
 import zipfile
 import pathlib
-import os # Used in the example main block
+import glob
+import polars as pl
 
 # Read Text from Zips
 def read_text_from_zip(zip_file_path, encoding='utf-8'):
@@ -19,6 +20,7 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
         (filename_in_zip, None) if decoding or read error for that file,
         (None, None) if no suitable file is found or a major error occurs.
     """
+
     try:
 
         with zipfile.ZipFile(zip_file_path, 'r') as zf:
@@ -36,8 +38,9 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
             target_file_info = None
             if len(candidate_files) == 1:
                 target_file_info = candidate_files[0]
+
+            # Handle Multiple Files
             else:
-                # Multiple files found. Try to find a specific text file.
                 print(f"Info: Multiple files found in '{zip_file_path.name}'. Attempting to identify the primary text file.")
                 common_text_extensions = ('.txt', '.dat', '.csv', '.text', '.log') # Add more if needed
                 text_files = [
@@ -54,7 +57,8 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
                 else: # No specific text files, pick the first candidate from all non-directory files
                     target_file_info = candidate_files[0]
                     print(f"Warning: No specific text file (e.g., .txt) found among multiple files. Using the first available file: '{target_file_info.filename}'")
-            
+
+            # Decode Content if Found
             if target_file_info:
                 try:
                     with zf.open(target_file_info.filename, 'r') as f_in_zip:
@@ -84,7 +88,7 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
         return None, None
 
 # Process Zip Files in Folder
-def process_zip_files_in_folder(folder_path_str, file_prefix='', file_encoding='utf-8'):
+def process_zip_files_in_folder(folder_path_str, save_folder_path_str, file_prefix='', file_encoding='utf-8'):
     """
     Processes all zip files in a given folder. For each zip file,
     it reads the content of the identified text file within.
@@ -99,9 +103,9 @@ def process_zip_files_in_folder(folder_path_str, file_prefix='', file_encoding='
               and values are the content of the text files.
               Entries with content=None indicate a read/decode failure for that file.
     """
+
     folder_path = pathlib.Path(folder_path_str)
 
-    import glob
     zip_files = glob.glob(f'{folder_path}/{file_prefix}*.zip')
     print(zip_files)
 
@@ -110,60 +114,124 @@ def process_zip_files_in_folder(folder_path_str, file_prefix='', file_encoding='
         return {}
 
     print(f"Scanning for zip files in folder: {folder_path}\n")
-    found_zip_files = False
-    processed_data = {}
 
     # for item_path in folder_path.iterdir():
     for item_path in zip_files:
         item_path = pathlib.Path(item_path)
         if item_path.is_file() and item_path.suffix.lower() == '.zip':
-            found_zip_files = True
             print(f"--- Processing Zip File: {item_path.name} ---")
             
             filename_in_zip, content = read_text_from_zip(item_path, encoding=file_encoding)
-            print(content)
-            stop
-            
-            if filename_in_zip: # A file was identified, even if content is None (due to read/decode error)
-                full_key = f"{item_path.name}/{filename_in_zip}"
-                processed_data[full_key] = content
-                if content:
-                    print(f"Successfully read '{filename_in_zip}'.")
-                    # Displaying a preview of the content (e.g., first 5 lines)
-                    print(f"Preview of '{filename_in_zip}' (first 5 lines or less):")
-                    lines = content.splitlines()
-                    for i, line in enumerate(lines[:5]):
-                        print(line)
-                    if len(lines) > 5:
-                        print("...")
-                # If content is None, an error message was already printed by read_text_from_zip
-            else: # No file was identified within the zip by read_text_from_zip
-                 print(f"Could not identify a text file to read from '{item_path.name}'.")
 
-            print(f"--- Finished processing {item_path.name} ---\n")
-    
-    if not found_zip_files:
-        print(f"No zip files found in '{folder_path_str}'.")
-    
-    return processed_data
+# Read Fixed-Width Files
+def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=False, skip_rows=0) :
+
+    # Load the Factor Data
+    df = pl.read_csv(
+        fwf_name,
+        has_header=has_header,
+        skip_rows=skip_rows,
+        new_columns=["full_str"]
+    )
+
+    # Read Dictionary File
+    try :
+        formats = pl.read_csv(dictionary_file)
+        formats = formats.filter(pl.col('Prefix')==file_prefix)
+        column_names = formats.select(pl.col('Data Item')).to_series().to_list()
+        widths = formats.select(pl.col('Length')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None
+
+    # Calculate slice values from widths.
+    slice_tuples = []
+    offset = 0
+    for i in widths:
+        slice_tuples.append((offset, i))
+        offset += i
+
+    # Create Final DataFrame (and drop full string)
+    df = df.with_columns(
+        [
+        pl.col("full_str").str.slice(slice_tuple[0], slice_tuple[1]).str.strip_chars().alias(col)
+        for slice_tuple, col in zip(slice_tuples, final_column_names)
+        ]
+    ).drop("full_str")
+
+    # Return DataFrame
+    return df
+
+# Read Fixed-Width Files
+def convert_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=False, skip_rows=0) :
+
+    # Load the Factor Data
+    df = pl.read_csv(
+        fwf_name,
+        has_header=has_header,
+        skip_rows=skip_rows,
+        new_columns=["full_str"]
+    )
+
+    # Read Dictionary File
+    try :
+        formats = pl.read_csv(dictionary_file)
+        formats = formats.filter(pl.col('Prefix')==file_prefix)
+        column_names = formats.select(pl.col('Data Item')).to_series().to_list()
+        widths = formats.select(pl.col('Length')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None
+
+    # Calculate slice values from widths.
+    slice_tuples = []
+    offset = 0
+    for i in widths:
+        slice_tuples.append((offset, i))
+        offset += i
+
+    # Create Final DataFrame (and drop full string)
+    df = df.with_columns(
+        [
+        pl.col("full_str").str.slice(slice_tuple[0], slice_tuple[1]).str.strip_chars().alias(col)
+        for slice_tuple, col in zip(slice_tuples, final_column_names)
+        ]
+    ).drop("full_str")
+
+    # Save to Parquet
+    df.write_parquet(fwf_name.replace('.txt', '.parquet'))
 
 ## Main Routine
 if __name__ == "__main__":
 
-    # Configuration
+    # Process Zip Files
     folder_to_scan = "./data/raw"
+    folder_to_save = './data/clean'
     text_file_encoding = 'utf-8'
+    # process_zip_files_in_folder(folder_to_scan, folder_to_save, file_prefix='factorA1_', file_encoding=text_file_encoding)
 
-    #
-    all_extracted_data = process_zip_files_in_folder(folder_to_scan, file_prefix='factorA1_', file_encoding=text_file_encoding)
-
-    if all_extracted_data:
-        print("\n--- Summary of Extracted Data ---")
-        for key, content_data in all_extracted_data.items():
-            if content_data is not None:
-                print(f"Data successfully read for: {key} ({len(content_data)} characters)")
-            else:
-                print(f"Failed to read/decode content for: {key}")
-        print("--- End of Summary ---")
-    else:
-        print("No data was processed.")
+    # Read Fixed-Width Files
+    fwf_name = './data/raw/factorAplat_202501.txt'
+    dictionary_file = './dictionary_files/clean/factor_layouts_combined.csv'
+    df = read_fixed_width_files(fwf_name, dictionary_file=dictionary_file, file_prefix='factorAplat')
+    print(df)

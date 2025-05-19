@@ -12,7 +12,7 @@ df = pl.read_csv(
 )
 
 # Read Dictionary File
-dictionary_file = './dictionary_files/factor_layouts_combined.csv'
+dictionary_file = './dictionary_files/clean/factor_layouts_combined.csv'
 formats = pl.read_csv(dictionary_file)
 formats = formats.filter(pl.col('Prefix')=="factorAplat")
 column_names = formats.select(pl.col('Data Item')).to_series().to_list()
