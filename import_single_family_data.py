@@ -68,6 +68,7 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dail
 
     # Get Zip Folders
     folders = glob.glob(f'{data_folder}/{file_prefix}_*.zip')
+    folders.sort(reverse=False)
     for folder in folders :
 
         # Get Year-Month Suffix
@@ -521,8 +522,8 @@ if __name__ == '__main__' :
         os.makedirs(CLEAN_DIR)
 
     # Set Formatting Files
-    FORMATTING_FILE = PROJECT_DIR / 'dictionary_files/gnma_file_layouts.csv'
-    NIMON_FILE = PROJECT_DIR / 'dictionary_files/nimonSFPS_layout_combined.csv'
+    FORMATTING_FILE = PROJECT_DIR / 'dictionary_files/clean/gnma_file_layouts.csv'
+    NIMON_FILE = PROJECT_DIR / 'dictionary_files/clean/nimonSFPS_layout_combined.csv'
 
     # Import Ginnie Mae Data
     for FILE_PREFIX in ['llmon1', 'llmon2', 'dailyllmni'] :
@@ -533,7 +534,7 @@ if __name__ == '__main__' :
         unzip_gnma_nissues_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='D')
     for FILE_PREFIX in ['nimonSFPS'] :
         unzip_gnma_nimon_data(RAW_DIR, CLEAN_DIR, NIMON_FILE, file_prefix=FILE_PREFIX, record_type='PS')
-
+    stop
     ## SUMMARY
     # Combine GNMA Issuance Data
     combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')

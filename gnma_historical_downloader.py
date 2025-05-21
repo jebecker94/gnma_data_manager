@@ -7,6 +7,8 @@ import re
 from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
 import yaml
+import glob
+import zipfile
 
 # Get Date Format Function
 def get_date_format(date_string: str) -> str:
@@ -67,6 +69,41 @@ def get_date_format(date_string: str) -> str:
 
     # If no pattern matched
     raise ValueError(f"Could not determine date format for input: '{date_string}'")
+
+# Check Zip File Validity Function
+def drop_invalid_zip_files(folder_path: str) :
+    """
+    Checks if files with a .zip extension in a given folder are valid zip files.
+
+    Args:
+        folder_path: The path to the folder containing the potential zip files.
+
+    Returns:
+        A dictionary where keys are the full paths of the .zip files found
+        and values are booleans indicating whether the file is a valid zip (True)
+        or not (False).
+    """
+
+    # Check that folder exists
+    if not os.path.isdir(folder_path):
+        print(f"Error: Folder not found or is not a directory: {folder_path}")
+        return {}
+
+    # Get all candidate zip files
+    zip_files = glob.glob(os.path.join(folder_path, '*.zip'))
+
+    if not zip_files:
+        print(f"No files with a .zip extension found in {folder_path}")
+        return {}
+
+    print(f"Checking validity of {len(zip_files)} .zip files in {folder_path}...")
+
+    # Drop Invalid Zip Files
+    for file_path in zip_files:
+        is_valid = zipfile.is_zipfile(file_path)
+        if not is_valid :
+            os.remove(file_path)
+            print('Removing file:', file_path)
 
 ## Main Routine
 if __name__=='__main__' :
@@ -145,3 +182,6 @@ if __name__=='__main__' :
             
             # Add one month to the current date
             current_date += relativedelta(months=1)
+
+    # Drop Invalid Zip Files (If any)
+    drop_invalid_zip_files(download_folder)
