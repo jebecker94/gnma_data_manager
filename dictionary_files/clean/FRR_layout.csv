@@ -1,0 +1,11 @@
+Field Name,Description,Position,Length,Format
+Series,"The Ginnie Mae REMIC Series number formatted as:GNMA-YYYY-XXXWhere:   GNMA = Ginnie Mae REMIC IdentifierYYYY  = REMIC Year of IssuanceXXX    = the actual Ginnie Mae deal numberNOTE:  Hyphens must be included",1-14,14,"Alpha as follows:GNMA-YYYY-NNNLeft justify"
+Tranche Name,"The alpha/numeric number assigned to the trancheunderlying the series.",15-22,8,Alpha - left justify
+CUSIP,"The nine character S&P CUSIP number assigned to thetranche.",23-31,9,Alpha - left justify
+Reset Rate,"The applicable interest rate formula result on the trancheon which the interest payment will be made on the nextpayment date.",32-45,14,"Numeric X.XXXXXRight justify leadingblanks"
+Filler,,46-47,2,
+Payment Date,"The date on which the P and/or I payments will be madefor the tranche.  The format is YYYYMMDD.",48-55,8,Numeric (YYYYMMDD)
+Filler,,56-57,2,
+Accrual Period Begins,"The date from which interest first accrues on the tranche.The format is YYYYMMDD.",58-65,8,Numeric (YYYYMMDD)
+Filler,,66-67,2,
+Accrual Period Ends,"The date from which interest accrual ends on the tranche.The format is YYYYMMDD.",68-75,8,Numeric (YYYYMMDD)

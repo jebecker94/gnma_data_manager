@@ -2,8 +2,9 @@
 .venv
 .venv/*
 
-#
+# Cache Files
 __pycache__
+.ruff_cache
 
 # Folders
 data

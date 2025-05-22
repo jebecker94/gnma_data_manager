@@ -1,0 +1,12 @@
+Field name,Start,End,Format,Length
+Series,1,15,"Alpha Numeric as Follows:GNMA-YYYY-NNNGNMA = Ginnie Mae REMIC IdentifierYYYY = REMIC Year of IssuanceXXX = The Actual Ginnie Mae Deal NumberLeft Justify",15
+Payment Date,16,23,Numeric YYYYMMDD,8
+Factor,24,34,"Numeric, Format 9(2).9(8)Zero Fill Right Justify",11
+Settlement Date,35,43,"Numeric YYYYMMDDRight Justify",9
+First Accrual Date,44,52,"Numeric YYYYMMDDRight Justify",9
+Original Balance,53,69,"Numeric, Format 9(14).9(2)Right Justify",17
+Current WAC,70,76,"Numeric, Format 9(3).9(3)Right Justify",7
+Current WARM,77,80,"Numeric, Format 9(4)Right Justify",4
+Current WALA,81,84,"Numeric, Format 9(4)Right Justify",4
+Current Balance,85,101,"Numeric, Format 9(14).9(2)Right Justify",17
+Filler,102,120,,9

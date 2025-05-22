@@ -5,6 +5,7 @@ import pathlib
 import glob
 import polars as pl
 from io import StringIO
+import config
 
 #%% Support Functions
 # Read Text from Zips
@@ -91,9 +92,9 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
         return None, None
 
 # Read Fixed-Width Files
-def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=False, skip_rows=0) :
+def read_fixed_width_files(fwf_name, final_column_names, widths, has_header=False, skip_rows=0) :
 
-    # Load the Factor Data
+    # Load the Factor Data from a CSV/TXT file
     df = pl.scan_csv(
         fwf_name,
         has_header=has_header,
@@ -101,26 +102,6 @@ def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=Fa
         new_columns=["full_str"],
         separator='|',
     )
-
-    # Read Dictionary File
-    try :
-        formats = pl.read_csv(dictionary_file)
-        formats = formats.filter(pl.col('Prefix')==file_prefix)
-        column_names = formats.select(pl.col('Data Item')).to_series().to_list()
-        widths = formats.select(pl.col('Length')).to_series().to_list()
-
-        # Fix Column Names for Filler Values
-        filler_count = 0
-        final_column_names = []
-        for column_name in column_names :
-            if column_name == 'Filler' :
-                column_name += f' {filler_count+1}'
-                filler_count += 1
-            final_column_names.append(column_name)
-
-    except Exception as e:
-        print('Error reading the dictionary file with the supplied prefix:', e)
-        return None
 
     # Calculate slice values from widths.
     slice_tuples = []
@@ -140,7 +121,119 @@ def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=Fa
     # Return DataFrame
     return df
 
-#%% Import and Combine Factor Files
+# Get Combined Suffix
+def get_combined_suffix(files) :
+    """Create a suffix for a combined file from a list of individual files."""
+
+    # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
+    suffixes = [os.path.splitext(os.path.basename(file))[0].split('_')[-1] for file in files]
+    combined_suffix = '_'+min(suffixes)+'-'+max(suffixes)
+
+    # Return Combined Suffix
+    return combined_suffix
+
+#%% Read Dictionaries
+# Read Factor Dictionary
+def read_factor_dictionary(factor_dictionary_file) :
+
+    try :
+        formats = pl.read_csv(factor_dictionary_file)
+        formats = formats.filter(pl.col('Prefix')==file_prefix)
+        column_names = formats.select(pl.col('Data Item')).to_series().to_list()
+        widths = formats.select(pl.col('Length')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+        # Return Columns and Widths
+        return final_column_names, widths
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None, None
+
+# Read REMIC Dictionary
+def read_remic_dictionary(remic_dictionary_file) :
+
+    # Read Dictionary File
+    try :
+        formats = pl.read_csv(remic_dictionary_file)
+        formats = formats.filter(pl.col('PREFIX')==file_prefix)
+        formats = formats.filter(pl.col('LINE TYPE')=='data')
+        column_names = formats.select(pl.col('FIELD NAME')).to_series().to_list()
+        widths = formats.select(pl.col('LENGTH')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+        # Return Columns and Widths
+        return final_column_names, widths
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None, None
+
+# Read FRR Dictionary
+def read_frr_dictionary(frr_dictionary_file) :
+
+    try :
+        formats = pl.read_csv(frr_dictionary_file)
+        column_names = formats.select(pl.col('Field Name')).to_series().to_list()
+        widths = formats.select(pl.col('Length')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+        # Return Columns and Widths
+        return final_column_names, widths
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None, None
+
+# Read SRF Dictionary
+def read_srf_dictionary(srf_dictionary_file) :
+
+    try :
+        formats = pl.read_csv(srf_dictionary_file)
+        column_names = formats.select(pl.col('Field name')).to_series().to_list()
+        widths = formats.select(pl.col('Length')).to_series().to_list()
+
+        # Fix Column Names for Filler Values
+        filler_count = 0
+        final_column_names = []
+        for column_name in column_names :
+            if column_name == 'Filler' :
+                column_name += f' {filler_count+1}'
+                filler_count += 1
+            final_column_names.append(column_name)
+
+        # Return Columns and Widths
+        return final_column_names, widths
+
+    except Exception as e:
+        print('Error reading the dictionary file with the supplied prefix:', e)
+        return None, None
+
+#%% Import Files
 # Import Factor Files
 def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
     """Import the full history of the factor file types."""
@@ -151,6 +244,9 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
 
     # Get All Files for the Given Prefix
     files = glob.glob(f'{data_folder}/{file_prefix}_*')
+
+    # Load Dictionary
+    column_names, widths = read_factor_dictionary(dictionary_file)
 
     # Convert All Files to Parquet
     for file in files :
@@ -165,65 +261,168 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
             # Handle ZIPs vs TXTs
             if zipfile.is_zipfile(file) :
                 _,content = read_text_from_zip(file)
-                df = read_fixed_width_files(StringIO(content), dictionary_file, file_prefix, has_header=False, skip_rows=0)
+                df = read_fixed_width_files(StringIO(content), column_names, widths, has_header=False, skip_rows=0)
             else :
-                df = read_fixed_width_files(file, dictionary_file, file_prefix, has_header=False, skip_rows=0)
+                df = read_fixed_width_files(file, column_names, widths, has_header=False, skip_rows=0)
             
             # Save to Parquet
             df.sink_parquet(save_file_name)
 
-# Combine Factor Files
-def combine_factor_files(data_folder: str, file_prefix: str) :
+# Import REMIC Files
+def import_remic_files(data_folder, save_folder, file_prefix, dictionary_file) :
 
-    # Combine Data From Parquets
-    df = []
-    files = glob.glob(f'{data_folder}/{file_prefix}_*.parquet')
+    # Create Save Folder if Doesn't Yet Exist
+    if not os.path.exists(save_folder) :
+        os.makedirs(save_folder)
+
+    # Get All Files for the Given Prefix
+    files = glob.glob(f'{data_folder}/{file_prefix}_*')
+
+    # Load Dictionary
+    column_names, widths = read_remic_dictionary(dictionary_file)
+
+    # Convert All Files to Parquet
     for file in files :
-        df_a = pl.scan_parquet(file)
-        df.append(df_a)
-    df = pl.concat(df)
 
-    # Return Combined Data
-    return df
+        # Create Save File Name
+        file_name = os.path.splitext(os.path.basename(file))[0]
+        save_file_name = f'{save_folder}/{file_name}.parquet'
 
-#%% Import and Combine Remic Files
-# Import Remic Files
-def import_remic_files() :
+        # Save as Parquet if file doesn't exist yet
+        if not os.path.exists(save_file_name) :
 
-    pass
+            # Handle ZIPs vs TXTs
+            if zipfile.is_zipfile(file) :
+                _,content = read_text_from_zip(file)
+                df = read_fixed_width_files(StringIO(content), column_names, widths, has_header=False, skip_rows=0)
+            else :
+                df = read_fixed_width_files(file, column_names, widths, has_header=False, skip_rows=0)
 
-# Combine Remic Files
-def combine_remic_files() :
+            # Save File
+            df = df.filter([pl.col('Record_indicator')=='2'])
+            df.sink_parquet(save_file_name)
 
-    pass
-
-#%% Import and Combine FRR/SRF Datasets
 # Import FRR Data
-def import_frr_data() :
+def import_frr_files(data_folder, save_folder, file_prefix, dictionary_file) :
 
-    pass
+    # Create Save Folder if Doesn't Yet Exist
+    if not os.path.exists(save_folder) :
+        os.makedirs(save_folder)
+
+    # Get All Files for the Given Prefix
+    files = glob.glob(f'{data_folder}/{file_prefix}_*')
+
+    # Load Dictionary
+    column_names, widths = read_frr_dictionary(dictionary_file)
+
+    # Convert All Files to Parquet
+    for file in files :
+
+        # Create Save File Name
+        file_name = os.path.splitext(os.path.basename(file))[0]
+        save_file_name = f'{save_folder}/{file_name}.parquet'
+
+        # Save as Parquet if file doesn't exist yet
+        if not os.path.exists(save_file_name) :
+
+            # Handle ZIPs vs TXTs
+            if zipfile.is_zipfile(file) :
+                _,content = read_text_from_zip(file)
+                df = read_fixed_width_files(StringIO(content), column_names, widths, has_header=False, skip_rows=0)
+            else :
+                df = read_fixed_width_files(file, column_names, widths, has_header=False, skip_rows=0)
+
+            # Save File
+            df.sink_parquet(save_file_name)
 
 # Import SRF Data
-def import_srf_data() :
+def import_srf_files(data_folder, save_folder, file_prefix, dictionary_file) :
 
-    pass
+    # Create Save Folder if Doesn't Yet Exist
+    if not os.path.exists(save_folder) :
+        os.makedirs(save_folder)
 
-# Combine FRR Data
-def combine_frr_data() :
+    # Get All Files for the Given Prefix
+    files = glob.glob(f'{data_folder}/{file_prefix}_*')
 
-    pass
+    # Load Dictionary
+    column_names, widths = read_srf_dictionary(dictionary_file)
 
-# Combine SRF Data
-def combine_srf_data() :
+    # Convert All Files to Parquet
+    for file in files :
 
-    pass
+        # Create Save File Name
+        file_name = os.path.splitext(os.path.basename(file))[0]
+        save_file_name = f'{save_folder}/{file_name}.parquet'
+
+        # Save as Parquet if file doesn't exist yet
+        if not os.path.exists(save_file_name) :
+
+            # Handle ZIPs vs TXTs
+            if zipfile.is_zipfile(file) :
+                _,content = read_text_from_zip(file)
+                df = read_fixed_width_files(StringIO(content), column_names, widths, has_header=False, skip_rows=0)
+            else :
+                df = read_fixed_width_files(file, column_names, widths, has_header=False, skip_rows=0)
+
+            # Save File
+            df.sink_parquet(save_file_name)
+
+#%% Combine Files
+# Combine Files
+def combine_files(data_folder: str, save_folder: str, file_prefix: str) :
+
+    # Get All Files w/ Given Prefix
+    files = glob.glob(f'{data_folder}/{file_prefix}_*.parquet')
+    
+    # Get Combined Suffix from File List
+    combined_suffix = get_combined_suffix(files)
+
+    # Save File Name
+    save_file_name = f'{save_folder}/{file_prefix}{combined_suffix}.parquet'
+
+    # Only Combine if No Combined File Exists
+    if not os.path.exists(save_file_name) :
+
+        # Combine Data From Parquets
+        df = []
+        for file in files :
+            df_a = pl.scan_parquet(file)
+            df.append(df_a)
+        df = pl.concat(df)
+
+        # Get Combined Suffix from File List
+        combined_suffix = get_combined_suffix(files)
+
+        # Save
+        df.sink_parquet(save_file_name)
 
 #%% Main Routine
 if __name__ == "__main__":
 
+    # Set Folder Structure
+    DATA_DIR = config.DATA_DIR
+    RAW_DIR = config.RAW_DIR
+    CLEAN_DIR = config.CLEAN_DIR
+    PROJECT_DIR = config.PROJECT_DIR
+
     # Import Fixed-Width Factor Files
-    data_folder = "./data/raw"
-    save_folder = './data/clean'
     dictionary_file = './dictionary_files/clean/factor_layouts_combined.csv'
     for file_prefix in ['factorA1','factorA2','factorAAdd','factorAplat','factorB1','factorB2']:
-        import_factor_files(data_folder=data_folder, save_folder=save_folder, file_prefix=file_prefix, dictionary_file=dictionary_file)
+        import_factor_files(data_folder=RAW_DIR, save_folder=CLEAN_DIR, file_prefix=file_prefix, dictionary_file=dictionary_file)
+
+    # Import Fixed Width REMIC Files
+    dictionary_file = './dictionary_files/clean/remic_layouts_combined.csv'
+    for file_prefix in ['remic1','remic2']:
+        import_remic_files(data_folder=RAW_DIR, save_folder=CLEAN_DIR, file_prefix=file_prefix, dictionary_file=dictionary_file)
+
+    # Read FRR and SRF Files
+    dictionary_file = './dictionary_files/clean/FRR_layout.csv'
+    import_frr_files(data_folder=RAW_DIR, save_folder=CLEAN_DIR, file_prefix='FRR', dictionary_file=dictionary_file)
+
+    dictionary_file = './dictionary_files/clean/SRF_layout.csv'
+    import_srf_files(data_folder=RAW_DIR, save_folder=CLEAN_DIR, file_prefix='SRF', dictionary_file=dictionary_file)
+
+    # Create Combined Files
+    for file_prefix in ['factorA1','factorA2','factorAAdd','factorAplat','factorB1','factorB2','remic1','remic2','FRR','SRF']:
+        combine_files(data_folder=CLEAN_DIR, save_folder=DATA_DIR, file_prefix=file_prefix)
