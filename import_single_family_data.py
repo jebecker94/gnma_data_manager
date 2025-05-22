@@ -17,8 +17,20 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from io import StringIO
 import config
+import re
 
-#%% UNZIPPING
+#%% UNZIPPING# Get Combined Suffix
+def get_combined_suffix(files: list) :
+    """Create a suffix for a combined file from a list of individual files."""
+
+    # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
+    suffixes = [os.path.splitext(os.path.basename(file))[0].split('_')[-1] for file in files]
+    suffixes = ["".join(re.findall(r'\d', suffix)) for suffix in suffixes] # Extract only numeric characters
+    combined_suffix = '_'+min(suffixes)+'-'+max(suffixes)
+
+    # Return Combined Suffix
+    return combined_suffix
+
 # Skip Row (For Handling Reading Errors)
 def skip_row(row) :
     """
@@ -395,16 +407,18 @@ def get_liquidation_reasons(data_folder, save_folder, file_suffix = '', verbose 
     """
 
     # Read and Write Options
-    liquidation_columns = ['Disclosure Sequence Number',
-                           'As of Date',
-                           'Current Month Liquidation Flag',
-                           'Removal Reason',
-                           'Months Pre-Paid',
-                           'Months Delinquent',
-                           'Pool ID',
-                           'Issuer ID',
-                           'First Payment Date',
-                           'Unpaid Principal Balance']
+    liquidation_columns = [
+        'Disclosure Sequence Number',
+        'As of Date',
+        'Current Month Liquidation Flag',
+        'Removal Reason',
+        'Months Pre-Paid',
+        'Months Delinquent',
+        'Pool ID',
+        'Issuer ID',
+        'First Payment Date',
+        'Unpaid Principal Balance',
+    ]
 
     # Get Performance Files
     files = glob.glob(f'{data_folder}/llmon1_*.parquet')

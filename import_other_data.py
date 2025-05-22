@@ -13,6 +13,19 @@ import glob
 import pandas as pd
 import numpy as np
 import config
+import re
+
+# Get Combined Suffix
+def get_combined_suffix(files: list) :
+    """Create a suffix for a combined file from a list of individual files."""
+
+    # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
+    suffixes = [os.path.splitext(os.path.basename(file))[0].split('_')[-1] for file in files]
+    suffixes = ["".join(re.findall(r'\d', suffix)) for suffix in suffixes] # Extract only numeric characters
+    combined_suffix = '_'+min(suffixes)+'-'+max(suffixes)
+
+    # Return Combined Suffix
+    return combined_suffix
 
 #%% Combine Issuers
 # Combine Ginnie Mae Issuer Files

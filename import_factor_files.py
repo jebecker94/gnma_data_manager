@@ -6,10 +6,11 @@ import glob
 import polars as pl
 from io import StringIO
 import config
+import re
 
 #%% Support Functions
 # Read Text from Zips
-def read_text_from_zip(zip_file_path, encoding='utf-8'):
+def read_text_from_zip(zip_file_path: str, encoding: str='utf-8'):
     """
     Opens a zip file, identifies the primary text file within it,
     and returns its filename and content as a string.
@@ -92,7 +93,7 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
         return None, None
 
 # Read Fixed-Width Files
-def read_fixed_width_files(fwf_name, final_column_names, widths, has_header=False, skip_rows=0) :
+def read_fixed_width_files(fwf_name, final_column_names: list, widths:list, has_header: bool=False, skip_rows: int=0) :
 
     # Load the Factor Data from a CSV/TXT file
     df = pl.scan_csv(
@@ -122,11 +123,12 @@ def read_fixed_width_files(fwf_name, final_column_names, widths, has_header=Fals
     return df
 
 # Get Combined Suffix
-def get_combined_suffix(files) :
+def get_combined_suffix(files: list) :
     """Create a suffix for a combined file from a list of individual files."""
 
     # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
     suffixes = [os.path.splitext(os.path.basename(file))[0].split('_')[-1] for file in files]
+    suffixes = ["".join(re.findall(r'\d', suffix)) for suffix in suffixes] # Extract only numeric characters
     combined_suffix = '_'+min(suffixes)+'-'+max(suffixes)
 
     # Return Combined Suffix
@@ -134,7 +136,7 @@ def get_combined_suffix(files) :
 
 #%% Read Dictionaries
 # Read Factor Dictionary
-def read_factor_dictionary(factor_dictionary_file) :
+def read_factor_dictionary(factor_dictionary_file: str) :
 
     try :
         formats = pl.read_csv(factor_dictionary_file)
@@ -159,7 +161,7 @@ def read_factor_dictionary(factor_dictionary_file) :
         return None, None
 
 # Read REMIC Dictionary
-def read_remic_dictionary(remic_dictionary_file) :
+def read_remic_dictionary(remic_dictionary_file: str) :
 
     # Read Dictionary File
     try :
@@ -186,7 +188,7 @@ def read_remic_dictionary(remic_dictionary_file) :
         return None, None
 
 # Read FRR Dictionary
-def read_frr_dictionary(frr_dictionary_file) :
+def read_frr_dictionary(frr_dictionary_file: str) :
 
     try :
         formats = pl.read_csv(frr_dictionary_file)
@@ -210,7 +212,7 @@ def read_frr_dictionary(frr_dictionary_file) :
         return None, None
 
 # Read SRF Dictionary
-def read_srf_dictionary(srf_dictionary_file) :
+def read_srf_dictionary(srf_dictionary_file: str) :
 
     try :
         formats = pl.read_csv(srf_dictionary_file)
@@ -269,7 +271,7 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
             df.sink_parquet(save_file_name)
 
 # Import REMIC Files
-def import_remic_files(data_folder, save_folder, file_prefix, dictionary_file) :
+def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
@@ -303,7 +305,7 @@ def import_remic_files(data_folder, save_folder, file_prefix, dictionary_file) :
             df.sink_parquet(save_file_name)
 
 # Import FRR Data
-def import_frr_files(data_folder, save_folder, file_prefix, dictionary_file) :
+def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
@@ -336,7 +338,7 @@ def import_frr_files(data_folder, save_folder, file_prefix, dictionary_file) :
             df.sink_parquet(save_file_name)
 
 # Import SRF Data
-def import_srf_files(data_folder, save_folder, file_prefix, dictionary_file) :
+def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
