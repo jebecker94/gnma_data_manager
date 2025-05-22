@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 import config
 
-#%% ISSUERS
+#%% Combine Issuers
 # Combine Ginnie Mae Issuer Files
 def combine_gnma_issuer_files(data_folder, save_folder, formatting_file, file_prefix='issrinfo', file_suffix='') :
     """
@@ -113,10 +113,7 @@ def clean_gnma_issuers(data_folder, save_folder, issrinfo_suffix = '', issuers_s
     
     ## Issuer Info Data
     # Import Data
-    df = pd.read_csv(f'{data_folder}/issrinfo_combined_{issrinfo_suffix}.csv.gz',
-                     compression = 'gzip',
-                     sep = '|',
-                     )
+    df = pd.read_parquet(f'{data_folder}/issrinfo_combined_{issrinfo_suffix}.parquet')
     
     # Create Group ID Variable
     df['Index'] = range(0, df.shape[0])
@@ -145,18 +142,11 @@ def clean_gnma_issuers(data_folder, save_folder, issrinfo_suffix = '', issuers_s
     df.reset_index(drop = True, inplace = True)
     
     # Save
-    df.to_csv(f'{save_folder}/issrinfo_combined_cleaned_{issrinfo_suffix}.csv.gz',
-              compression = 'gzip',
-              sep = '|',
-              index = False,
-              )
+    df.to_parquet(f'{save_folder}/issrinfo_combined_cleaned_{issrinfo_suffix}.parquet', index = False)
     
     ## Issuer Data
     # Import Data
-    df = pd.read_csv(f'{data_folder}/issuers_combined_{issuers_suffix}.csv.gz',
-                     compression = 'gzip',
-                     sep = '|',
-                     )
+    df = pd.read_parquet(f'{data_folder}/issuers_combined_{issuers_suffix}.parquet')
     
     # Create Group ID Variable
     df['Index'] = range(0, df.shape[0])
@@ -192,11 +182,56 @@ def clean_gnma_issuers(data_folder, save_folder, issrinfo_suffix = '', issuers_s
     df.reset_index(drop = True, inplace = True)
     
     # Save
-    df.to_csv(f'{save_folder}/issuers_combined_cleaned_{issuers_suffix}.csv.gz',
-              compression = 'gzip',
-              sep = '|',
-              index = False,
-              )
+    df.to_parquet(f'{save_folder}/issuers_combined_cleaned_{issuers_suffix}.parquet', index=False)
+
+#%% Import Functions
+# Import ptermplatot
+def import_ptermplatot():
+    pass
+
+# Import ptermot
+def import_ptermot():
+    pass
+
+# Import Issuers
+def import_issuers():
+    pass
+
+# Import ptermmon
+def import_ptermmon():
+    pass
+
+# Import liqloanqtr
+def import_liqloanqtr():
+    pass
+
+# Import issrinfo
+def import_issrinfo():
+    pass
+
+# Import issrcutoff
+def import_issrcutoff():
+    pass
+
+# Import plmonforb
+def import_plmonforb():
+    pass
+
+# Import llmonforb
+def import_llmonforb():
+    pass
+
+# Import llpaymhist
+def import_llpaymhist():
+    pass
+
+# Import LoanPerf
+def import_LoanPerf():
+    pass
+
+# Import LoanPerfAnn
+def import_LoanPerfAnn():
+    pass
 
 #%% Main Routine
 if __name__ == '__main__' :
@@ -216,12 +251,12 @@ if __name__ == '__main__' :
         os.makedirs(CLEAN_DIR)
 
     # Set formatting file
-    FORMATTING_FILE = PROJECT_DIR / 'dictionary_files/gnma_file_layouts.csv'
+    FORMATTING_FILE = PROJECT_DIR / 'dictionary_files/clean/other_layouts_combined.csv'
 
     ## ISSUERS
     # Combine Ginnie Issuers
-    combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issrinfo', file_suffix='201804-202412')
-    combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202502')
+    combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issrinfo', file_suffix='201804-202503')
+    combine_gnma_issuer_files(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix='issuers', file_suffix='201208-202503')
 
     # Clean Ginnie Issuers
-    clean_gnma_issuers(CLEAN_DIR, DATA_DIR, issrinfo_suffix='201804-202412', issuers_suffix='201208-202411')
+    clean_gnma_issuers(CLEAN_DIR, DATA_DIR, issrinfo_suffix='201804-202503', issuers_suffix='201208-202503')

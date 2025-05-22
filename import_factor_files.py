@@ -1,8 +1,10 @@
 # Import Packages
+import os
 import zipfile
 import pathlib
 import glob
 import polars as pl
+from io import StringIO
 
 #%% Support Functions
 # Read Text from Zips
@@ -88,51 +90,16 @@ def read_text_from_zip(zip_file_path, encoding='utf-8'):
         print(f"An unexpected error occurred with '{zip_file_path.name}': {e}")
         return None, None
 
-# Process Zip Files in Folder
-def process_zip_files_in_folder(folder_path_str, save_folder_path_str, file_prefix='', file_encoding='utf-8'):
-    """
-    Processes all zip files in a given folder. For each zip file,
-    it reads the content of the identified text file within.
-
-    Args:
-        folder_path_str (str): The path to the folder containing zip files.
-        file_encoding (str): The encoding of the text files within the zips.
-                             Defaults to 'utf-8'.
-
-    Returns:
-        dict: A dictionary where keys are strings like "zip_filename/text_filename_in_zip"
-              and values are the content of the text files.
-              Entries with content=None indicate a read/decode failure for that file.
-    """
-
-    folder_path = pathlib.Path(folder_path_str)
-
-    zip_files = glob.glob(f'{folder_path}/{file_prefix}*.zip')
-    print(zip_files)
-
-    if not folder_path.is_dir():
-        print(f"Error: Folder '{folder_path_str}' not found or is not a directory.")
-        return {}
-
-    print(f"Scanning for zip files in folder: {folder_path}\n")
-
-    # for item_path in folder_path.iterdir():
-    for item_path in zip_files:
-        item_path = pathlib.Path(item_path)
-        if item_path.is_file() and item_path.suffix.lower() == '.zip':
-            print(f"--- Processing Zip File: {item_path.name} ---")
-            
-            filename_in_zip, content = read_text_from_zip(item_path, encoding=file_encoding)
-
 # Read Fixed-Width Files
 def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=False, skip_rows=0) :
 
     # Load the Factor Data
-    df = pl.read_csv(
+    df = pl.scan_csv(
         fwf_name,
         has_header=has_header,
         skip_rows=skip_rows,
-        new_columns=["full_str"]
+        new_columns=["full_str"],
+        separator='|',
     )
 
     # Read Dictionary File
@@ -173,65 +140,51 @@ def read_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=Fa
     # Return DataFrame
     return df
 
-# Read Fixed-Width Files
-def convert_fixed_width_files(fwf_name, dictionary_file, file_prefix, has_header=False, skip_rows=0) :
-
-    # Load the Factor Data
-    df = pl.read_csv(
-        fwf_name,
-        has_header=has_header,
-        skip_rows=skip_rows,
-        new_columns=["full_str"]
-    )
-
-    # Read Dictionary File
-    try :
-        formats = pl.read_csv(dictionary_file)
-        formats = formats.filter(pl.col('Prefix')==file_prefix)
-        column_names = formats.select(pl.col('Data Item')).to_series().to_list()
-        widths = formats.select(pl.col('Length')).to_series().to_list()
-
-        # Fix Column Names for Filler Values
-        filler_count = 0
-        final_column_names = []
-        for column_name in column_names :
-            if column_name == 'Filler' :
-                column_name += f' {filler_count+1}'
-                filler_count += 1
-            final_column_names.append(column_name)
-
-    except Exception as e:
-        print('Error reading the dictionary file with the supplied prefix:', e)
-        return None
-
-    # Calculate slice values from widths.
-    slice_tuples = []
-    offset = 0
-    for i in widths:
-        slice_tuples.append((offset, i))
-        offset += i
-
-    # Create Final DataFrame (and drop full string)
-    df = df.with_columns(
-        [
-        pl.col("full_str").str.slice(slice_tuple[0], slice_tuple[1]).str.strip_chars().alias(col)
-        for slice_tuple, col in zip(slice_tuples, final_column_names)
-        ]
-    ).drop("full_str")
-
-    # Save to Parquet
-    df.write_parquet(fwf_name.replace('.txt', '.parquet'))
-
 #%% Import and Combine Factor Files
 # Import Factor Files
-def import_factor_files() :
+def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
+    """Import the full history of the factor file types."""
 
-    pass
+    # Create Save Folder if Doesn't Yet Exist
+    if not os.path.exists(save_folder) :
+        os.makedirs(save_folder)
+
+    # Get All Files for the Given Prefix
+    files = glob.glob(f'{data_folder}/{file_prefix}_*')
+
+    # Convert All Files to Parquet
+    for file in files :
+
+        # Create Save File Name
+        file_name = os.path.splitext(os.path.basename(file))[0]
+        save_file_name = f'{save_folder}/{file_name}.parquet'
+
+        # Save as Parquet if file doesn't exist yet
+        if not os.path.exists(save_file_name) :
+
+            # Handle ZIPs vs TXTs
+            if zipfile.is_zipfile(file) :
+                _,content = read_text_from_zip(file)
+                df = read_fixed_width_files(StringIO(content), dictionary_file, file_prefix, has_header=False, skip_rows=0)
+            else :
+                df = read_fixed_width_files(file, dictionary_file, file_prefix, has_header=False, skip_rows=0)
+            
+            # Save to Parquet
+            df.sink_parquet(save_file_name)
 
 # Combine Factor Files
-def combine_factor_files() :
+def combine_factor_files(data_folder: str, file_prefix: str) :
 
-    pass
+    # Combine Data From Parquets
+    df = []
+    files = glob.glob(f'{data_folder}/{file_prefix}_*.parquet')
+    for file in files :
+        df_a = pl.scan_parquet(file)
+        df.append(df_a)
+    df = pl.concat(df)
+
+    # Return Combined Data
+    return df
 
 #%% Import and Combine Remic Files
 # Import Remic Files
@@ -268,59 +221,9 @@ def combine_srf_data() :
 #%% Main Routine
 if __name__ == "__main__":
 
-    # Process Zip Files
-    folder_to_scan = "./data/raw"
-    folder_to_save = './data/clean'
-    text_file_encoding = 'utf-8'
-    # process_zip_files_in_folder(folder_to_scan, folder_to_save, file_prefix='factorA1_', file_encoding=text_file_encoding)
-
-    # Read Fixed-Width Files
-    fwf_name = './data/raw/factorAplat_202501.txt'
+    # Import Fixed-Width Factor Files
+    data_folder = "./data/raw"
+    save_folder = './data/clean'
     dictionary_file = './dictionary_files/clean/factor_layouts_combined.csv'
-    df = read_fixed_width_files(fwf_name, dictionary_file=dictionary_file, file_prefix='factorAplat')
-    print(df)
-
-# # OLD
-# # Import Packages
-# import polars as pl
-
-# # Set File Name
-# fwf_name = './data/raw/factorAplat_202001.txt'
-
-# # Load the Factor Data
-# df = pl.read_csv(
-#     fwf_name,
-#     has_header=False,
-#     skip_rows=1,
-#     new_columns=["full_str"]
-# )
-
-# # Read Dictionary File
-# dictionary_file = './dictionary_files/tabula-factorAplat_layout.csv'
-# formats = pl.read_csv(dictionary_file)
-# column_names = formats.select(pl.col('Data Item')).to_series().to_list()
-# widths = (formats.select(pl.col('End')) - formats.select(pl.col('Begin')) + 1).to_series().to_list()
-
-# # Fix Column Names
-# filler_count = 0
-# final_column_names = []
-# for column_name in column_names :
-#     if column_name == 'Filler' :
-#         column_name += f' {filler_count+1}'
-#         filler_count += 1
-#     final_column_names.append(column_name)
-
-# # Calculate slice values from widths.
-# slice_tuples = []
-# offset = 0
-# for i in widths:
-#     slice_tuples.append((offset, i))
-#     offset += i
-
-# # Create Final DataFrame (and drop full string)
-# df = df.with_columns(
-#     [
-#        pl.col("full_str").str.slice(slice_tuple[0], slice_tuple[1]).str.strip_chars().alias(col)
-#        for slice_tuple, col in zip(slice_tuples, final_column_names)
-#     ]
-# ).drop("full_str")
+    for file_prefix in ['factorA1','factorA2','factorAAdd','factorAplat','factorB1','factorB2']:
+        import_factor_files(data_folder=data_folder, save_folder=save_folder, file_prefix=file_prefix, dictionary_file=dictionary_file)

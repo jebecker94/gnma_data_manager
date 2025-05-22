@@ -91,8 +91,9 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dail
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path=data_folder)
-                    except :
+                    except Exception as e:
                         if verbose :
+                            print('Error:', e)
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
@@ -181,8 +182,9 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path = data_folder)
-                    except :
+                    except Exception as e:
                         if verbose :
+                            print('Error:', e)
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
@@ -272,8 +274,9 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path = data_folder)
-                    except :
+                    except Exception as e:
                         if verbose :
+                            print('Error:', e)
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
@@ -423,7 +426,8 @@ def get_liquidation_reasons(data_folder, save_folder, file_suffix = '', verbose 
             df_a.drop(columns = ['Current Month Liquidation Flag'], inplace = True)
             df_a['Removal Reason'] = [int(x) for x in df_a['Removal Reason']]
             df.append(df_a)
-        except :
+        except Exception as e:
+            print('Error:', e, '\nSkipping for now, but you may wish to investigate.')
             pass
 
     # Combine Monthly DataFrames
@@ -534,7 +538,7 @@ if __name__ == '__main__' :
         unzip_gnma_nissues_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='D')
     for FILE_PREFIX in ['nimonSFPS'] :
         unzip_gnma_nimon_data(RAW_DIR, CLEAN_DIR, NIMON_FILE, file_prefix=FILE_PREFIX, record_type='PS')
-    stop
+
     ## SUMMARY
     # Combine GNMA Issuance Data
     combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')

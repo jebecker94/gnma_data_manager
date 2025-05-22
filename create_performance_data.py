@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on: Sat Dec 3 09:49:44 2022
-Last updated on: Friday May 2 23:21:00 2025
+Created on: Saturday Dec 3 2022
+Updated on: Wednesday May 21 2025
 @author: Jonathan E. Becker
 """
 
-#%% Setup
 # Import Packages
 import os
 import glob
@@ -16,7 +14,6 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import config
 
-#%% PERFORMANCE
 # Create Ginnie Mae Performance Files
 def create_yearly_gnma_performance_files(data_folder, save_folder, file_prefix='llmon1', replace=False, verbose=False) :
     """
@@ -24,12 +21,12 @@ def create_yearly_gnma_performance_files(data_folder, save_folder, file_prefix='
 
     Parameters
     ----------
-    data_folder : TYPE
-        DESCRIPTION.
-    save_folder : TYPE
-        DESCRIPTION.
-    file_prefix : TYPE, optional
-        DESCRIPTION. The default is 'llmon1'.
+    data_folder : str
+        Folder where data is stored.
+    save_folder : str
+        Folder where cleaned performance data will be saved.
+    file_prefix : str, optional
+        The prefix of the files to use when creating yearly performance files. The default is 'llmon1'.
 
     Returns
     -------
@@ -38,19 +35,23 @@ def create_yearly_gnma_performance_files(data_folder, save_folder, file_prefix='
     """
 
     # Monthly and Numeric Columns
-    monthly_columns = ['Disclosure Sequence Number',
-                       'First Payment Date',
-                       'Unpaid Principal Balance',
-                       'Loan Age',
-                       'Months Delinquent',
-                       'Months Pre-Paid',
-                       'As of Date']
-    numeric_columns = ['Unpaid Principal Balance',
-                       'First Payment Date',
-                       'Loan Age',
-                       'Months Delinquent',
-                       'Months Pre-Paid',
-                       'As of Date']
+    monthly_columns = [
+        'Disclosure Sequence Number',
+        'First Payment Date',
+        'Unpaid Principal Balance',
+        'Loan Age',
+        'Months Delinquent',
+        'Months Pre-Paid',
+        'As of Date',
+    ]
+    numeric_columns = [
+        'Unpaid Principal Balance',
+        'First Payment Date',
+        'Loan Age',
+        'Months Delinquent',
+        'Months Pre-Paid',
+        'As of Date',
+    ]
 
     # Yearly File Metadata
     combined_metadata_file = f'{save_folder}/yearly_metadata_{file_prefix}.csv'
@@ -67,7 +68,7 @@ def create_yearly_gnma_performance_files(data_folder, save_folder, file_prefix='
     for file in files :
 
         # Convert Name to be Linux Friendly
-        linux_file_name = file.replace('V:/',f'/')
+        linux_file_name = file.replace('V:/','/')
 
         # Add Information from File if not Logged in Metadata File
         if not linux_file_name in metadata['Logged Files'].tolist() :
@@ -386,7 +387,7 @@ def combine_performance_summaries(data_folder, save_folder, file_suffix = '', ve
         csv.write_csv(dt, out, write_options = write_options)
 
 # Performance Time-Series
-def create_performance_time_series(data_folder, save_folder) :
+def create_performance_time_series(data_folder, save_folder, min_year=1983, max_year=2025) :
     """
     Create time-series files of performance. Will save files with the full set
     of loan balances at each time period.
@@ -404,7 +405,7 @@ def create_performance_time_series(data_folder, save_folder) :
 
     """
     
-    for year in range(1983, 2023 + 1) :
+    for year in range(min_year, max_year+1) :
 
         df = []
         for lltype in range(1, 2 + 1) :
@@ -415,9 +416,10 @@ def create_performance_time_series(data_folder, save_folder) :
             df_a = csv.read_csv(file, parse_options = parse_options).to_pandas(date_as_object = False)
             df.append(df_a)
         
-        # Combine GNMAIs and GNMAIIs
+        # Combine GNMA Is and GNMA IIs
         df = pd.concat(df)
 
+        # Convert Loan Age to Integer
         df['Loan Age'] = df['Loan Age'].astype('Int16')
 
         # Impute Loan Ages
@@ -429,7 +431,7 @@ def create_performance_time_series(data_folder, save_folder) :
         df['Loan Age'] = df['Loan Age'].fillna(df['Imputed Loan Age'])
         df = df.drop(columns = ['First Payment Year', 'First Payment Month', 'As of Year', 'As of Month', 'Imputed Loan Age'])
 
-        #
+        # Convert Loan Age to a String
         df['Loan Age'] = df['Loan Age'].astype('str')
         entries = {}
         for group in df.groupby(['Disclosure Sequence Number']) :
@@ -442,7 +444,7 @@ def create_performance_time_series(data_folder, save_folder) :
         dt = pa.Table.from_pandas(df_js, preserve_index = True)
         pq.write_table(dt, DATA_DIR / f'gnma_performance_time_series_{year}.parquet')
 
-#%% Main Routine
+# Main Routine
 if __name__ == '__main__' :
 
     # Set Folder Structure
@@ -459,7 +461,6 @@ if __name__ == '__main__' :
     if not os.path.exists(CLEAN_DIR) :
         os.makedirs(CLEAN_DIR)
 
-    ## PERFORMANCE
     # Create GNMA Yearly Performance Files
     for FILE_PREFIX in ['llmon1', 'llmon2'] :
         create_yearly_gnma_performance_files(CLEAN_DIR, CLEAN_DIR, file_prefix=FILE_PREFIX)

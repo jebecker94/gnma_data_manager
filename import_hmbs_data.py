@@ -90,9 +90,10 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dail
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path=data_folder)
-                    except :
+                    except Exception as e :
                         if verbose :
-                            print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
+                            print('Error:', e)
+                            print('Could not unzip file:', file, 'with Python\'s Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
                         p.wait()
@@ -180,8 +181,9 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path = data_folder)
-                    except :
+                    except Exception as e :
                         if verbose :
+                            print('Error:', e)
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])
@@ -272,8 +274,9 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
                         print('Extracting File:', file, 'Year/Month:', ym)
                     try :
                         z.extract(file, path = data_folder)
-                    except :
+                    except Exception as e:
                         if verbose :
+                            print('Error:', e)
                             print('Could not unzip file:', file, 'with Pythons Zipfile package. Using 7z instead.')
                         unzip_string = "C:/Program Files/7-Zip/7z.exe"
                         p = subprocess.Popen([unzip_string, "e", f"{folder}", f"-o{data_folder}", f"{file}", "-y"])

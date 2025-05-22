@@ -61,16 +61,14 @@ llmonliqot:
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: LOAN LIQUIDATION FILE (MBS SINGLE FAMILY), OCTOBER 2009 THROUGH MARCH
-    2019
+  description: LOAN LIQUIDATION FILE (MBS SINGLE FAMILY), OCTOBER 2009 THROUGH MARCH 2019
 liqloanot:
   min_date: '201405'
   max_date: '201405'
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MBS LIQUIDATED AND TERMINATED LOANS, OCTOBER 2009 THROUGH SEPTEMBER
-    2013
+  description: MBS LIQUIDATED AND TERMINATED LOANS, OCTOBER 2009 THROUGH SEPTEMBER 2013
 nissues:
   min_date: '201202'
   max_date: '202104'
@@ -179,8 +177,7 @@ mfpppot:
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MULTIFAMILY PREPAYMENT PENALTY DISCLOSURE DATA (MBS), SEPTEMBER 2001
-    THROUGH SEPTEMBER 2018
+  description: MULTIFAMILY PREPAYMENT PENALTY DISCLOSURE DATA (MBS), SEPTEMBER 2001 THROUGH SEPTEMBER 2018
 mfpldailymni3:
   min_date: '202201'
   max_date: null
@@ -194,16 +191,14 @@ mfpldailymni2:
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MULTIFAMILY POOL AND LOAN NEW ISSUANCE MONTHLY DISCLOSURE V2.0 (08/01/2021
-    - 01/01/2022)
+  description: MULTIFAMILY POOL AND LOAN NEW ISSUANCE MONTHLY DISCLOSURE V2.0 (08/01/2021 - 01/01/2022)
 mfpldailymni:
   min_date: '201812'
   max_date: '202109'
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MULTIFAMILY POOL AND LOAN NEW ISSUANCE MONTHLY DISCLOSURE V1.0 (12/01/2018
-    - 07/01/2021)
+  description: MULTIFAMILY POOL AND LOAN NEW ISSUANCE MONTHLY DISCLOSURE V1.0 (12/01/2018 - 07/01/2021)
 mfplmon3:
   min_date: '202201'
   max_date: null
@@ -217,16 +212,14 @@ mfplmon2:
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE V2.0 (07/01/2021
-    - 12/01/2021)
+  description: MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE V2.0 (07/01/2021 - 12/01/2021)
 mfplmon:
   min_date: '201812'
   max_date: '202109'
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE V1.0 (12/01/2018
-    - 06/01/2021)
+  description: MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE V1.0 (12/01/2018 - 06/01/2021)
 mfpppmon:
   min_date: '201810'
   max_date: null
@@ -286,24 +279,21 @@ pfot2000s:
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 2000 THROUGH
-    DECEMBER 2006
+  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 2000 THROUGH DECEMBER 2006
 pfot1990s:
   min_date: '201812'
   max_date: '201812'
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 1990 THROUGH
-    DECEMBER 1999
+  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 1990 THROUGH DECEMBER 1999
 pfot1980s:
   min_date: '201812'
   max_date: '201812'
   extension: zip
   date_format: '%Y%m'
   frequency: monthly
-  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 1982 THROUGH
-    DECEMBER 1989
+  description: POOL FACTOR HISTORY DISCLOSURE DATA (MBS AND HMBS), JANUARY 1982 THROUGH DECEMBER 1989
 factorA1:
   min_date: '201208'
   max_date: null
@@ -382,8 +372,7 @@ ptermplatot:
   extension: txt
   date_format: '%Y%m'
   frequency: monthly
-  description: POOL TERMINATIONS FILE (PLATINUM/HMBS), JANUARY 1994 THROUGH MARCH
-    2017
+  description: POOL TERMINATIONS FILE (PLATINUM/HMBS), JANUARY 1994 THROUGH MARCH 2017
 ptermot:
   min_date: '201405'
   max_date: '201405'

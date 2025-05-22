@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import yaml
 import glob
 import zipfile
+import pandas as pd
 
 # Get Date Format Function
 def get_date_format(date_string: str) -> str:
@@ -105,6 +106,29 @@ def drop_invalid_zip_files(folder_path: str) :
             os.remove(file_path)
             print('Removing file:', file_path)
 
+# Create Date Suffix
+def create_date_suffix(current_date: datetime.datetime, date_format: str, frequency: str, firstlast: str='last') -> str:
+
+    # Turn Current Date to Period
+    if frequency == 'monthly' :
+        date_period = pd.Series(current_date).dt.to_period('M')
+    elif frequency == 'quarterly' :
+        date_period = pd.Series(current_date).dt.to_period('Q')
+    elif frequency == 'yearly' :
+        date_period = pd.Series(current_date).dt.to_period('Y')
+
+    # Get First of
+    if firstlast == 'first' :
+        key_date = date_period.dt.start_time[0]
+    else :
+        key_date = date_period.dt.end_time[0]
+
+    # Get Date Suffix
+    date_suffix = key_date.strftime(date_format)
+
+    # Return Date Suffix
+    return date_suffix
+
 ## Main Routine
 if __name__=='__main__' :
 
@@ -165,9 +189,13 @@ if __name__=='__main__' :
         current_date = start_date
         while current_date <= end_date :
 
+            # Get File Suffix
+            date_format = prefix_dict[prefix]['date_format']
+            frequency = prefix_dict[prefix]['frequency']
+            file_date_suffix = create_date_suffix(current_date, date_format, frequency, firstlast='last')
+
             # Create File Name and URL
-            yearmonth = f'{current_date.year}{str(current_date.month).zfill(2)}'
-            file_name = f'{prefix}_{yearmonth}.{prefix_dict[prefix]["extension"]}'
+            file_name = f'{prefix}_{file_date_suffix}.{prefix_dict[prefix]["extension"]}'
             file_url = f'{historical_url_prefix}/{file_name}'
             download_file = f'{download_folder}/{file_name}'
 

@@ -66,7 +66,8 @@ def import_gnma_servicer_changes(data_folder, save_folder, file_suffix = '', ver
             df_a['First Payment Date'] = pd.to_datetime(df_a['First Payment Date'], format='%Y%m%d')
             df.append(df_a)
             del df_a
-        except :
+        except Exception as e :
+            print('Error:', e, '\nSkipping for now, but you may want to investigate.')
             pass
 
     # Combine Monthly DataFrames
