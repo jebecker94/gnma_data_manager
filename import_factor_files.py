@@ -10,7 +10,7 @@ import re
 
 #%% Support Functions
 # Read Text from Zips
-def read_text_from_zip(zip_file_path: str, encoding: str='utf-8'):
+def read_text_from_zip(zip_file_path: str | pathlib.Path, encoding: str='utf-8') -> tuple[str | None, str | None] :
     """
     Opens a zip file, identifies the primary text file within it,
     and returns its filename and content as a string.
@@ -21,7 +21,7 @@ def read_text_from_zip(zip_file_path: str, encoding: str='utf-8'):
 
     Returns:
         tuple (str, str) or (None, None): 
-        (filename_in_zip, content_string) if successful,
+        (filename_in_zip, content_string) if successful,        
         (filename_in_zip, None) if decoding or read error for that file,
         (None, None) if no suitable file is found or a major error occurs.
     """
@@ -93,7 +93,7 @@ def read_text_from_zip(zip_file_path: str, encoding: str='utf-8'):
         return None, None
 
 # Read Fixed-Width Files
-def read_fixed_width_files(fwf_name, final_column_names: list, widths:list, has_header: bool=False, skip_rows: int=0) :
+def read_fixed_width_files(fwf_name: str | StringIO, final_column_names: list[str], widths:list[int], has_header: bool=False, skip_rows: int=0) -> pl.LazyFrame :
 
     # Load the Factor Data from a CSV/TXT file
     df = pl.scan_csv(
@@ -123,7 +123,7 @@ def read_fixed_width_files(fwf_name, final_column_names: list, widths:list, has_
     return df
 
 # Get Combined Suffix
-def get_combined_suffix(files: list) :
+def get_combined_suffix(files: list[str]) -> str :
     """Create a suffix for a combined file from a list of individual files."""
 
     # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
@@ -136,7 +136,8 @@ def get_combined_suffix(files: list) :
 
 #%% Read Dictionaries
 # Read Factor Dictionary
-def read_factor_dictionary(factor_dictionary_file: str) :
+def read_factor_dictionary(factor_dictionary_file: str, file_prefix: str) -> tuple[list[str] | None, list[int] | None] :
+    """Read the schema for the factor files."""
 
     try :
         formats = pl.read_csv(factor_dictionary_file)
@@ -161,7 +162,8 @@ def read_factor_dictionary(factor_dictionary_file: str) :
         return None, None
 
 # Read REMIC Dictionary
-def read_remic_dictionary(remic_dictionary_file: str) :
+def read_remic_dictionary(remic_dictionary_file: str, file_prefix: str) -> tuple[list[str] | None, list[int] | None] :
+    """Read the schema for the REMIC files."""
 
     # Read Dictionary File
     try :
@@ -188,7 +190,8 @@ def read_remic_dictionary(remic_dictionary_file: str) :
         return None, None
 
 # Read FRR Dictionary
-def read_frr_dictionary(frr_dictionary_file: str) :
+def read_frr_dictionary(frr_dictionary_file: str) -> tuple[list[str] | None, list[int] | None] :
+    """Read the schema for the FRR files."""
 
     try :
         formats = pl.read_csv(frr_dictionary_file)
@@ -212,7 +215,8 @@ def read_frr_dictionary(frr_dictionary_file: str) :
         return None, None
 
 # Read SRF Dictionary
-def read_srf_dictionary(srf_dictionary_file: str) :
+def read_srf_dictionary(srf_dictionary_file: str) -> tuple[list[str] | None, list[int] | None] :
+    """Read the schema for the SRF files."""
 
     try :
         formats = pl.read_csv(srf_dictionary_file)
@@ -237,7 +241,7 @@ def read_srf_dictionary(srf_dictionary_file: str) :
 
 #%% Import Files
 # Import Factor Files
-def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
+def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
     """Import the full history of the factor file types."""
 
     # Create Save Folder if Doesn't Yet Exist
@@ -248,7 +252,7 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
     files = glob.glob(f'{data_folder}/{file_prefix}_*')
 
     # Load Dictionary
-    column_names, widths = read_factor_dictionary(dictionary_file)
+    column_names, widths = read_factor_dictionary(dictionary_file, file_prefix)
 
     # Convert All Files to Parquet
     for file in files :
@@ -271,7 +275,8 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
             df.sink_parquet(save_file_name)
 
 # Import REMIC Files
-def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
+def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+    """Import the full history of the REMIC file types."""
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
@@ -281,7 +286,7 @@ def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dic
     files = glob.glob(f'{data_folder}/{file_prefix}_*')
 
     # Load Dictionary
-    column_names, widths = read_remic_dictionary(dictionary_file)
+    column_names, widths = read_remic_dictionary(dictionary_file, file_prefix)
 
     # Convert All Files to Parquet
     for file in files :
@@ -305,7 +310,8 @@ def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dic
             df.sink_parquet(save_file_name)
 
 # Import FRR Data
-def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
+def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+    """Import the full history of the FRR file types."""
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
@@ -338,7 +344,8 @@ def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dicti
             df.sink_parquet(save_file_name)
 
 # Import SRF Data
-def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) :
+def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+    """Import the full history of the SRF file types."""
 
     # Create Save Folder if Doesn't Yet Exist
     if not os.path.exists(save_folder) :
@@ -372,7 +379,8 @@ def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dicti
 
 #%% Combine Files
 # Combine Files
-def combine_files(data_folder: str, save_folder: str, file_prefix: str) :
+def combine_files(data_folder: str, save_folder: str, file_prefix: str) -> None :
+    """Combine all files for a given file prefix."""
 
     # Get All Files w/ Given Prefix
     files = glob.glob(f'{data_folder}/{file_prefix}_*.parquet')
@@ -387,11 +395,11 @@ def combine_files(data_folder: str, save_folder: str, file_prefix: str) :
     if not os.path.exists(save_file_name) :
 
         # Combine Data From Parquets
-        df = []
+        df_list = []
         for file in files :
             df_a = pl.scan_parquet(file)
-            df.append(df_a)
-        df = pl.concat(df)
+            df_list.append(df_a)
+        df = pl.concat(df_list)
 
         # Get Combined Suffix from File List
         combined_suffix = get_combined_suffix(files)

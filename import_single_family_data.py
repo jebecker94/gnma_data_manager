@@ -18,6 +18,7 @@ import pyarrow.parquet as pq
 from io import StringIO
 import config
 import re
+import polars as pl
 
 #%% UNZIPPING# Get Combined Suffix
 def get_combined_suffix(files: list) :
@@ -313,7 +314,7 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
 
 #%% SUMMARY
 # Combine Ginnie Mae Data
-def combine_gnma_data(data_folder, save_folder, file_prefix = 'dailyllmni', record_type = 'L', file_suffix = '') :
+def combine_gnma_data(data_folder: str, save_folder: str, file_prefix: str='dailyllmni', record_type: str='L', file_suffix: str=None) :
     """
     Combine all GNMA files with a given prefix and record type.
 
@@ -334,22 +335,30 @@ def combine_gnma_data(data_folder, save_folder, file_prefix = 'dailyllmni', reco
 
     """
 
-    # Load
-    df = []
+    # Verify that data and save folders are different
+    if data_folder == save_folder :
+        raise ValueError('Data and save folders cannot be the same.')
+
+    # Get Files
     files = glob.glob(f'{data_folder}/{file_prefix}_*{record_type}*.parquet')
     files.sort()
-    for file in files :
-        df_a = pq.read_table(file).to_pandas(date_as_object = False)
-        df.append(df_a)
+
+    # Get File Suffix and Create Save File Name
+    if not file_suffix :
+        file_suffix = get_combined_suffix(files)
+    save_file_name = f'{save_folder}/{file_prefix}_combined{file_suffix}{record_type}.parquet'
 
     # Combine and Save
-    # df = pa.concat_tables(df, promote = True)
-    df = pd.concat(df)
-    df = pa.Table.from_pandas(df, preserve_index = False)
-    pq.write_table(df, f'{save_folder}/{file_prefix}_combined_{file_suffix}{record_type}.parquet')
+    if not os.path.exists(save_file_name) :
+        df = []
+        for file in files :
+            df_a = pl.scan_parquet(file)
+            df.append(df_a)
+        df = pl.concat(df, how='diagonal_relaxed')
+        pl.sink_parquet(df, save_file_name)
 
 # Combine Ginnie Mae Data
-def combine_gnma_pools(data_folder, save_folder, file_suffix='') :
+def combine_gnma_pools(data_folder, save_folder, file_suffix=None) :
     """
     Combine GNMA pools data from issuance files.
 
@@ -548,6 +557,8 @@ if __name__ == '__main__' :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='L')
     for FILE_PREFIX in ['dailyllmni'] :
         unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='P')
+    for FILE_PREFIX in ['dailyllmni'] :
+        unzip_gnma_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='T')
     for FILE_PREFIX in ['nissues'] :
         unzip_gnma_nissues_data(RAW_DIR, CLEAN_DIR, FORMATTING_FILE, file_prefix=FILE_PREFIX, record_type='D')
     for FILE_PREFIX in ['nimonSFPS'] :

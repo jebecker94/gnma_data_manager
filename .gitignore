@@ -12,6 +12,7 @@ data/*
 
 # Dictionary Files (PDF)
 dictionary_files/*.pdf
+dictionary_files/pdf_layouts
 
 # Config Files
 .env
