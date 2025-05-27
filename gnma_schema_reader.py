@@ -16,9 +16,6 @@ def extract_tables_from_pdf(pdf_path: str) -> List[Dict[str, Any]]:
             tables = page.extract_tables()
             for table in tables:
                 for row in table:
-                    if not row or not row[0].strip().isdigit():
-                        schema.append(row)
-                        continue
                     try:
                         schema.append(row)
                     except Exception:
@@ -38,16 +35,24 @@ def reconcile_schemas(schema_list: List[Tuple[str, List[Dict[str, Any]]]]) -> Di
     return reconciled
 
 # Extract Tables
-pdf_paths = glob.glob('./dictionary_files/raw/llmon2_layout_v*.pdf')
+pdf_paths = glob.glob('./dictionary_files/pdf_layouts/dailyllmni_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/factorA1_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/ptermot_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/issrinfo_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/issuers_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/mfpldailymni3_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/mfpldailymni2_*.pdf')
+# pdf_paths = glob.glob('./dictionary_files/pdf_layouts/llmonliq_*.pdf')
 df = []
 for pdf_path in pdf_paths:
     schema = extract_tables_from_pdf(pdf_path)
     df_a = pd.DataFrame(schema)
-    df_a['File'] = os.path.basename(pdf_path).split('.')[0]
+    df_a['File'] = os.path.basename(pdf_path)
+    # df_a['File'] = os.path.splitext(os.path.basename(pdf_path))[0]
     df.append(df_a)
     del df_a
 df = pd.concat(df)
 
 # Keep Only Variable Rows and Non-empty Columns
-df = df.loc[df[0].str.strip().str.isdigit()]
+# df = df.loc[df[0].str.strip().str.isdigit()]
 df = df.dropna(axis=1, how='all')

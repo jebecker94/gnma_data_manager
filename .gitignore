@@ -12,7 +12,14 @@ data/*
 
 # Dictionary Files (PDF)
 dictionary_files/*.pdf
+dictionary_files/raw/*.pdf
 dictionary_files/pdf_layouts
 
 # Config Files
 .env
+
+# Preliminary Functions
+create_performance_data.py 
+create_servicer_change_dataset.py 
+gnma_schema_reader.py
+match_gnma_loan_modifications.py
