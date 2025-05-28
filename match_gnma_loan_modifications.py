@@ -94,4 +94,4 @@ if __name__ == '__main__' :
         os.makedirs(CLEAN_DIR)
 
     # Match Modified and Non-modified Loans
-    match_gnma_loan_modifications(gnma_file = DATA_DIR / 'gnma_combined_data_201309-202502.parquet')
+    df = match_gnma_loan_modifications(gnma_file = DATA_DIR / 'gnma_combined_data_201309-202502.parquet')

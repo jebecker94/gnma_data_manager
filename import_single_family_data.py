@@ -19,9 +19,11 @@ from io import StringIO
 import config
 import re
 import polars as pl
+from pathlib import Path
 
-#%% UNZIPPING# Get Combined Suffix
-def get_combined_suffix(files: list) :
+#%% UNZIPPING
+# Get Combined Suffix
+def get_combined_suffix(files: list[str]) -> str:
     """Create a suffix for a combined file from a list of individual files."""
 
     # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
@@ -32,27 +34,16 @@ def get_combined_suffix(files: list) :
     # Return Combined Suffix
     return combined_suffix
 
-# Skip Row (For Handling Reading Errors)
-def skip_row(row) :
-    """
-    Function for handling bad rows when reading CSVs with pyarrow.
-
-    Parameters
-    ----------
-    row : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    str
-        DESCRIPTION.
-
-    """
-
-    return 'skip'
-
 # Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dailyllmni', replace_files=False, record_type='L', verbose=False) :
+def unzip_gnma_data(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    formatting_file: str | Path,
+    file_prefix: str = 'dailyllmni',
+    replace_files: bool = False,
+    record_type: str = 'L',
+    verbose: bool = False
+) -> None:
     """
     Unzip files from GNMA disclosure data collection, and create parquet files.
 
@@ -143,7 +134,15 @@ def unzip_gnma_data(data_folder, save_folder, formatting_file, file_prefix='dail
                     df.to_parquet(save_file_name, index=False)
 
 # Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_prefix = 'dailyllmni', replace_files = False, record_type = 'L', verbose = False) :
+def unzip_gnma_nissues_data(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    formatting_file: str | Path,
+    file_prefix: str = 'dailyllmni',
+    replace_files: bool = False,
+    record_type: str = 'L',
+    verbose: bool = False
+) -> None:
     """
     Unzip files from GNMA disclosure data collection, and create gzipped csvs.
 
@@ -235,7 +234,15 @@ def unzip_gnma_nissues_data(data_folder, save_folder, formatting_file, file_pref
                     pq.write_table(dt, save_file_name)
 
 # Convert MBS/HMBS Files to Compressed CSV
-def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix='nimonSFPS', replace_files=False, record_type='PS', verbose=False) :
+def unzip_gnma_nimon_data(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    formatting_file: str | Path,
+    file_prefix: str = 'nimonSFPS',
+    replace_files: bool = False,
+    record_type: str = 'PS',
+    verbose: bool = False
+) -> None:
     """
     Unzip files from GNMA disclosure data collection, and create gzipped csvs.
 
@@ -314,7 +321,13 @@ def unzip_gnma_nimon_data(data_folder, save_folder, formatting_file, file_prefix
 
 #%% SUMMARY
 # Combine Ginnie Mae Data
-def combine_gnma_data(data_folder: str, save_folder: str, file_prefix: str='dailyllmni', record_type: str='L', file_suffix: str=None) :
+def combine_gnma_data(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    file_prefix: str = 'dailyllmni',
+    record_type: str = 'L',
+    file_suffix: str | None = None
+) -> None:
     """
     Combine all GNMA files with a given prefix and record type.
 
@@ -355,10 +368,14 @@ def combine_gnma_data(data_folder: str, save_folder: str, file_prefix: str='dail
             df_a = pl.scan_parquet(file)
             df.append(df_a)
         df = pl.concat(df, how='diagonal_relaxed')
-        pl.sink_parquet(df, save_file_name)
+        df.sink_parquet(save_file_name)
 
 # Combine Ginnie Mae Data
-def combine_gnma_pools(data_folder, save_folder, file_suffix=None) :
+def combine_gnma_pools(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    file_suffix: str | None = None
+) -> None:
     """
     Combine GNMA pools data from issuance files.
 
@@ -379,22 +396,34 @@ def combine_gnma_pools(data_folder, save_folder, file_suffix=None) :
 
     """
 
-    # Load
-    df = []
+    # Get Files
     files = glob.glob(f'{data_folder}/*dailyllmni_*P*.parquet')
     files.sort()
-    for file in files :
-        df_a = pq.read_table(file).to_pandas(date_as_object = False)
-        df_a.rename(columns = {'As-Of Date':'As of Date'}, inplace = True)
-        df.append(df_a)
 
-    # Combine and Save
-    df = pd.concat(df)
-    dt = pa.Table.from_pandas(df, preserve_index = False)
-    pq.write_table(dt, f'{save_folder}/gnma_combined_pools_{file_suffix}.parquet')
+    # Get File Suffix and Create Save File Name
+    if not file_suffix :
+        file_suffix = get_combined_suffix(files)
+    save_file_name = f'{save_folder}/gnma_combined_pools{file_suffix}.parquet'
+
+    # Combine Monthly Files
+    df = []
+    for file in files :
+        df_a = pl.scan_parquet(file)
+        if 'As-Of Date' in df_a.columns :
+            df_a = df_a.rename({'As-Of Date': 'As of Date'})
+        df.append(df_a)
+    df = pl.concat(df, how='diagonal_relaxed')
+
+    # Save
+    df.sink_parquet(save_file_name)
 
 # Get GNMA Liquidation Reasons
-def get_liquidation_reasons(data_folder, save_folder, file_suffix = '', verbose = False) :
+def get_liquidation_reasons(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    file_suffix: str | None = None,
+    verbose: bool = False
+) -> None:
     """
     Read liquidation reasons from performance files.
 
@@ -432,7 +461,11 @@ def get_liquidation_reasons(data_folder, save_folder, file_suffix = '', verbose 
     # Get Performance Files
     files = glob.glob(f'{data_folder}/llmon1_*.parquet')
     files += glob.glob(f'{data_folder}/llmon2_*.parquet')
-    files.sort(reverse = True)
+    files.sort(reverse=True)
+
+    # Get File Suffix and Create Save File Name
+    if not file_suffix :
+        file_suffix = get_combined_suffix(files)
 
     # Read Monthly Liquidations
     df = []
@@ -442,45 +475,51 @@ def get_liquidation_reasons(data_folder, save_folder, file_suffix = '', verbose 
             print('Importing liquidation/termination reasons from file:', file)
 
         try :
-            df_a = pq.read_table(file,
-                                 columns = liquidation_columns,
-                                 filters = [('Current Month Liquidation Flag','==','Y')],
-                                 ).to_pandas(date_as_object = False)
-            df_a.drop(columns = ['Current Month Liquidation Flag'], inplace = True)
-            df_a['Removal Reason'] = [int(x) for x in df_a['Removal Reason']]
-            df.append(df_a)
+            df_a = pl.scan_parquet(file)
+            if 'Current Month Liquidation Flag' in df_a.columns :
+                df_a = df_a.select(liquidation_columns)#, strict=False)
+                df_a = df_a.filter([pl.col('Current Month Liquidation Flag')=='Y'])
+                df_a = df_a.drop('Current Month Liquidation Flag')
+                # df_a['Removal Reason'] = [int(x) for x in df_a['Removal Reason']]
+                df.append(df_a)
         except Exception as e:
             print('Error:', e, '\nSkipping for now, but you may wish to investigate.')
             pass
 
     # Combine Monthly DataFrames
-    df = pd.concat(df)
+    df = pl.concat(df, how='diagonal_relaxed')
 
     # Rename Columns
-    df = df.rename(columns = {'As of Date': 'Liquidation Date',
-                              'Months Pre-Paid': 'Months Pre-Paid at Liquidation',
-                              'Months Delinquent': 'Months Delinquent at Liquidation',
-                              'Pool ID': 'Final Pool ID',
-                              'Issuer ID': 'Final Issuer ID',
-                              'Unpaid Principal Balance': 'Final Unpaid Principal Balance'})
+    rename_map = {
+        'As of Date': 'Liquidation Date',
+        'Months Pre-Paid': 'Months Pre-Paid at Liquidation',
+        'Months Delinquent': 'Months Delinquent at Liquidation',
+        'Pool ID': 'Final Pool ID',
+        'Issuer ID': 'Final Issuer ID',
+        'Unpaid Principal Balance': 'Final Unpaid Principal Balance',
+    }
+    df = df.rename(rename_map)
 
-    # Combine and Save (Write with PyArrow)
+    # Save
     save_file = f'{save_folder}/gnma_combined_loan_liquidations{file_suffix}.parquet'
-    dt = pa.Table.from_pandas(df, preserve_index = False)
-    pq.write_table(dt, save_file)
+    df.sink_parquet(save_file)
 
 # Add Old Observations to Issuance Data
-def create_final_dataset(data_folder, save_folder, file_suffix = '') :
+def create_final_dataset(
+    data_folder: str | Path,
+    save_folder: str | Path,
+    file_suffix: str | None = None,
+) -> None:
     """
     Create final dataset from issuance, pools, and liquidations data.
 
     Parameters
     ----------
-    data_folder : TYPE
+    data_folder : str | Path
         DESCRIPTION.
-    save_folder : TYPE
+    save_folder : str | Path
         DESCRIPTION.
-    file_suffix : TYPE, optional
+    file_suffix : str, optional
         DESCRIPTION. The default is ''.
 
     Returns
@@ -490,46 +529,50 @@ def create_final_dataset(data_folder, save_folder, file_suffix = '') :
     """
 
     # Load Combined Issuances Data
-    combined_issuance_file = f'{save_folder}/dailyllmni_combined{file_suffix}L.parquet'
-    df = pq.read_table(combined_issuance_file).to_pandas(date_as_object = False)
+    combined_issuance_files = glob.glob(f'{save_folder}/dailyllmni_combined_*L.parquet')
+    combined_issuance_files.sort(reverse=True)
+    combined_issuance_file = combined_issuance_files[0]
+    df = pl.scan_parquet(combined_issuance_file)
 
     # Read Initial Observations
     first_period_files = [f'{data_folder}/llmon1_201310L.parquet', f'{data_folder}/llmon2_201310L.parquet']
     df_old = []
     for file in first_period_files :
-        df_a = pq.read_table(file).to_pandas(date_as_object = False)
+        df_a = pl.scan_parquet(file)
         df_old.append(df_a)
-    df_old = pd.concat(df_old)
-    df_old['As of Date'] = 201310
+    df_old = pl.concat(df_old, how='diagonal_relaxed')
+    df_old = df_old.with_columns(pl.lit(201310).alias('As of Date'))
 
     # Append and Drop Duplicates
-    df = pd.concat([df, df_old])
-    df = df.drop_duplicates(subset = ['Disclosure Sequence Number', 'First Payment Date'])
+    df = pl.concat([df, df_old], how='diagonal_relaxed')
+    del df_old
+    df = df.unique(subset = ['Disclosure Sequence Number', 'First Payment Date'], keep='first')
 
     # Load Pools Data
-    file_pools = f'{save_folder}/gnma_combined_pools{file_suffix}.parquet'
-    df_pools = pq.read_table(file_pools).to_pandas(date_as_object = False)
-    df_pools = df_pools.drop(columns = ['Record Type','As of Date'])
-    df_pools = df_pools.rename(columns = {'Issuer ID': 'Pool Issuer ID'})
-    df = df.merge(df_pools,
-                  on = ['Pool ID'],
-                  how = 'left',
-                  )
+    combined_pools_files = glob.glob(f'{save_folder}/gnma_combined_pools_*.parquet')
+    combined_pools_files.sort(reverse=True)
+    combined_pools_file = combined_pools_files[0]
+    df_pools = pl.scan_parquet(combined_pools_file)
+    df_pools = df_pools.drop(['Record Type','As of Date'])
+    df_pools = df_pools.rename({'Issuer ID': 'Pool Issuer ID'})
+    df = df.join(df_pools, on=['Pool ID'], how='left')
+    del df_pools
 
     # Load Liquidations Data
-    file_liq = f'{save_folder}/gnma_combined_loan_liquidations{file_suffix}.parquet'
-    df_liq = pq.read_table(file_liq).to_pandas(date_as_object = False)
-    df_liq = df_liq.drop_duplicates(subset = ['Disclosure Sequence Number'])
-    df = df.drop(columns = ['Removal Reason'])
-    df = df.merge(df_liq,
-                  on = ['Disclosure Sequence Number', 'First Payment Date'],
-                  how = 'left',
-                  )
+    combined_liquidation_files = glob.glob(f'{save_folder}/gnma_combined_loan_liquidations_*.parquet')
+    combined_liquidation_files.sort(reverse=True)
+    combined_liquidation_file = combined_liquidation_files[0]
+    df_liq = pl.scan_parquet(combined_liquidation_file)
+    df_liq = df_liq.unique(subset=['Disclosure Sequence Number'], keep='first')
+    # Ensure 'Removal Reason' column exists before trying to drop it
+    if 'Removal Reason' in df.columns:
+        df = df.drop(['Removal Reason'])
+    df = df.join(df_liq, on=['Disclosure Sequence Number','First Payment Date'], how='left')
+    del df_liq
 
     # Save Combined File
     save_file = f'{save_folder}/gnma_combined_data{file_suffix}.parquet'
-    dt = pa.Table.from_pandas(df, preserve_index = False)
-    pq.write_table(dt, save_file)
+    df.sink_parquet(save_file)
 
 #%% Main Routine
 if __name__ == '__main__' :
@@ -566,13 +609,13 @@ if __name__ == '__main__' :
 
     ## SUMMARY
     # Combine GNMA Issuance Data
-    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L', file_suffix='201309-202502')
-    combine_gnma_pools(CLEAN_DIR, DATA_DIR, file_suffix='201309-202502')
-    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nissues', record_type='D', file_suffix='201202-202010')
-    combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS', file_suffix='202001-202502')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='dailyllmni', record_type='L')
+    # combine_gnma_pools(CLEAN_DIR, DATA_DIR)
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nissues', record_type='D')
+    # combine_gnma_data(CLEAN_DIR, DATA_DIR, file_prefix='nimonSFPS', record_type='PS')
 
     # Get GNMA Liquidation Reasons
-    get_liquidation_reasons(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
+    # get_liquidation_reasons(CLEAN_DIR, DATA_DIR)
 
     # Create Final Dataset
-    create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202502')
+    # create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202503')
