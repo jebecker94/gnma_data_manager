@@ -546,7 +546,7 @@ def create_final_dataset(
     # Append and Drop Duplicates
     df = pl.concat([df, df_old], how='diagonal_relaxed')
     del df_old
-    df = df.unique(subset = ['Disclosure Sequence Number', 'First Payment Date'], keep='first')
+    df = df.unique(subset=['Disclosure Sequence Number','First Payment Date'], keep='first')
 
     # Load Pools Data
     combined_pools_files = glob.glob(f'{save_folder}/gnma_combined_pools_*.parquet')
@@ -571,7 +571,7 @@ def create_final_dataset(
     del df_liq
 
     # Save Combined File
-    save_file = f'{save_folder}/gnma_combined_data{file_suffix}.parquet'
+    save_file = f'{save_folder}/gnma_combined_data{file_suffix}_temp.parquet'
     df.sink_parquet(save_file)
 
 #%% Main Routine
@@ -618,4 +618,4 @@ if __name__ == '__main__' :
     # get_liquidation_reasons(CLEAN_DIR, DATA_DIR)
 
     # Create Final Dataset
-    # create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202503')
+    create_final_dataset(CLEAN_DIR, DATA_DIR, file_suffix='_201309-202503')

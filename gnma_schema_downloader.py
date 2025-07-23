@@ -51,9 +51,9 @@ if __name__=='__main__' :
         'Supplemental Loan Level Forbearance File',
     ]
 
-    # Create a directory to save PDFs
-    download_folder = './dictionary_files/pdf_layouts'
-    os.makedirs(download_folder, exist_ok=True)
+    # Base directory for saving PDFs
+    base_download_folder = './dictionary_files/raw'
+    os.makedirs(base_download_folder, exist_ok=True)
 
     # Load YAML file as dictionary
     with open("dictionary_files/prefix_dictionary.yaml", "r") as f:
@@ -62,6 +62,10 @@ if __name__=='__main__' :
     ## Download Data
     # Loop through Prefixes and Year-Month Ranges
     for prefix in prefix_dict.keys() :
+
+        # Create prefix-specific download folder
+        prefix_download_folder = os.path.join(base_download_folder, prefix)
+        os.makedirs(prefix_download_folder, exist_ok=True)
 
         # URL of the page to scrape for PDFs
         url = f'https://www.ginniemae.gov/data_and_reports/disclosure_data/pages/disclosurehistoryfiles.aspx?prefix={prefix}'
@@ -89,7 +93,7 @@ if __name__=='__main__' :
 
             # Sanitize the link text to create a valid filename
             filename = prefix + '_' + re.sub(r'[\\/*?:"<>|]', "_", link_text) + '.pdf'
-            file_path = os.path.join(download_folder, filename)
+            file_path = os.path.join(prefix_download_folder, filename)
 
             # Check if the file already exists
             if not os.path.exists(file_path):
@@ -110,7 +114,7 @@ if __name__=='__main__' :
                         f.write(pdf_response.content)
 
                     # Display Progress
-                    print(f'Downloaded: {filename}')
+                    print(f'Downloaded: {filename} → dictionary_files/raw/{prefix}/')
 
                     # Courtesy Pause
                     time.sleep(2)

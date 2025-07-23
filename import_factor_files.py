@@ -10,7 +10,10 @@ import re
 
 #%% Support Functions
 # Read Text from Zips
-def read_text_from_zip(zip_file_path: str | pathlib.Path, encoding: str='utf-8') -> tuple[str | None, str | None] :
+def read_text_from_zip(
+    zip_file_path: str | pathlib.Path,
+    encoding: str='utf-8',
+) -> tuple[str | None, str | None] :
     """
     Opens a zip file, identifies the primary text file within it,
     and returns its filename and content as a string.
@@ -93,7 +96,13 @@ def read_text_from_zip(zip_file_path: str | pathlib.Path, encoding: str='utf-8')
         return None, None
 
 # Read Fixed-Width Files
-def read_fixed_width_files(fwf_name: str | StringIO, final_column_names: list[str], widths:list[int], has_header: bool=False, skip_rows: int=0) -> pl.LazyFrame :
+def read_fixed_width_files(
+    fwf_name: str | StringIO,
+    final_column_names: list[str],
+    widths:list[int],
+    has_header: bool=False,
+    skip_rows: int=0,
+) -> pl.LazyFrame :
 
     # Load the Factor Data from a CSV/TXT file
     df = pl.scan_csv(
@@ -123,7 +132,9 @@ def read_fixed_width_files(fwf_name: str | StringIO, final_column_names: list[st
     return df
 
 # Get Combined Suffix
-def get_combined_suffix(files: list[str]) -> str :
+def get_combined_suffix(
+    files: list[str],
+) -> str :
     """Create a suffix for a combined file from a list of individual files."""
 
     # Get Suffixes from File Names and Create Combined Suffix from Min and Max Dates
@@ -136,7 +147,10 @@ def get_combined_suffix(files: list[str]) -> str :
 
 #%% Read Dictionaries
 # Read Factor Dictionary
-def read_factor_dictionary(factor_dictionary_file: str, file_prefix: str) -> tuple[list[str] | None, list[int] | None] :
+def read_factor_dictionary(
+    factor_dictionary_file: str,
+    file_prefix: str,
+) -> tuple[list[str] | None, list[int] | None] :
     """Read the schema for the factor files."""
 
     try :
@@ -162,7 +176,10 @@ def read_factor_dictionary(factor_dictionary_file: str, file_prefix: str) -> tup
         return None, None
 
 # Read REMIC Dictionary
-def read_remic_dictionary(remic_dictionary_file: str, file_prefix: str) -> tuple[list[str] | None, list[int] | None] :
+def read_remic_dictionary(
+    remic_dictionary_file: str,
+    file_prefix: str,
+) -> tuple[list[str] | None, list[int] | None] :
     """Read the schema for the REMIC files."""
 
     # Read Dictionary File
@@ -190,7 +207,9 @@ def read_remic_dictionary(remic_dictionary_file: str, file_prefix: str) -> tuple
         return None, None
 
 # Read FRR Dictionary
-def read_frr_dictionary(frr_dictionary_file: str) -> tuple[list[str] | None, list[int] | None] :
+def read_frr_dictionary(
+    frr_dictionary_file: str,
+) -> tuple[list[str] | None, list[int] | None] :
     """Read the schema for the FRR files."""
 
     try :
@@ -215,7 +234,9 @@ def read_frr_dictionary(frr_dictionary_file: str) -> tuple[list[str] | None, lis
         return None, None
 
 # Read SRF Dictionary
-def read_srf_dictionary(srf_dictionary_file: str) -> tuple[list[str] | None, list[int] | None] :
+def read_srf_dictionary(
+    srf_dictionary_file: str,
+) -> tuple[list[str] | None, list[int] | None] :
     """Read the schema for the SRF files."""
 
     try :
@@ -241,7 +262,12 @@ def read_srf_dictionary(srf_dictionary_file: str) -> tuple[list[str] | None, lis
 
 #%% Import Files
 # Import Factor Files
-def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+def import_factor_files(
+    data_folder: str,
+    save_folder: str,
+    file_prefix: str,
+    dictionary_file: str,
+) -> None :
     """Import the full history of the factor file types."""
 
     # Create Save Folder if Doesn't Yet Exist
@@ -275,7 +301,12 @@ def import_factor_files(data_folder: str, save_folder: str, file_prefix: str, di
             df.sink_parquet(save_file_name)
 
 # Import REMIC Files
-def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+def import_remic_files(
+    data_folder: str,
+    save_folder: str,
+    file_prefix: str,
+    dictionary_file: str,
+) -> None :
     """Import the full history of the REMIC file types."""
 
     # Create Save Folder if Doesn't Yet Exist
@@ -310,7 +341,12 @@ def import_remic_files(data_folder: str, save_folder: str, file_prefix: str, dic
             df.sink_parquet(save_file_name)
 
 # Import FRR Data
-def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+def import_frr_files(
+    data_folder: str,
+    save_folder: str,
+    file_prefix: str,
+    dictionary_file: str,
+) -> None :
     """Import the full history of the FRR file types."""
 
     # Create Save Folder if Doesn't Yet Exist
@@ -344,7 +380,12 @@ def import_frr_files(data_folder: str, save_folder: str, file_prefix: str, dicti
             df.sink_parquet(save_file_name)
 
 # Import SRF Data
-def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dictionary_file: str) -> None :
+def import_srf_files(
+    data_folder: str,
+    save_folder: str,
+    file_prefix: str,
+    dictionary_file: str,
+) -> None :
     """Import the full history of the SRF file types."""
 
     # Create Save Folder if Doesn't Yet Exist
@@ -379,7 +420,11 @@ def import_srf_files(data_folder: str, save_folder: str, file_prefix: str, dicti
 
 #%% Combine Files
 # Combine Files
-def combine_files(data_folder: str, save_folder: str, file_prefix: str) -> None :
+def combine_files(
+    data_folder: str,
+    save_folder: str,
+    file_prefix: str,
+) -> None :
     """Combine all files for a given file prefix."""
 
     # Get All Files w/ Given Prefix

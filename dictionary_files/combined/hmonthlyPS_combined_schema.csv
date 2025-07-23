@@ -1,0 +1,374 @@
+Item,Data Element,Type,Max Length,Format,Description,Definition,File,Min_Date,Max_Date,Record_Type
+1,Record Type = HP,Character,2,,,File Header Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HP
+2,Reporting Period,Numeric,6,YYYYMM,,The monthly reporting period for the data in the file.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HP
+3,Create Date,Date,8,YYYYMMDD,,The date that the file is produced.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HP
+1,Record Type = PS,Character,2,,,HMBS Pool/Security Detail Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,PS
+1,Record Type = TP,Character,2,,,File Trailer Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,PS
+2,Reporting Period,Numeric,6,YYYYMM,,The monthly reporting period for the data in the file.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,PS
+3,File Create Date,Date,8,YYYYMMDD,,The date that the file is produced.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,PS
+4,Detail Record Count,Numeric,8,,,"Control total of the total number of records with Record Type =
+“PS” in the file.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,PS
+1,Record Type = HS,Character,2,,,File Header Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HS
+2,Reporting Period,Numeric,6,YYYYMM,,The monthly reporting period for the data in the file.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HS
+3,Create Date,Date,8,"YYYYMM
+DD",,The date that the file is produced.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,HS
+1,Record Type = 01,Character,2,,,Quartiles Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is H.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+6,Quartiles,Character,1,,,"Values are:
+4 = Maximum (100%) Quartile
+3 = 75th Percentage Quartile",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,01
+1,Record Type = 02,Character,2,,,Various Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+6,"Eligible Non-Borrowing Spouse
+Number of Participations",Numeric,5,,,"The number of participations in the pool associated with a
+loan that has one or more Eligible Non-Borrowing Spouses.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,02
+1,Record Type = 03,Character,2,,,Payment Option Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+6,Payment Option,Numeric,1,,,"The method to receive payment(s) that was selected by the
+borrower associated with the HECM loan as of the Pool Issue
+Date:
+1 = tenure
+2 = term
+3 = line of credit
+4 = modified term
+5 = modified tenure
+6 = single disbursement lump sum (for fixed rate HECMs with
+an FHA case number assigned on or after September 30, 2013)
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the Payment Option value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Payment Option value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,03
+1,Record Type = 04,Character,2,,,Property Type Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+6,Property Type,Numeric,1,,,"The type of property:
+1 = Single Family
+2 = Condominium
+3 = Manufactured Housing
+4 = Planned Unit Development
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the Property Type value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Property Type value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Property Type value, expressed as a
+percentage of the Pool’s UPB. This UPB percentage is
+calculated by dividing the total participation UPB of the given
+condition (Property Type) by the Pool’s UPB.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+10,"UPB of Participations as % of
+Principal Limit of HECM Loans",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Property Type value, expressed as a
+percentage of the total Principal Limit of the associated
+HECM Loans. This UPB percentage is calculated by dividing
+the total participation UPB of the given condition (Property
+Type) by the total of the HECM Principal Limits for all the
+loans associated with those Participations.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,04
+1,Record Type = 05,Character,2,,,Age of Youngest Borrower/Co-borrower Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+6,"Age of Youngest Borrower/Co-
+borrower",Numeric,2,,,"Age is computed from Birth Date, and is the age of the
+youngest Borrower/Co-borrower who is at least 62 years old:
+1 = Age is 62-65
+2 = Age is 66-70
+3 = Age is 71-75
+4 = Age is 76-80
+5 = Age is 81-85
+6 = Age is 86-90
+7 = Age is 91-95
+8 = Age is 96-100
+9 = Age is 100 +
+10 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has a youngest borrower/co-borrower with an age in
+the borrower/co-borrower grouping.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has a
+youngest borrower/co-borrower with an age in the
+borrower/co-borrower grouping.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,05
+1,Record Type = 06,Character,2,,,"Age of Youngest Eligible Non-Borrowing Spouse
+Stratification",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+6,"Age of Youngest Eligible Non-
+Borrowing Spouse",Numeric,2,,,"Age is computed from Birth Date and is the age of the
+youngest eligible Non-Borrowing Spouse (if any):
+1 = Age is under 40
+2 = Age is 40-49
+3 = Age is 50-59
+4 = Age is 60-69
+5 = Age is 70-79
+6 = Age is 80+
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has an eligible non-borrowing spouse with an age in
+the eligible non-borrowing spouse age grouping.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan where the
+youngest eligible non-borrowing spouse has an age in the
+eligible non-borrowing spouse age grouping.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan where the youngest eligible non-borrowing spouse has an
+age in the eligible non-borrowing spouse age grouping,
+expressed as a percentage of the Pool’s UPB. This UPB
+percentage is calculated by dividing the total participation",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,06
+1,Record Type = 07,Character,2,,,"Metropolitan Statistical Area (MSA) Stratification for each
+MSA applicable to the pool.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+6,MSA,Numeric,5,,,"The MSA values and the MSA Not Available are provided.
+Values are:
+• the MSA value
+• 99999 = MSA Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+7,Number of Participations,Numeric,5,,,The number of participations in the pool for the MSA Value.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Balance (UPB) of the participations in the
+pool for the MSA Value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool for the MSA value,
+expressed as a percentage of the Pool’s UPB. This UPB",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,07
+1,Record Type = 08,Character,2,,,Property State Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Values is H.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+6,State Code,Character,2,,,"The abbreviation of the state or territory where the loan
+property exists. See Appendix 2 for a listing of state codes.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool for the State Code
+value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+8,"Number of Participations for State
+as a % of Pool’s total Participation
+count",Numeric,6,3.2,,"The total number of Participations for the state expressed as a
+percentage of the pool’s total participation count.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+9,"Original Principal Balance of
+Participations",Numeric,14,11.2,,"The sum of the Participation Original Principal Balance
+amounts for all Participations in the pool associated with the
+given State.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+10,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Balance (UPB) of the participations in the
+pool for the State Code value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,08
+1,Record Type = 09,Character,2,,,Loan Purpose Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+6,Loan Purpose,Numeric,1,,,"Loan Purpose:
+1 = HECM Traditional
+2 = HECM Refinance
+3 = HECM Purchase
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the Loan Purpose value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Loan Purpose value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Loan Purpose value, expressed as a",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,09
+1,Record Type = 10,Character,2,,,HECM Saver Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+6,HECM Saver,Character,1,,,"HECM Saver:
+Y = Saver
+N = Standard",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the HECM Saver value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+HECM Saver value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the HECM Saver value, expressed as a
+percentage of the Pool’s UPB. This UPB percentage is
+calculated by dividing the total participation UPB of the given
+condition (HECM Saver) by the Pool’s UPB.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,10
+1,Record Type = 11,Character,2,,,"Low and Moderate Borrower Income Stratification. Pools
+with Low and Moderate Borrower Income characteristics
+based on Federal Financial Institutions Examination Council
+(FFIEC) data. This record includes participations in pools
+issued January 2012 and thereafter. Not populated/provided
+for new issuance disclosures.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+6,"Low and Moderate Borrower
+Income",Character,1,,,"Values are:
+Y = Borrower Income is Less than 80% of the FFIEC Median
+Family Income (MFI)
+N = Borrower Income is Greater than or Equal to 80% of the
+FFIEC Median Family Income (MFI)
+9 = Not available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the Low and Moderate Borrower Income value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Low and Moderate Borrower Income value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Low and Moderate Borrower Income value,
+expressed as a percentage of the Pool’s UPB. This UPB
+percentage is calculated by dividing the total participation
+UPB of the given condition (Low and Moderate Borrower
+Income) by the Pool’s UPB.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,11
+1,Record Type = 12,Character,2,,,Not Available Stratification,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Values is H.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+6,Not Available,Numeric,2,,,"Values are:
+1 = Expected Average Mortgage Interest Rate
+2 = Servicing Fee Set Aside
+3 = Original Funding Age
+4 = Property Valuation Amount
+5 = Original Term of Payments
+6 = Property Charges Set Aside Amount
+7 = Property Repair Set Aside Amount
+8 = Original Available Line of Credit Amount
+9 = Original Draw Amount
+10 = Mortgage Margin
+11 = Lifetime Floor Rate
+12 = Remaining Available Line of Credit
+13 = Monthly Scheduled Payment Amount
+14 = Remaining Term of Payments
+15 = Credit Line Set Aside Amount",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,12
+1,Record Type = 13,Character,2,,,"Joint-Single Loan Indicator / Youngest Borrower or Co-
+borrower Sex Stratification",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is H.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+6,Joint/Single Loan Indicator,Numeric,1,,,"Joint/Single Loan Indicator. Values are:
+1 = Single
+2 = Joint",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+7,"Youngest Borrower/Co-borrower
+Sex",Character,1,,,"Sex of the youngest borrower/co-borrower. Values are:
+F = Female
+M = Male
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+8,Number of Participations,Numeric,5,,,"The number of participations associated with a loan in the
+pool that has the Joint-Single Loan Indicator value/Sex value
+combination.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+9,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Joint-Single Loan Indicator value/Sex value combination.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+10,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Joint-Single Loan Indicator value/Sex value
+combination, expressed as a percentage of the Pool’s UPB.
+This UPB percentage is calculated by dividing the total
+participation UPB of the given combination (Joint-Single
+Loan Indicator value/Sex value) by the Pool’s UPB.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+11,"UPB of Participations as % of
+Principal Limit of HECM Loans",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Joint-Single Loan Indicator value/Sex value
+combination, expressed as a percentage of the total Principal",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,13
+1,Record Type = 14,Character,2,,,"Rural Area Stratification. Pools with participations that are
+associated with loans identified as being in rural areas based
+on Rural Urban Commuting Area (RUCA) areas (US
+Department of Agriculture Rural Urban Commuting Area
+Codes). Not populated/provided for new issuance disclosures.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+2,CUSIP,Character,9,,,"The unique identification number permanently assigned by the
+Committee on Uniform Securities Identification Procedures
+(CUSIP).",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+3,Pool ID,Character,6,,,"The Ginnie Mae unique identifier for the pool; this is assigned
+by Ginnie Mae at pool issuance.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+4,Pool Indicator,Character,1,,,Identifies the Issue Type of the pool. Value is “H”.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+5,Pool Type,Character,2,,,"The type of Ginnie Mae pool. Appendix 1 provides a listing
+of pool types.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+6,Rural Area,Character,1,,,"Values are:
+Y = Rural Area (RUCA Code 4-10)
+N = Not Rural Area (RUCA Code 1-3)
+9 = Not Available",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+7,Number of Participations,Numeric,5,,,"The number of participations in the pool associated with a
+loan that has the Rural Area value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+8,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+participations in the pool associated with a loan that has the
+Rural Area value.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+9,"UPB of Participations as % of Pool
+UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+loan that has the Rural Area value, expressed as a percentage
+of the Pool’s UPB. This UPB percentage is calculated by
+dividing the total participation UPB of the given condition
+(Rural Area value) by the Pool’s UPB.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,14
+1,Record Type = TS,Character,2,,,File Trailer Record,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,TS
+2,Reporting Period,Numeric,6,YYYYMM,,The monthly reporting period for the data in the file.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,TS
+3,File Create Date,Date,8,YYYYMMDD,,The date that the file is produced.,hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,TS
+4,Detail Record Count,Numeric,12,,,"Control total of the total number of HMBS Pool
+Supplemental records in the file. This count will not
+include HS or TS records.",hmonthlyPS_HMBS PORTFOLIO – POOL_SECURITY Layout V5.1 (Apr 2024 - Present).pdf,2024-04-01,2099-12-31,TS
