@@ -1,8 +1,11 @@
-# gnma_data_manager
+# GNMA Data Manager
 A tool to make it easier to use the publicly available Ginnie Mae (GNMA) data.
 
 ## Functionality
 This program takes raw data from Ginnie Mae's public disclosure data files, cleans it, and combines it into a large research-ready dataset.
+
+### Parsing GNMA PDF Schemas
+The scripts include tools for parsing the PDF schemas released by GNMA for handling the fixed-width and delimited files
 
 ## How To Use
 1. Download data from the GNMA Public Disclosure Data and History pages:

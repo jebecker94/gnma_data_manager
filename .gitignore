@@ -9,6 +9,8 @@ __pycache__
 # Folders
 data
 data/*
+old_scripts
+output
 
 # Dictionary Files (PDF)
 dictionary_files/old
@@ -24,3 +26,5 @@ match_gnma_loan_modifications.py
 analyze_column_names.py
 analyze_common_fields.py
 examine_schema_headers.py
+example_usage.py
+test_polars_cobol.py
