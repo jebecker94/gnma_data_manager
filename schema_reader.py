@@ -122,6 +122,7 @@ class GNMASchemaReader:
         except yaml.YAMLError as e:
             raise ValueError(f"Error parsing YAML file: {e}")
 
+
     #==============================================
     # Helper Functions
     #==============================================
@@ -337,6 +338,7 @@ class GNMASchemaReader:
                 # Note: In practice, you might want different logic here
         
         return df_copy
+
 
     #==============================================
     # PDF Parsing Functions
@@ -611,21 +613,6 @@ class GNMASchemaReader:
                 if self.config.verbose:
                     self.logger.debug("No data remaining after cleaning - skipping save")
 
-    def reconcile_schemas(self, schema_list: List[Tuple[str, List[Dict[str, Any]]]]) -> Dict[Tuple[int, int], Dict[str, Any]]:
-        """
-        Reconcile schemas from different versions of the same document.
-        """
-
-        reconciled: Dict[Tuple[int, int], Dict[str, Any]] = defaultdict(dict)
-        for version, schema in schema_list:
-            for field in schema:
-                key = (field['begin'], field['end'])  # or item name
-                reconciled[key].update({
-                    "field_name": field['field_name'],
-                    f"version_{version}": True # type: ignore # Dynamic key name
-                })
-        return reconciled
-
     def extract_schemas_to_csv(
         self, 
         prefixes: List[str] | None = None,
@@ -695,32 +682,6 @@ class GNMASchemaReader:
                 self.logger.debug(f"Standardized {len(column_mapping)} column names")
         return df_copy
 
-    def extract_and_propagate_record_types(self, df: pd.DataFrame, filename: str) -> pd.DataFrame:
-        """
-        Unified record-type extraction and propagation over groups when present.
-        - Adds 'Record_Type' if possible
-        - If 'group_id' exists, validates and propagates across groups
-        """
-        if df.empty:
-            return df
-        df_out = df.copy()
-
-        # Ensure we have any candidate columns
-        candidate_cols = [c for c in df_out.columns if c in ['Data Item', 'Data Element']]
-        if not candidate_cols:
-            return df_out
-
-        # Extract and propagate
-        df_out = self.add_record_type_column(df_out)
-        if 'group_id' in df_out.columns and 'Record_Type' in df_out.columns:
-            df_out = self.propagate_record_types_to_groups(df_out)
-
-        if self.config.verbose and 'Record_Type' in df_out.columns:
-            n_types = df_out['Record_Type'].dropna().nunique()
-            self.logger.debug(f"{filename}: extracted {n_types} record type(s)")
-
-        return df_out
-
     def _merge_continuation_table(self, df: pd.DataFrame, header_columns: pd.Index) -> pd.DataFrame:
         """Merge a continuation table lacking headers with the previous header-bearing columns."""
         df2 = df.copy()
@@ -729,22 +690,6 @@ class GNMASchemaReader:
         df2 = df2.sort_index()
         df2.columns = header_columns
         return df2
-
-    def clean_table(self, df: pd.DataFrame, filename: str) -> pd.DataFrame:
-        """
-        Single entry: standardize columns, optional grouping, record-type extraction/propagation.
-        """
-        if df.empty:
-            return df
-        out = self.standardize_columns(df)
-        # Apply item-based grouping if configured
-        if self.config.apply_item_grouping:
-            # Minimal reuse of existing logic via clean_extracted_dataframe with flags
-            out = self.clean_extracted_dataframe(out, filename=filename, add_record_types=False)
-        # Extract / propagate record types if configured
-        if self.config.extract_record_types:
-            out = self.extract_and_propagate_record_types(out, filename=filename)
-        return out
 
     def combine_schemas(
         self, 
@@ -857,6 +802,7 @@ class GNMASchemaReader:
         if self.config.save_analysis:
             self.analyze_temporal_coverage()
             self.analyze_schema_formats()
+
 
     #==============================================
     # Field Name Standardization
@@ -1021,6 +967,7 @@ class GNMASchemaReader:
         
         return standardized
 
+
     #==============================================
     # COBOL Helpers
     #==============================================
@@ -1139,201 +1086,6 @@ class GNMASchemaReader:
         # If no pattern matches, return None
         return None
 
-    def convert_cobol_value(self, raw_value, cobol_format_info):
-        """
-        Convert a raw string value from a fixed-width file using COBOL format information.
-        
-        Args:
-            raw_value (str): Raw string value from file
-            cobol_format_info (dict): Output from parse_cobol_format()
-            
-        Returns:
-            Converted value in appropriate Python type, or None if conversion fails
-            
-        Examples:
-            >>> info = parse_cobol_format('9(13)v9(2)')
-            >>> convert_cobol_value('000012345000', info)
-            123450.0
-            
-            >>> info = parse_cobol_format('X(9)')
-            >>> convert_cobol_value('ABC123   ', info)
-            'ABC123   '
-            
-            >>> info = parse_cobol_format('9(6)')
-            >>> convert_cobol_value('202401', info)
-            202401
-        """
-        if not cobol_format_info or not isinstance(raw_value, str):
-            return raw_value
-        
-        try:
-            # Handle alphanumeric fields - return as-is (but could trim if needed)
-            if cobol_format_info['cobol_type'] == 'alphanumeric':
-                return raw_value
-            
-            # Handle numeric fields
-            elif cobol_format_info['cobol_type'] == 'numeric_integer':
-                # Convert to integer, handling leading zeros
-                return int(raw_value)
-            
-            # Handle decimal fields with implied decimal point
-            elif cobol_format_info['cobol_type'] == 'numeric_decimal':
-                decimal_places = cobol_format_info['decimal_places']
-                # Convert to integer first, then divide by 10^decimal_places
-                int_value = int(raw_value)
-                float_value = int_value / (10 ** decimal_places)
-                return float_value
-            
-            else:
-                return raw_value
-                
-        except (ValueError, TypeError):
-            return None
-
-    def validate_cobol_value(self, raw_value, cobol_format_info):
-        """
-        Validate a raw string value against COBOL format requirements.
-        
-        Args:
-            raw_value (str): Raw string value from file
-            cobol_format_info (dict): Output from parse_cobol_format()
-            
-        Returns:
-            dict: Contains 'is_valid' (bool) and 'error_message' (str)
-            
-        Examples:
-            >>> info = parse_cobol_format('9(6)')
-            >>> validate_cobol_value('202401', info)
-            {'is_valid': True, 'error_message': None}
-            
-            >>> validate_cobol_value('20240A', info)
-            {'is_valid': False, 'error_message': 'Value contains non-numeric characters'}
-        """
-        if not cobol_format_info:
-            return {'is_valid': False, 'error_message': 'No format information provided'}
-        
-        if not isinstance(raw_value, str):
-            return {'is_valid': False, 'error_message': 'Value must be a string'}
-        
-        # Check length
-        expected_length = cobol_format_info['total_length']
-        if len(raw_value) != expected_length:
-            return {
-                'is_valid': False, 
-                'error_message': f'Expected length {expected_length}, got {len(raw_value)}'
-            }
-        
-        # Check pattern
-        pattern = cobol_format_info['validation_pattern']
-        if not re.match(pattern, raw_value):
-            cobol_type = cobol_format_info['cobol_type']
-            if 'numeric' in cobol_type:
-                return {'is_valid': False, 'error_message': 'Value contains non-numeric characters'}
-            else:
-                return {'is_valid': False, 'error_message': 'Value does not match expected pattern'}
-        
-        return {'is_valid': True, 'error_message': None}
-
-    def create_pandas_dtype_mapping(self, schema_df, remarks_column='Remarks'):
-        """
-        Create a pandas dtype mapping from a schema DataFrame containing COBOL format notation.
-        
-        Args:
-            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
-            remarks_column (str): Name of column containing COBOL notation
-            
-        Returns:
-            dict: Mapping of field names to pandas dtypes
-            
-        Example:
-            >>> schema = pd.DataFrame({
-            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
-            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
-            ... })
-            >>> create_pandas_dtype_mapping(schema)
-            {'Pool Number': 'string', 'Issue Date': 'Int64', 'Interest Rate': 'float64'}
-        """
-        dtype_mapping = {}
-        
-        for _, row in schema_df.iterrows():
-            field_name = row.get('Data Item') or row.get('Data Element')
-            if not field_name or pd.isna(field_name):
-                continue
-                
-            cobol_notation = row.get(remarks_column)
-            if not cobol_notation or pd.isna(cobol_notation):
-                continue
-                
-            format_info = self.parse_cobol_format(cobol_notation)
-            if format_info:
-                dtype_mapping[field_name] = format_info['pandas_dtype']
-        
-        return dtype_mapping
-
-    def create_polars_dtype_mapping(self, schema_df, remarks_column='Remarks'):
-        """
-        Create a Polars dtype mapping from a schema DataFrame containing COBOL format notation.
-        
-        Args:
-            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
-            remarks_column (str): Name of column containing COBOL notation
-            
-        Returns:
-            dict: Mapping of field names to Polars dtypes
-            
-        Example:
-            >>> schema = pd.DataFrame({
-            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
-            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
-            ... })
-            >>> create_polars_dtype_mapping(schema)
-            {'Pool Number': pl.Utf8, 'Issue Date': pl.Int64, 'Interest Rate': pl.Float64}
-        
-        Note:
-            Requires Polars to be installed. If Polars is not available, returns string representations.
-        """
-        
-        dtype_mapping = {}
-        
-        for _, row in schema_df.iterrows():
-            field_name = row.get('Data Item') or row.get('Data Element')
-            if not field_name or pd.isna(field_name):
-                continue
-                
-            cobol_notation = row.get(remarks_column)
-            if not cobol_notation or pd.isna(cobol_notation):
-                continue
-                
-            format_info = self.parse_cobol_format(cobol_notation)
-            if format_info:
-                dtype_mapping[field_name] = format_info['polars_dtype']
-        
-        return dtype_mapping
-
-    def create_polars_schema(self, schema_df, remarks_column='Remarks'):
-        """
-        Create a Polars schema dictionary from a schema DataFrame containing COBOL format notation.
-        This is the preferred format for Polars DataFrame creation with explicit schemas.
-        
-        Args:
-            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
-            remarks_column (str): Name of column containing COBOL notation
-            
-        Returns:
-            dict: Polars schema mapping {column_name: polars_dtype}
-            
-        Example:
-            >>> schema = pd.DataFrame({
-            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
-            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
-            ... })
-            >>> polars_schema = create_polars_schema(schema)
-            >>> df = pl.DataFrame(data, schema=polars_schema)
-        
-        Note:
-            Requires Polars to be installed.
-        """
-        return create_polars_dtype_mapping(schema_df, remarks_column)
 
     #==============================================
     # Analysis Helpers
@@ -1631,6 +1383,263 @@ class GNMASchemaReader:
             results_df.to_csv(self.config.analysis_folder / 'schema_format_analysis.csv', index=False)
 
 
+    #==============================================
+    # Not yet implemented
+    #==============================================
+    def reconcile_schemas(self, schema_list: List[Tuple[str, List[Dict[str, Any]]]]) -> Dict[Tuple[int, int], Dict[str, Any]]:
+        """
+        Reconcile schemas from different versions of the same document.
+        """
+
+        reconciled: Dict[Tuple[int, int], Dict[str, Any]] = defaultdict(dict)
+        for version, schema in schema_list:
+            for field in schema:
+                key = (field['begin'], field['end'])  # or item name
+                reconciled[key].update({
+                    "field_name": field['field_name'],
+                    f"version_{version}": True # type: ignore # Dynamic key name
+                })
+        return reconciled
+
+    def create_pandas_dtype_mapping(self, schema_df, remarks_column='Remarks'):
+        """
+        Create a pandas dtype mapping from a schema DataFrame containing COBOL format notation.
+        
+        Args:
+            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
+            remarks_column (str): Name of column containing COBOL notation
+            
+        Returns:
+            dict: Mapping of field names to pandas dtypes
+            
+        Example:
+            >>> schema = pd.DataFrame({
+            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
+            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
+            ... })
+            >>> create_pandas_dtype_mapping(schema)
+            {'Pool Number': 'string', 'Issue Date': 'Int64', 'Interest Rate': 'float64'}
+        """
+        dtype_mapping = {}
+        
+        for _, row in schema_df.iterrows():
+            field_name = row.get('Data Item') or row.get('Data Element')
+            if not field_name or pd.isna(field_name):
+                continue
+                
+            cobol_notation = row.get(remarks_column)
+            if not cobol_notation or pd.isna(cobol_notation):
+                continue
+                
+            format_info = self.parse_cobol_format(cobol_notation)
+            if format_info:
+                dtype_mapping[field_name] = format_info['pandas_dtype']
+        
+        return dtype_mapping
+
+    def create_polars_dtype_mapping(self, schema_df, remarks_column='Remarks'):
+        """
+        Create a Polars dtype mapping from a schema DataFrame containing COBOL format notation.
+        
+        Args:
+            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
+            remarks_column (str): Name of column containing COBOL notation
+            
+        Returns:
+            dict: Mapping of field names to Polars dtypes
+            
+        Example:
+            >>> schema = pd.DataFrame({
+            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
+            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
+            ... })
+            >>> create_polars_dtype_mapping(schema)
+            {'Pool Number': pl.Utf8, 'Issue Date': pl.Int64, 'Interest Rate': pl.Float64}
+        
+        Note:
+            Requires Polars to be installed. If Polars is not available, returns string representations.
+        """
+        
+        dtype_mapping = {}
+        
+        for _, row in schema_df.iterrows():
+            field_name = row.get('Data Item') or row.get('Data Element')
+            if not field_name or pd.isna(field_name):
+                continue
+                
+            cobol_notation = row.get(remarks_column)
+            if not cobol_notation or pd.isna(cobol_notation):
+                continue
+                
+            format_info = self.parse_cobol_format(cobol_notation)
+            if format_info:
+                dtype_mapping[field_name] = format_info['polars_dtype']
+        
+        return dtype_mapping
+
+    def create_polars_schema(self, schema_df, remarks_column='Remarks'):
+        """
+        Create a Polars schema dictionary from a schema DataFrame containing COBOL format notation.
+        This is the preferred format for Polars DataFrame creation with explicit schemas.
+        
+        Args:
+            schema_df (pd.DataFrame): Schema with COBOL format notation in remarks column
+            remarks_column (str): Name of column containing COBOL notation
+            
+        Returns:
+            dict: Polars schema mapping {column_name: polars_dtype}
+            
+        Example:
+            >>> schema = pd.DataFrame({
+            ...     'Data Item': ['Pool Number', 'Issue Date', 'Interest Rate'],
+            ...     'Remarks': ['X(6)', '9(8)', '9(2)v9(3)']
+            ... })
+            >>> polars_schema = create_polars_schema(schema)
+            >>> df = pl.DataFrame(data, schema=polars_schema)
+        
+        Note:
+            Requires Polars to be installed.
+        """
+        return create_polars_dtype_mapping(schema_df, remarks_column)
+
+    def convert_cobol_value(self, raw_value, cobol_format_info):
+        """
+        Convert a raw string value from a fixed-width file using COBOL format information.
+        
+        Args:
+            raw_value (str): Raw string value from file
+            cobol_format_info (dict): Output from parse_cobol_format()
+            
+        Returns:
+            Converted value in appropriate Python type, or None if conversion fails
+            
+        Examples:
+            >>> info = parse_cobol_format('9(13)v9(2)')
+            >>> convert_cobol_value('000012345000', info)
+            123450.0
+            
+            >>> info = parse_cobol_format('X(9)')
+            >>> convert_cobol_value('ABC123   ', info)
+            'ABC123   '
+            
+            >>> info = parse_cobol_format('9(6)')
+            >>> convert_cobol_value('202401', info)
+            202401
+        """
+        if not cobol_format_info or not isinstance(raw_value, str):
+            return raw_value
+        
+        try:
+            # Handle alphanumeric fields - return as-is (but could trim if needed)
+            if cobol_format_info['cobol_type'] == 'alphanumeric':
+                return raw_value
+            
+            # Handle numeric fields
+            elif cobol_format_info['cobol_type'] == 'numeric_integer':
+                # Convert to integer, handling leading zeros
+                return int(raw_value)
+            
+            # Handle decimal fields with implied decimal point
+            elif cobol_format_info['cobol_type'] == 'numeric_decimal':
+                decimal_places = cobol_format_info['decimal_places']
+                # Convert to integer first, then divide by 10^decimal_places
+                int_value = int(raw_value)
+                float_value = int_value / (10 ** decimal_places)
+                return float_value
+            
+            else:
+                return raw_value
+                
+        except (ValueError, TypeError):
+            return None
+
+    def validate_cobol_value(self, raw_value, cobol_format_info):
+        """
+        Validate a raw string value against COBOL format requirements.
+        
+        Args:
+            raw_value (str): Raw string value from file
+            cobol_format_info (dict): Output from parse_cobol_format()
+            
+        Returns:
+            dict: Contains 'is_valid' (bool) and 'error_message' (str)
+            
+        Examples:
+            >>> info = parse_cobol_format('9(6)')
+            >>> validate_cobol_value('202401', info)
+            {'is_valid': True, 'error_message': None}
+            
+            >>> validate_cobol_value('20240A', info)
+            {'is_valid': False, 'error_message': 'Value contains non-numeric characters'}
+        """
+        if not cobol_format_info:
+            return {'is_valid': False, 'error_message': 'No format information provided'}
+        
+        if not isinstance(raw_value, str):
+            return {'is_valid': False, 'error_message': 'Value must be a string'}
+        
+        # Check length
+        expected_length = cobol_format_info['total_length']
+        if len(raw_value) != expected_length:
+            return {
+                'is_valid': False, 
+                'error_message': f'Expected length {expected_length}, got {len(raw_value)}'
+            }
+        
+        # Check pattern
+        pattern = cobol_format_info['validation_pattern']
+        if not re.match(pattern, raw_value):
+            cobol_type = cobol_format_info['cobol_type']
+            if 'numeric' in cobol_type:
+                return {'is_valid': False, 'error_message': 'Value contains non-numeric characters'}
+            else:
+                return {'is_valid': False, 'error_message': 'Value does not match expected pattern'}
+        
+        return {'is_valid': True, 'error_message': None}
+
+    def clean_table(self, df: pd.DataFrame, filename: str) -> pd.DataFrame:
+        """
+        Single entry: standardize columns, optional grouping, record-type extraction/propagation.
+        """
+        if df.empty:
+            return df
+        out = self.standardize_columns(df)
+        # Apply item-based grouping if configured
+        if self.config.apply_item_grouping:
+            # Minimal reuse of existing logic via clean_extracted_dataframe with flags
+            out = self.clean_extracted_dataframe(out, filename=filename, add_record_types=False)
+        # Extract / propagate record types if configured
+        if self.config.extract_record_types:
+            out = self.extract_and_propagate_record_types(out, filename=filename)
+        return out
+
+    def extract_and_propagate_record_types(self, df: pd.DataFrame, filename: str) -> pd.DataFrame:
+        """
+        Unified record-type extraction and propagation over groups when present.
+        - Adds 'Record_Type' if possible
+        - If 'group_id' exists, validates and propagates across groups
+        """
+        if df.empty:
+            return df
+        df_out = df.copy()
+
+        # Ensure we have any candidate columns
+        candidate_cols = [c for c in df_out.columns if c in ['Data Item', 'Data Element']]
+        if not candidate_cols:
+            return df_out
+
+        # Extract and propagate
+        df_out = self.add_record_type_column(df_out)
+        if 'group_id' in df_out.columns and 'Record_Type' in df_out.columns:
+            df_out = self.propagate_record_types_to_groups(df_out)
+
+        if self.config.verbose and 'Record_Type' in df_out.columns:
+            n_types = df_out['Record_Type'].dropna().nunique()
+            self.logger.debug(f"{filename}: extracted {n_types} record type(s)")
+
+        return df_out
+
+    
 # Main Routine
 if __name__ == "__main__":
 
