@@ -40,8 +40,8 @@ class DownloadConfig:
     schema_base_url: str = "https://www.ginniemae.gov/data_and_reports/disclosure_data/pages/disclosurehistoryfiles.aspx"
 
     # Folder settings
-    data_download_folder: Union[str, Path]  # For data files (e.g., "data")
-    schema_download_folder: Union[str, Path] = "dictionary_files"  # For schema/PDF files
+    data_download_folder: Union[str, Path] = 'data' # For data files (e.g., "data")
+    schema_download_folder: Union[str, Path] = 'dictionary_files'  # For schema/PDF files
     dictionary_file: Union[str, Path] = "prefix_dictionary.yaml"
     use_prefix_subfolders: bool = True
     create_prefix_folders: bool = True
@@ -93,6 +93,10 @@ class SchemaReaderConfig:
     merge_continuations: bool = True
     apply_item_grouping: bool = True
     extract_record_types: bool = True
+
+    # Analysis settings
+    save_analysis: bool = False
+    analysis_folder: Path = Path('analysis')
 
 
 @dataclass

@@ -831,6 +831,16 @@ class GNMASchemaReader:
                 self.logger.info(f"No data found for prefix: {prefix}")
             return pd.DataFrame()
 
+    def combine_all_schemas(self, prefixes: List[str] | None = None) :
+        """
+        Combine all schemas for all prefixes.
+        """
+        if prefixes is None:
+            prefixes = self.prefix_dict.keys()
+
+        for prefix in prefixes:
+            self.combine_schemas(prefix=prefix, save_combined_schema=True)
+
     def read_all_schemas(self, prefixes: List[str] | None = None) :
         """
         Read all schemas for all prefixes.
@@ -838,8 +848,8 @@ class GNMASchemaReader:
         if prefixes is None:
             prefixes = self.prefix_dict.keys()
         
-        self.extract_schemas_to_csv(prefixes=prefixes)
-        self.combine_schemas(prefixes=prefixes)
+        # self.extract_schemas_to_csv(prefixes=prefixes)
+        self.combine_all_schemas(prefixes=prefixes)
         self.count_field_names_from_clean_schemas()
         self.standardize_field_names()
 
@@ -927,7 +937,7 @@ class GNMASchemaReader:
         df = pd.read_csv(input_dir / 'field_name_counts.csv')
         
         # Apply standardization rules
-        df['Standardized_Field_Name'] = df['Field_Name'].apply(standardize_single_name)
+        df['Standardized_Field_Name'] = df['Field_Name'].apply(self.standardize_single_name)
         
         # Create aggregated counts for standardized names
         standardized_counts = df.groupby('Standardized_Field_Name')['Count'].sum().reset_index()
@@ -951,7 +961,7 @@ class GNMASchemaReader:
         
         return result_df
 
-    def standardize_single_name(self, name):
+    def standardize_single_name(self, name: str) -> str:
         """
         Apply standardization rules to a single field name.
         """
@@ -1323,12 +1333,11 @@ class GNMASchemaReader:
     #==============================================
     # Analysis Helpers
     #==============================================
-    def analyze_temporal_coverage(self) -> pd.DataFrame:
+    def analyze_temporal_coverage(self) :
         """
         Analyze temporal coverage across all combined schema files to identify monthly gaps.
         
-        Returns:
-            pd.DataFrame: Summary of coverage with gaps identified for each prefix
+        Saves analysis to analysis folder if requested.
         """
         combined_dir = self.config.dictionary_folder / 'combined'
         
@@ -1468,51 +1477,17 @@ class GNMASchemaReader:
         if not results_df.empty:
             results_df = results_df.sort_values(['Has_Gaps', 'Coverage_Percentage'], ascending=[True, False])
         
-        return results_df
+        # Save analysis if requested
+        if self.config.save_analysis:
+            self.config.analysis_folder.mkdir(parents=True, exist_ok=True)
+            results_df.to_csv(self.config.analysis_folder / 'temporal_coverage_analysis.csv', index=False)
 
-    def print_coverage_summary(self, coverage_df: pd.DataFrame) :
-        """
-        Print a formatted summary of temporal coverage analysis.
-        """
-        if coverage_df.empty:
-            print("No coverage data to summarize")
-            return
-        
-        total_prefixes = len(coverage_df)
-        prefixes_with_gaps = coverage_df['Has_Gaps'].sum()
-        prefixes_complete = total_prefixes - prefixes_with_gaps
-        
-        print(f"\n" + "="*80)
-        print(f"TEMPORAL COVERAGE SUMMARY")
-        print(f"="*80)
-        print(f"Total Prefixes Analyzed: {total_prefixes}")
-        print(f"Complete Coverage: {prefixes_complete}")
-        print(f"With Gaps: {prefixes_with_gaps}")
-        print(f"="*80)
-        
-        if prefixes_with_gaps > 0:
-            print(f"PREFIXES WITH GAPS:")
-            print(f"{'-'*80}")
-            gap_df = coverage_df[coverage_df['Has_Gaps']].copy()
-            for _, row in gap_df.iterrows():
-                print(f"{row['Prefix']:<20} | {row['Coverage_Percentage']:>5.1f}% | {row['Gap_Periods']}")
-        
-        if prefixes_complete > 0:
-            print(f"PREFIXES WITH COMPLETE COVERAGE:")
-            print(f"{'-'*80}")
-            complete_df = coverage_df[~coverage_df['Has_Gaps']].copy()
-            for _, row in complete_df.iterrows():
-                print(f"{row['Prefix']:<20} | {row['Coverage_Start']} to {row['Coverage_End']}")
-        
-        print(f"\n" + "="*80)
-
-    def analyze_schema_formats(self) -> pd.DataFrame:
+    def analyze_schema_formats(self) :
         """
         Analyze schema files to identify potential delimited vs fixed-width file formats
         based on column structure patterns.
         
-        Returns:
-            pd.DataFrame: Analysis of schema formats with file type predictions
+        Saves analysis to analysis folder if requested.
         """
         combined_dir = self.config.dictionary_folder / 'combined'
         
@@ -1647,70 +1622,32 @@ class GNMASchemaReader:
             results_df = results_df.sort_values(['Predicted_Format', 'Confidence_Score'], 
                                             ascending=[True, False])
         
-        return results_df
-
-    def print_format_analysis_summary(self, format_df: pd.DataFrame) :
-        """
-        Print a formatted summary of schema format analysis.
-        """
-        if format_df.empty:
-            print("No format analysis data to summarize")
-            return
-        
-        total_prefixes = len(format_df)
-        delimited_count = (format_df['Predicted_Format'] == 'DELIMITED').sum()
-        fixed_width_count = (format_df['Predicted_Format'] == 'FIXED-WIDTH').sum()
-        uncertain_count = (format_df['Predicted_Format'] == 'UNCERTAIN').sum()
-        
-        print(f"\n" + "="*80)
-        print(f"SCHEMA FORMAT ANALYSIS SUMMARY")
-        print(f"="*80)
-        print(f"Total Prefixes Analyzed: {total_prefixes}")
-        print(f"Predicted Delimited: {delimited_count}")
-        print(f"Predicted Fixed-Width: {fixed_width_count}")
-        print(f"Uncertain: {uncertain_count}")
-        print(f"="*80)
-        
-        if delimited_count > 0:
-            print(f"LIKELY DELIMITED FILES:")
-            print(f"{'-'*80}")
-            delimited_df = format_df[format_df['Predicted_Format'] == 'DELIMITED'].copy()
-            for _, row in delimited_df.iterrows():
-                print(f"{row['Prefix']:<20} | Score: {row['Confidence_Score']:>2} | {row['Format_Indicators']}")
-        
-        if fixed_width_count > 0:
-            print(f"LIKELY FIXED-WIDTH FILES:")
-            print(f"{'-'*80}")
-            fixed_df = format_df[format_df['Predicted_Format'] == 'FIXED-WIDTH'].copy()
-            for _, row in fixed_df.iterrows():
-                print(f"{row['Prefix']:<20} | Score: {row['Confidence_Score']:>2} | {row['Format_Indicators']}")
-        
-        if uncertain_count > 0:
-            print(f"UNCERTAIN FORMAT:")
-            print(f"{'-'*80}")
-            uncertain_df = format_df[format_df['Predicted_Format'] == 'UNCERTAIN'].copy()
-            for _, row in uncertain_df.iterrows():
-                print(f"{row['Prefix']:<20} | Score: {row['Confidence_Score']:>2} | {row['Format_Indicators']}")
-        
-        print(f"\n" + "="*80)
+        # Save analysis if requested
+        if self.config.save_analysis:
+            self.config.analysis_folder.mkdir(parents=True, exist_ok=True)
+            results_df.to_csv(self.config.analysis_folder / 'schema_format_analysis.csv', index=False)
 
 
-# === Main entry point (lean) ===
+# Main Routine
 if __name__ == "__main__":
 
     # Load environment variables
     load_dotenv()
 
     # Build config from defaults and env overrides if present
-    dictionary_folder = Path(os.getenv('SCHEMA_DICTIONARY_FOLDER', 'dictionary_files'))
-    dictionary_file = Path(os.getenv('SCHEMA_DICTIONARY_FILE', 'prefix_dictionary.yaml'))
-
+    dictionary_folder = Path(os.getenv('schema_download_folder', 'dictionary_files'))
     config = SchemaReaderConfig(
         dictionary_folder=dictionary_folder,
-        dictionary_file=dictionary_file,
         use_prefix_subfolders=True,
+        save_analysis=True,
     )
 
+    # Initialize reader
     reader = GNMASchemaReader(config)
 
+    # Read all schemas
     reader.read_all_schemas()
+
+    # Perform temporal and format analysis
+    reader.analyze_temporal_coverage()
+    reader.analyze_schema_formats()

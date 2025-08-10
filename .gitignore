@@ -8,7 +8,6 @@ __pycache__
 
 # Folders
 data
-data/*
 old_scripts
 output
 logs
@@ -16,18 +15,7 @@ logs
 # Dictionary Files (PDF)
 dictionary_files/old
 dictionary_files/raw
+dictionary_files/clean_old
 
 # Config Files
 .env
-
-# Preliminary Functions
-create_performance_data.py 
-create_servicer_change_dataset.py 
-match_gnma_loan_modifications.py
-analyze_schemas.py
-examine_schema_headers.py
-example_usage.py
-test_polars_cobol.py
-example_use_downloader.py
-example_use_schema_reader.py
-gnma_schema_analyzer.py
