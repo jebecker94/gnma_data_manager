@@ -853,6 +853,11 @@ class GNMASchemaReader:
         self.count_field_names_from_clean_schemas()
         self.standardize_field_names()
 
+        # Conduct analysis
+        if self.config.save_analysis:
+            self.analyze_temporal_coverage()
+            self.analyze_schema_formats()
+
     #==============================================
     # Field Name Standardization
     #==============================================
@@ -1477,8 +1482,7 @@ class GNMASchemaReader:
         if not results_df.empty:
             results_df = results_df.sort_values(['Has_Gaps', 'Coverage_Percentage'], ascending=[True, False])
         
-        # Save analysis if requested
-        if self.config.save_analysis:
+            # Save analysis
             self.config.analysis_folder.mkdir(parents=True, exist_ok=True)
             results_df.to_csv(self.config.analysis_folder / 'temporal_coverage_analysis.csv', index=False)
 
@@ -1622,8 +1626,7 @@ class GNMASchemaReader:
             results_df = results_df.sort_values(['Predicted_Format', 'Confidence_Score'], 
                                             ascending=[True, False])
         
-        # Save analysis if requested
-        if self.config.save_analysis:
+            # Save analysis
             self.config.analysis_folder.mkdir(parents=True, exist_ok=True)
             results_df.to_csv(self.config.analysis_folder / 'schema_format_analysis.csv', index=False)
 
