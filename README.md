@@ -53,7 +53,7 @@ This project implements a simple ETL-style pipeline for GNMA data. The key compo
     - Embedded format detection
       - `detect_file_format(prefix)` (uses combined schema)
 
-- Config (`gnma_data_manager/config_options.py`)
+- Config (`gnma_data_manager/config.py`)
   - `DownloadConfig`: downloader settings (cookies, base URLs, paths)
   - `ProcessorConfig`: unified settings for staging, transform, and parser (folders, encodings, delimiter, chunk size, etc.)
   - `SchemaReaderConfig`: schema reader paths and behavior

@@ -44,10 +44,10 @@ import zipfile
 
 # Imports from other modules
 try:
-    from .config_options import ProcessorConfig
+    from .config import ProcessorConfig
     from .types_and_errors import ProcessingResult, ConversionResult
 except ImportError:
-    from config_options import ProcessorConfig
+    from config import ProcessorConfig
     from types_and_errors import ProcessingResult, ConversionResult
 
 

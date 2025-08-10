@@ -47,10 +47,10 @@ from dotenv import load_dotenv
 
 # Imports from other modules
 try:
-    from .config_options import SchemaReaderConfig
+    from .config import SchemaReaderConfig
     from .types_and_errors import SchemaReaderError
 except ImportError:
-    from config_options import SchemaReaderConfig
+    from config import SchemaReaderConfig
     from types_and_errors import SchemaReaderError
 
 
@@ -549,8 +549,8 @@ class GNMASchemaReader:
                 for table in table_list:
                     df = table.to_pandas()
 
-                    # Standardize column names immediately after extraction
-                    df = self.standardize_column_names(df)
+                    # Standardize column names immediately after extraction via unified helper
+                    df = self.standardize_columns(df)
                     
                     # Track table types for reporting
                     has_item = "item" in df.columns.str.lower().values
@@ -665,71 +665,62 @@ class GNMASchemaReader:
                     cobol_column=cobol_column,
                 )
 
-    # Standardize Column Names
-    def standardize_column_names(
-        self, 
-        df: pd.DataFrame,
-    ) -> pd.DataFrame:
+    # Unified helpers: standardize columns and record-type extraction
+    def standardize_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Return a copy with normalized column names and deduplicated headers."""
+        if df.empty:
+            return df
+        df_copy = df.copy()
+        column_mapping: Dict[str, str] = {}
+        seen: set[str] = set()
+
+        def normalize(name: str) -> str:
+            new_col = str(name).replace('\n', ' ').replace('\r', ' ')
+            new_col = ' '.join(new_col.split()).strip()
+            return new_col
+
+        for col in df_copy.columns:
+            base = normalize(col)
+            new_col = base
+            suffix = 1
+            while new_col in seen:
+                new_col = f"{base}_{suffix}"
+                suffix += 1
+            seen.add(new_col)
+            if new_col != col:
+                column_mapping[col] = new_col
+
+        if column_mapping:
+            df_copy = df_copy.rename(columns=column_mapping)
+            if self.config.verbose:
+                self.logger.debug(f"Standardized {len(column_mapping)} column names")
+        return df_copy
+
+    def extract_and_propagate_record_types(self, df: pd.DataFrame, filename: str) -> pd.DataFrame:
         """
-        Standardize column names to handle inconsistencies.
-        
-        Fixes issues like:
-        - "Max\nLength" → "Max Length"
-        - Extra whitespace
-        - Other formatting inconsistencies
-        - Handles potential duplicate columns after standardization
-        
-        Args:
-            df: DataFrame with potentially inconsistent column names
-            
-        Returns:
-            DataFrame with standardized column names
+        Unified record-type extraction and propagation over groups when present.
+        - Adds 'Record_Type' if possible
+        - If 'group_id' exists, validates and propagates across groups
         """
         if df.empty:
             return df
-        
-        # Create a copy to avoid modifying the original
-        df_copy = df.copy()
-        
-        # Create mapping of old column names to new standardized names
-        column_mapping = {}
-        standardized_names = []
-        
-        for col in df_copy.columns:
-            # Start with the original column name
-            new_col = str(col)
-            
-            # Remove newlines and extra whitespace
-            new_col = new_col.replace('\n', ' ').replace('\r', ' ')
-            
-            # Normalize multiple spaces to single space
-            new_col = ' '.join(new_col.split())
-            
-            # Strip leading/trailing whitespace
-            new_col = new_col.strip()
-            
-            # Handle potential duplicates by adding suffix
-            original_new_col = new_col
-            counter = 1
-            while new_col in standardized_names:
-                new_col = f"{original_new_col}_{counter}"
-                counter += 1
-            
-            standardized_names.append(new_col)
-            
-            # Store mapping if different
-            if new_col != col:
-                column_mapping[col] = new_col
-        
-        # Apply the column name changes
-        if column_mapping:
-            df_copy = df_copy.rename(columns=column_mapping)
-            
-            # Log the changes if verbose mode is enabled
-            if self.config.verbose:
-                self.logger.debug(f"Standardized {len(column_mapping)} column names")
-        
-        return df_copy
+        df_out = df.copy()
+
+        # Ensure we have any candidate columns
+        candidate_cols = [c for c in df_out.columns if c in ['Data Item', 'Data Element']]
+        if not candidate_cols:
+            return df_out
+
+        # Extract and propagate
+        df_out = self.add_record_type_column(df_out)
+        if 'group_id' in df_out.columns and 'Record_Type' in df_out.columns:
+            df_out = self.propagate_record_types_to_groups(df_out)
+
+        if self.config.verbose and 'Record_Type' in df_out.columns:
+            n_types = df_out['Record_Type'].dropna().nunique()
+            self.logger.debug(f"{filename}: extracted {n_types} record type(s)")
+
+        return df_out
 
     # Combine Schemas from Clean CSV Files
     def combine_schemas(

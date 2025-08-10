@@ -36,12 +36,12 @@ from dotenv import load_dotenv
 
 # Imports from other modules
 try :
-    from .config_options import DownloadConfig, ProcessorConfig, SchemaReaderConfig
+    from .config import DownloadConfig, ProcessorConfig, SchemaReaderConfig
     from .downloader import GNMAHistoricalDownloader
     from .processor import GNMADataProcessor
     from .schema_reader import GNMADataSchemaReader
 except ImportError:
-    from config_options import DownloadConfig, ProcessorConfig, SchemaReaderConfig
+    from config import DownloadConfig, ProcessorConfig, SchemaReaderConfig
     from downloader import GNMAHistoricalDownloader
     from processor import GNMADataProcessor
     from schema_reader import GNMADataSchemaReader

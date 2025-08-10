@@ -41,10 +41,10 @@ from urllib3.util.retry import Retry
 
 # Imports from other modules
 try:
-    from .config_options import DownloadConfig
+    from .config import DownloadConfig
     from .types_and_errors import DownloadError, DateFormatError
 except ImportError:
-    from config_options import DownloadConfig
+    from config import DownloadConfig
     from types_and_errors import DownloadError, DateFormatError
 
 class GNMAHistoricalDownloader:
@@ -55,6 +55,9 @@ class GNMAHistoricalDownloader:
     of historical data files based on configuration parameters.
     """
     
+    # ==========================================
+    # Initialization
+    # ==========================================
     def __init__(self, config: DownloadConfig):
         """
         Initialize the downloader with configuration.
@@ -77,6 +80,10 @@ class GNMAHistoricalDownloader:
         
         # Load prefix dictionary
         self._load_prefix_dictionary()
+
+        # Create all prefix folders
+        if self.config.create_prefix_folders:
+            self._create_all_prefix_folders()
         
         # Set up session
         self._setup_session()
@@ -87,7 +94,7 @@ class GNMAHistoricalDownloader:
         self.config.logs_folder.mkdir(parents=True, exist_ok=True)
         
         logging.basicConfig(
-            level=logging.INFO,
+            level=self.config.log_level,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
             handlers=[
                 logging.FileHandler(self.config.logs_folder / 'gnma_downloader.log'),
@@ -137,10 +144,10 @@ class GNMAHistoricalDownloader:
 
         # Configure retries for robustness
         retry_strategy = Retry(
-            total=3,
-            backoff_factor=1.0,
-            status_forcelist=[429, 500, 502, 503, 504],
-            allowed_methods=["GET"],
+            total=getattr(self.config, 'retry_total', 3),
+            backoff_factor=getattr(self.config, 'retry_backoff', 1.0),
+            status_forcelist=getattr(self.config, 'retry_statuses', [429, 500, 502, 503, 504]),
+            allowed_methods=getattr(self.config, 'retry_allowed_methods', ["GET"]),
         )
         adapter = HTTPAdapter(max_retries=retry_strategy)
         self.session.mount("https://", adapter)
@@ -148,7 +155,7 @@ class GNMAHistoricalDownloader:
         
         self.logger.info("Session configured with authentication cookies")
     
-    def _get_prefix_folder(self, prefix: str) -> Path:
+    def _get_prefix_data_folder(self, prefix: str) -> Path:
         """
         Get the appropriate download folder for a given prefix.
         
@@ -158,11 +165,11 @@ class GNMAHistoricalDownloader:
         Returns:
             Path object for the prefix-specific download folder
         """
-        base_path = Path(self.config.download_folder)
+        base_path = Path(self.config.data_download_folder)
         
         if self.config.use_prefix_subfolders:
             # Create path: download_folder/raw/prefix
-            prefix_path = base_path / self.config.raw_folder_name / prefix
+            prefix_path = base_path / "raw" / prefix
         else:
             # Use the base download folder
             prefix_path = base_path
@@ -172,7 +179,7 @@ class GNMAHistoricalDownloader:
         
         return prefix_path
 
-    def _get_schema_folder(self, prefix: str) -> Path:
+    def _get_prefix_schema_folder(self, prefix: str) -> Path:
         """
         Get the appropriate schema download folder for a given prefix.
         
@@ -186,16 +193,146 @@ class GNMAHistoricalDownloader:
         
         if self.config.use_prefix_subfolders:
             # Create path: schema_download_folder/raw/prefix
-            schema_path = base_path / self.config.schema_folder_name / prefix
+            schema_path = base_path / "raw" / prefix
         else:
             # Use the schema download folder with schema subfolder
-            schema_path = base_path / self.config.schema_folder_name
+            schema_path = base_path / "raw"
         
         # Create the directory if it doesn't exist
         schema_path.mkdir(parents=True, exist_ok=True)
         
         return schema_path
 
+    def _create_all_prefix_folders(self):
+        """
+        Create all prefix folders upfront for organization.
+
+        This creates a folder structure like:
+            data/raw/prefix
+            data/clean/prefix
+            dictionary_files/raw/prefix
+            dictionary_files/clean/prefix
+        for each prefix in the prefix dictionary.
+
+        Note that only the raw folders are used in the downloader when saving data and schema files.
+        The clean folders are used in the processor and schema_reader when cleaning the data.
+        """
+        created_folders = []
+        existing_folders = []
+        
+        # Define base directories
+        base_dirs = [
+            Path(self.config.data_download_folder) / "raw",  # data/raw
+            Path(self.config.schema_download_folder) / "raw",  # dictionary_files/raw
+            Path(self.config.data_download_folder) / "clean",  # data/clean
+            Path(self.config.schema_download_folder) / "clean",  # dictionary_files/clean
+        ]
+        
+        # Create base directories first
+        for base_dir in base_dirs:
+            base_dir.mkdir(parents=True, exist_ok=True)
+            self.logger.info(f"Ensured base directory exists: {base_dir}")
+        
+        # Create folders for each prefix
+        prefixes = [key for key in self.prefix_dict.keys() if not key.startswith('#')]
+        
+        for base_dir in base_dirs:
+            for prefix in prefixes:
+                folder_path = base_dir / prefix
+                
+                if folder_path.exists():
+                    existing_folders.append(str(folder_path))
+                else:
+                    folder_path.mkdir(parents=True, exist_ok=True)
+                    created_folders.append(str(folder_path))
+        
+        # Log results
+        self.logger.info(f"Created {len(created_folders)} new folders for {len(prefixes)} prefixes")
+        self.logger.info(f"Skipped {len(existing_folders)} existing folders")
+
+    # ==========================================
+    # Helper Functions
+    # ==========================================
+    @staticmethod
+    def get_date_format(date_string: str) -> str:
+        """
+        Analyzes a date string and returns the corresponding strptime/strftime format.
+        
+        Args:
+            date_string: The string containing the date to analyze
+            
+        Returns:
+            The detected strptime/strftime format string
+            
+        Raises:
+            DateFormatError: If the format cannot be determined
+        """
+        if not isinstance(date_string, str):
+            raise TypeError("Input must be a string.")
+        
+        patterns = {
+            r'^\d{4}-\d{2}-\d{2}$': '%Y-%m-%d',  # YYYY-MM-DD
+            r'^\d{4}/\d{2}/\d{2}$': '%Y/%m/%d',  # YYYY/MM/DD
+            r'^\d{2}/\d{2}/\d{4}$': '%m/%d/%Y',  # MM/DD/YYYY
+            r'^\d{2}-\d{2}-\d{4}$': '%m-%d-%Y',  # MM-DD-YYYY
+            r'^\d{8}$': '%Y%m%d',              # YYYYMMDD
+            r'^\d{6}$': '%Y%m',                # YYYYMM
+            r'^\d{14}$': '%Y%m%d%H%M%S',       # YYYYMMDDHHMMSS
+        }
+        
+        for pattern, date_format in patterns.items():
+            if re.match(pattern, date_string):
+                # Validate the date
+                try:
+                    datetime.datetime.strptime(date_string, date_format)
+                    return date_format
+                except ValueError:
+                    continue
+        
+        raise DateFormatError(f"Could not determine date format for input: '{date_string}'")
+    
+    @staticmethod
+    def create_date_suffix(
+        current_date: datetime.datetime,
+        date_format: str,
+        frequency: str,
+        firstlast: str = 'last',
+    ) -> str:
+        """
+        Create a date suffix based on the current date, format, frequency, and period.
+        
+        Args:
+            current_date: The reference date
+            date_format: The desired output format
+            frequency: 'monthly', 'quarterly', or 'yearly'
+            firstlast: 'first' or 'last' day of the period
+            
+        Returns:
+            Formatted date string
+        """
+        # Convert to pandas period
+        period_map = {
+            'monthly': 'M',
+            'quarterly': 'Q', 
+            'yearly': 'Y'
+        }
+        
+        if frequency not in period_map:
+            raise ValueError(f"Unsupported frequency: {frequency}")
+        
+        date_period = pd.Series(current_date).dt.to_period(period_map[frequency])
+        
+        # Get appropriate date
+        if firstlast == 'first':
+            key_date = date_period.dt.start_time[0]
+        else:
+            key_date = date_period.dt.end_time[0]
+        
+        return key_date.strftime(date_format)
+
+    # ==========================================
+    # Data File Downloading
+    # ==========================================
     def download_data_file(self, url: str, local_path: Union[str, Path], skip_existing: bool = True) -> bool:
         """
         Download a single file.
@@ -220,14 +357,25 @@ class GNMAHistoricalDownloader:
         
         try:
             self.logger.info(f"Downloading: {url}")
-            response = self.session.get(url, timeout=30)
-            response.raise_for_status()
+            if getattr(self.config, 'stream_downloads', False):
+                with self.session.get(url, timeout=getattr(self.config, 'request_timeout_s', 30), stream=True) as response:
+                    response.raise_for_status()
+                    with open(local_path, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=getattr(self.config, 'stream_chunk_size', 1024*1024)):
+                            if chunk:
+                                f.write(chunk)
+            else:
+                response = self.session.get(url, timeout=getattr(self.config, 'request_timeout_s', 30))
+                response.raise_for_status()
+                with open(local_path, 'wb') as f:
+                    f.write(response.content)
             
-            # Write file
-            with open(local_path, 'wb') as f:
-                f.write(response.content)
-            
-            self.logger.info(f"Downloaded: {local_path} ({len(response.content)} bytes)")
+            # We may not know content length when streaming; log file size from disk
+            try:
+                size = local_path.stat().st_size
+            except Exception:
+                size = -1
+            self.logger.info(f"Downloaded: {local_path} ({size} bytes)")
             
             # Add delay
             time.sleep(self.config.request_delay)
@@ -307,6 +455,9 @@ class GNMAHistoricalDownloader:
             'yearly': 12,
         }.get(prefix_config.get('frequency', 'monthly'), 1)
 
+        consecutive_misses = 0
+        miss_threshold = getattr(self.config, 'consecutive_miss_exit_threshold', None)
+
         while current_date <= end_date:
             # Create file name
             date_suffix = self.create_date_suffix(
@@ -318,13 +469,17 @@ class GNMAHistoricalDownloader:
             
             file_name = f"{prefix}_{date_suffix}.{prefix_config['extension']}"
             file_url = f"{self.config.base_url}/{file_name}"
-            prefix_folder = self._get_prefix_folder(prefix)
+            prefix_folder = self._get_prefix_data_folder(prefix)
             local_path = prefix_folder / file_name
 
             # Check if File is linked on page
             data_file = [x for x in data_links if file_name in x.get('href')]
-            if not data_file:
-                self.logger.warning(f"File {file_name} not found in data links")
+            if not data_file and getattr(self.config, 'require_link_on_page', True):
+                self.logger.debug(f"File {file_name} not found in data links; skipping (require_link_on_page=True)")
+                consecutive_misses += 1
+                if miss_threshold is not None and consecutive_misses >= miss_threshold:
+                    self.logger.info(f"Stopping early after {consecutive_misses} consecutive misses for {prefix}")
+                    break
                 current_date += relativedelta(months=step_months)
                 continue
 
@@ -332,6 +487,7 @@ class GNMAHistoricalDownloader:
             total_attempts += 1
             if self.download_data_file(file_url, str(local_path)):
                 successful_downloads += 1
+                consecutive_misses = 0
             
             # Move to next period
             current_date += relativedelta(months=step_months)
@@ -371,84 +527,10 @@ class GNMAHistoricalDownloader:
         self.logger.info(f"Download complete: {total_successful}/{total_attempts} files downloaded")
         
         return results
-    
-    @staticmethod
-    def get_date_format(date_string: str) -> str:
-        """
-        Analyzes a date string and returns the corresponding strptime/strftime format.
-        
-        Args:
-            date_string: The string containing the date to analyze
-            
-        Returns:
-            The detected strptime/strftime format string
-            
-        Raises:
-            DateFormatError: If the format cannot be determined
-        """
-        if not isinstance(date_string, str):
-            raise TypeError("Input must be a string.")
-        
-        patterns = {
-            r'^\d{4}-\d{2}-\d{2}$': '%Y-%m-%d',  # YYYY-MM-DD
-            r'^\d{4}/\d{2}/\d{2}$': '%Y/%m/%d',  # YYYY/MM/DD
-            r'^\d{2}/\d{2}/\d{4}$': '%m/%d/%Y',  # MM/DD/YYYY
-            r'^\d{2}-\d{2}-\d{4}$': '%m-%d-%Y',  # MM-DD-YYYY
-            r'^\d{8}$': '%Y%m%d',              # YYYYMMDD
-            r'^\d{6}$': '%Y%m',                # YYYYMM
-            r'^\d{14}$': '%Y%m%d%H%M%S',       # YYYYMMDDHHMMSS
-        }
-        
-        for pattern, date_format in patterns.items():
-            if re.match(pattern, date_string):
-                # Validate the date
-                try:
-                    datetime.datetime.strptime(date_string, date_format)
-                    return date_format
-                except ValueError:
-                    continue
-        
-        raise DateFormatError(f"Could not determine date format for input: '{date_string}'")
-    
-    @staticmethod
-    def create_date_suffix(
-        current_date: datetime.datetime,
-        date_format: str,
-        frequency: str,
-        firstlast: str = 'last',
-    ) -> str:
-        """
-        Create a date suffix based on the current date, format, frequency, and period.
-        
-        Args:
-            current_date: The reference date
-            date_format: The desired output format
-            frequency: 'monthly', 'quarterly', or 'yearly'
-            firstlast: 'first' or 'last' day of the period
-            
-        Returns:
-            Formatted date string
-        """
-        # Convert to pandas period
-        period_map = {
-            'monthly': 'M',
-            'quarterly': 'Q', 
-            'yearly': 'Y'
-        }
-        
-        if frequency not in period_map:
-            raise ValueError(f"Unsupported frequency: {frequency}")
-        
-        date_period = pd.Series(current_date).dt.to_period(period_map[frequency])
-        
-        # Get appropriate date
-        if firstlast == 'first':
-            key_date = date_period.dt.start_time[0]
-        else:
-            key_date = date_period.dt.end_time[0]
-        
-        return key_date.strftime(date_format)
 
+    # ==========================================
+    # Schema File Downloading
+    # ==========================================
     def download_schema_file(self, url: str, local_path: Union[str, Path], skip_existing: bool = True) -> bool:
         """
         Download a single schema/PDF file.
@@ -474,14 +556,18 @@ class GNMAHistoricalDownloader:
         
         try:
             self.logger.info(f"Downloading schema: {url}")
-            response = self.session.get(url, timeout=30)
+            response = self.session.get(url, timeout=getattr(self.config, 'request_timeout_s', 30))
             response.raise_for_status()
             
             # Write file
             with open(local_path, 'wb') as f:
                 f.write(response.content)
             
-            self.logger.info(f"Downloaded schema: {local_path} ({len(response.content)} bytes)")
+            try:
+                size = local_path.stat().st_size
+            except Exception:
+                size = -1
+            self.logger.info(f"Downloaded schema: {local_path} ({size} bytes)")
             
             # Add delay
             time.sleep(self.config.request_delay)
@@ -511,7 +597,7 @@ class GNMAHistoricalDownloader:
         self.logger.info(f"Downloading schemas for prefix: {prefix}")
         
         # Get the schema folder for this prefix
-        schema_folder = self._get_schema_folder(prefix)
+        schema_folder = self._get_prefix_schema_folder(prefix)
         
         # Construct the URL for this prefix
         url = f"{self.config.schema_base_url}?prefix={prefix}"
@@ -597,51 +683,6 @@ class GNMAHistoricalDownloader:
         self.logger.info(f"Schema download complete: {total_successful}/{total_attempts} files downloaded")
         return results
 
-    def create_all_prefix_folders(self, include_clean: bool = True):
-        """
-        Create all prefix folders upfront for organization (like create_prefix_folders.py).
-        
-        Args:
-            include_clean: Whether to create 'clean' folders in addition to 'raw' folders
-            
-        """
-        created_folders = []
-        existing_folders = []
-        
-        # Define base directories
-        base_dirs = [
-            Path(self.config.download_folder) / self.config.raw_folder_name,  # data/raw
-            Path(self.config.schema_download_folder) / self.config.schema_folder_name,  # dictionary_files/raw
-        ]
-        
-        if include_clean:
-            base_dirs.extend([
-                Path(self.config.download_folder) / "clean",  # data/clean
-                Path(self.config.schema_download_folder) / "clean",  # dictionary_files/clean
-            ])
-        
-        # Create base directories first
-        for base_dir in base_dirs:
-            base_dir.mkdir(parents=True, exist_ok=True)
-            self.logger.info(f"Ensured base directory exists: {base_dir}")
-        
-        # Create folders for each prefix
-        prefixes = [key for key in self.prefix_dict.keys() if not key.startswith('#')]
-        
-        for base_dir in base_dirs:
-            for prefix in prefixes:
-                folder_path = base_dir / prefix
-                
-                if folder_path.exists():
-                    existing_folders.append(str(folder_path))
-                else:
-                    folder_path.mkdir(parents=True, exist_ok=True)
-                    created_folders.append(str(folder_path))
-        
-        # Log results
-        self.logger.info(f"Created {len(created_folders)} new folders for {len(prefixes)} prefixes")
-        self.logger.info(f"Skipped {len(existing_folders)} existing folders")
-
 
 ## Main Routine
 if __name__ == "__main__":
@@ -649,27 +690,35 @@ if __name__ == "__main__":
     # Load the environment variables
     load_dotenv()
 
-    # Load the configuration
+    # Read env and validate
+    email_value = os.getenv("email_value")
+    id_value = os.getenv("id_value")
+    user_agent = os.getenv("user_agent")
+    data_download_folder = os.getenv("data_download_folder", "data")
+    schema_download_folder = os.getenv("schema_download_folder", "dictionary_files")
+
+    missing = [k for k, v in {
+        'email_value': email_value,
+        'id_value': id_value,
+        'user_agent': user_agent,
+    }.items() if not v]
+    if missing:
+        raise SystemExit(f"Missing required env vars: {', '.join(missing)}. Please set them in your environment or .env file.")
+
+    # Load the configuration with sane defaults
     cfg = DownloadConfig(
-        email_value=os.getenv("email_value"),
-        id_value=os.getenv("id_value"),
-        user_agent=os.getenv("user_agent"),
-        download_folder=os.getenv("download_folder"),
-        schema_download_folder="dictionary_files",
-        dictionary_file="dictionary_files/prefix_dictionary.yaml",
-        request_delay=2.0,
-        use_prefix_subfolders=True,
-        raw_folder_name="raw",
+        email_value=email_value,
+        id_value=id_value,
+        user_agent=user_agent,
+        data_download_folder=data_download_folder,
+        schema_download_folder=schema_download_folder,
     )
 
     # Initialize the downloader
     downloader = GNMAHistoricalDownloader(cfg)
 
-    # Create all prefix folders
-    downloader.create_all_prefix_folders(include_clean=True)
-
     # Download all data
-    downloader.download_all_data()
+    # downloader.download_all_data()
 
     # Download all schemas
     downloader.download_all_schemas()
