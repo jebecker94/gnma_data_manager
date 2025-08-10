@@ -89,6 +89,10 @@ class SchemaReaderConfig:
     verbose: bool = False
     overwrite: bool = False
     logs_folder: Path = Path('./logs')
+    # Heuristic flags
+    merge_continuations: bool = True
+    apply_item_grouping: bool = True
+    extract_record_types: bool = True
 
 
 @dataclass
