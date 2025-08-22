@@ -30,21 +30,18 @@ of “Multiple Issuers” indicates Multiple Issuer Pool.",monthlySFS_MBS SF POR
 14,Number of loans in pool,Numeric,6,,,The current total number of loans in the pool.,monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 15,Pool UPB,Numeric,16,13.2,,"The sum of the Loan UPBs in the pool. This is the aggregate of
 the actual UPB balances of the loans in the pool.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-16,"Average Original Loan Size
-(AOLS)",Numeric,16,13.2,,"Original Loan Size (original principal amount of the loan) for the
+16,Average Original Loan Size (AOLS),Numeric,16,13.2,,"Original Loan Size (original principal amount of the loan) for the
 loans in the pool. This is a simple average, not a weighted
 average.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 17,WA Original Loan Size,Numeric,16,13.2,,"Weighted Average of the Original Loan Size (principal amount of
 the loan) of the loans in the pool.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 18,WA Interest Rate (WAC),Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of loans in the pool.
 This is the gross WA Interest Rate (not the Security Rate).",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-19,"WA Remaining Months to
-Maturity (WARM)",Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to pay
+19,WA Remaining Months to Maturity (WARM),Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to pay
 off the loans) for the loans in the pool.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 20,WA Loan Age (WALA),Numeric,3,,,"Weighted Average Loan Age (age of loans in months from the
 first scheduled payment date) for the loans in the pool.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-21,"WA Original Loan Term
-(WAOLT)",Numeric,3,,,"Weighted Average Original Loan Term (original term of loans in
+21,WA Original Loan Term (WAOLT),Numeric,3,,,"Weighted Average Original Loan Term (original term of loans in
 months) for the loans in the pool.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 22,WA Gross Margin (WAGM),Numeric,6,2.3,,"For ARM pools, the Weighted Average Gross Margin for the loans
 in the pool. For an adjustable rate loan, the Gross Margin is the
@@ -64,18 +61,13 @@ modified first scheduled installment date, where a loan has been
 modified and re-amortized.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 28,WA Pre-Modified OPB,Numeric,16,13.2,,"The Weighted Average value for modified loans of the original
 loan size (Pre-Modified OPB) before loan modification.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-29,"WA Interest Rate (WAC) at
-Issuance",Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of all loans in the pool
+29,WA Interest Rate (WAC) at Issuance,Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of all loans in the pool
 at issuance. Point Forward Field not populated in V1.1",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-30,"WA Remaining Months to
-Maturity (WARM) at
-Issuance",Numeric,3,,,"Weighted Average Remaining Maturity of all loans in the pool at
+30,WA Remaining Months to Maturity (WARM) at Issuance,Numeric,3,,,"Weighted Average Remaining Maturity of all loans in the pool at
 issuance. Point Forward Field not populated in V1.1",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-31,"WA Loan Age (WALA) at
-Issuance",Numeric,3,,,"Weighted Average Loan Age (age of loan in months) of all loans
+31,WA Loan Age (WALA) at Issuance,Numeric,3,,,"Weighted Average Loan Age (age of loan in months) of all loans
 in the pool at issuance. Point Forward Field not populated in V1.1",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
-32,"WA Original Loan Term
-(WAOLT) at Issuance",Numeric,3,,,"Weighted Average Original Loan Term (original length of loan in
+32,WA Original Loan Term (WAOLT) at Issuance,Numeric,3,,,"Weighted Average Original Loan Term (original length of loan in
 months) for all loans in the pool at issuance. Point Forward Field
 not populated in V1.1",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,PS,,
 01,Record Type = TP,Character,2,,,File Trailer Record,monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,TP,,
@@ -166,8 +158,7 @@ Issuer Pool for the Issuer.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Lay
 of the loan) of the loans in the Multiple Issuer Pool for the
 Issuer.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,02,,
 13,WA Interest Rate (WAC),Numeric,6,2.3,,Weighted Average Interest Rate (Coupon) of loans in the Multiple Issuer Pool for the Issuer. This is the gross WA Interest Rate (not the Security Rate).,monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,02,,
-14,"WA Remaining Months to Maturity
-(WARM)",Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to
+14,WA Remaining Months to Maturity (WARM),Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to
 pay off the loans) for the loans in the Multiple Issuer Pool for
 the Issuer.",monthlySFS_MBS SF PORTFOLIO - POOL SUPPLEMENTAL Layout V1.2.3 (Feb 2022 - Feb 2022).pdf,2022-02-01,2022-02-01,02,,
 15,WA Loan Age (WALA),Numeric,3,,,"Weighted Average Loan Age (age of loans in months from the

@@ -14,7 +14,7 @@ logs
 
 # Dictionary Files (PDF)
 dictionary_files/old
-dictionary_files/raw
+# dictionary_files/raw
 dictionary_files/clean_old
 
 # Config Files

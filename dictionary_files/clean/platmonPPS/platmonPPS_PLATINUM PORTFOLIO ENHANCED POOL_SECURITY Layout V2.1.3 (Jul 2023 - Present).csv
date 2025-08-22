@@ -28,8 +28,7 @@ all pools.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (
 Issuers” for all pools.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 14,Pool UPB,Numeric,16,13.2,,"The sum of the Loan UPBs in the pool. This is the aggregate of
 the actual UPB balances of the loans in the pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-15,"Average Original Loan Size
-(AOLS) - Weighted",Numeric,16,13.2,,"Original Loan Size (original principal amount of the loan) for the
+15,Average Original Loan Size (AOLS) - Weighted,Numeric,16,13.2,,"Original Loan Size (original principal amount of the loan) for the
 loans in the pool. This is a weighted average of the underlying
 pools’ Average Original Loan Size (AOLS).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 16,WA Original Loan Size,Numeric,16,13.2,,"Weighted Average of the Original Loan Size (principal amount of
@@ -38,13 +37,11 @@ the underlying pools’ Weighted Average Original Loan Size
 (WAOLS).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 17,WA Interest Rate (WAC),Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of loans in the pool.
 This is the gross WA Interest Rate (not the Security Rate).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-18,"WA Remaining Months to
-Maturity (WARM)",Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to pay
+18,WA Remaining Months to Maturity (WARM),Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to pay
 off the loans) for the loans in the pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 19,WA Loan Age (WALA),Numeric,3,,,"Weighted Average Loan Age (age of loans in months from the
 first scheduled payment date) for the loans in the pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-20,"WA Original Loan Term
-(WAOLT)",Numeric,3,,,"Weighted Average Original Loan Term (original term of loans in
+20,WA Original Loan Term (WAOLT),Numeric,3,,,"Weighted Average Original Loan Term (original term of loans in
 months) for the loans in the pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 21,WA Gross Margin (WAGM),Numeric,6,2.3,,"For ARM pools, the Weighted Average Gross Margin for the loans
 in the pool. For an adjustable rate loan, the Gross Margin is the
@@ -64,21 +61,16 @@ modified first scheduled installment date, where a loan has been
 modified and re-amortized.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
 27,WA Pre-Modified OPB,Numeric,16,13.2,,"The Weighted Average value for modified loans of the original
 loan size (Pre-Modified OPB) before loan modification.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-28,"WA Interest Rate (WAC) at
-Issuance",Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of all loans in the pool
+28,WA Interest Rate (WAC) at Issuance,Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of all loans in the pool
 at issuance. Point Forward field populated for new pools issued
 after implementation date of Platinum v2.0.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-29,"WA Remaining Months to
-Maturity (WARM) at
-Issuance",Numeric,3,,,"Weighted Average Remaining Maturity of all loans in the pool at
+29,WA Remaining Months to Maturity (WARM) at Issuance,Numeric,3,,,"Weighted Average Remaining Maturity of all loans in the pool at
 issuance. Point Forward field populated for new pools issued
 after implementation date of Platinum v2.0.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-30,"WA Loan Age (WALA) at
-Issuance",Numeric,3,,,"Weighted Average Loan Age (age of loan in months) of all loans
+30,WA Loan Age (WALA) at Issuance,Numeric,3,,,"Weighted Average Loan Age (age of loan in months) of all loans
 in the pool at issuance. Point Forward field populated for new
 pools issued after implementation date of Platinum v2.0.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
-31,"WA Original Loan Term
-(WAOLT) at Issuance",Numeric,3,,,"Weighted Average Original Loan Term (original length of loan in
+31,WA Original Loan Term (WAOLT) at Issuance,Numeric,3,,,"Weighted Average Original Loan Term (original length of loan in
 months) for all loans in the pool at issuance. Point Forward field
 populated for new pools issued after implementation date of
 Platinum v2.0.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,PS,,
@@ -111,15 +103,13 @@ MBS Guide Chapter 26). Values are:
 01 = 30-day look back
 02 = 45-day look back
 03 = Combination of 30-day and 45-day look back periods",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-08,"Interest Rate Adjustment
-Frequency",Character,2,,,"The nominal adjustment frequency of the collateral pools
+08,Interest Rate Adjustment Frequency,Character,2,,,"The nominal adjustment frequency of the collateral pools
 underlying the WAC ARM Platinum Pool. Is based on the
 Platinum WAC ARM pool type, which will reflect the nominal
 adjustment frequency of the collateral pools. For example,
 for a WC pool type, where all of the collateral pools are 5-
 year hybrid ARMs, then a value of “05” will be disclosed",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-09,"Weighted Average Mortgage
-Margin",Numeric,6,2.3,,"Weighted Average of the Mortgage Margins of the collateral
+09,Weighted Average Mortgage Margin,Numeric,6,2.3,,"Weighted Average of the Mortgage Margins of the collateral
 pools in the Platinum pool weighted by (the Pool RPB
 multiplied by the “percentage” in the pool).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
 10,Weighted Average Security Margin,Numeric,5,1.3,,Weighted Average of the Security Margins of the collateral pools in the Platinum pool weighted by (the Pool RPB multiplied by the “percentage” in the pool).,platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
@@ -135,46 +125,35 @@ Platinum pool. This is the gross rate.",platmonPPS_PLATINUM PORTFOLIO ENHANCED P
 pool. This is the net rate, ie. the security rate.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
 16,Minimum Security Rate,Numeric,6,2.3,,"The Minimum Security Rate of the pools in the Platinum pool.
 This is the net rate, ie. the security rate.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-17,"Weighted Average Lifetime Interest
-Rate Ceiling",Numeric,6,2.3,,"Weighted Average of the Lifetime Interest Rate Ceilings for
+17,Weighted Average Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"Weighted Average of the Lifetime Interest Rate Ceilings for
 the collateral pools in the Platinum pool weighted by (the
 Pool RPB multiplied by the “percentage” in the pool).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-18,"Maximum Lifetime Interest Rate
-Ceiling",Numeric,6,2.3,,"The maximum Lifetime Interest Rate Ceiling of the pools in
+18,Maximum Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"The maximum Lifetime Interest Rate Ceiling of the pools in
 the Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-19,"Minimum Lifetime Interest Rate
-Ceiling",Numeric,6,2.3,,"The minimum Lifetime Interest Rate Ceiling of the pools in
+19,Minimum Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"The minimum Lifetime Interest Rate Ceiling of the pools in
 the Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-20,"Weighted Average Next Interest
-Rate Ceiling",Numeric,6,2.3,,"Weighted Average of the Next Interest Rate Ceilings for the
+20,Weighted Average Next Interest Rate Ceiling,Numeric,6,2.3,,"Weighted Average of the Next Interest Rate Ceilings for the
 collateral pools in the Platinum pool weighted by (the Pool
 RPB multiplied by the “percentage” in the pool). The Next
 Interest Rate Ceiling is the ceiling associated with the initial
 period or the subsequent period as applicable to the
 collateral pools.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-21,"Maximum Lifetime Next Interest
-Rate Ceiling",Numeric,6,2.3,,"The maximum Next Interest Rate Ceiling of the pools in the
+21,Maximum Lifetime Next Interest Rate Ceiling,Numeric,6,2.3,,"The maximum Next Interest Rate Ceiling of the pools in the
 Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-22,"Minimum Lifetime Next Interest
-Rate Ceiling",Numeric,6,2.3,,"The minimum Next Interest Rate Ceiling of the pools in the
+22,Minimum Lifetime Next Interest Rate Ceiling,Numeric,6,2.3,,"The minimum Next Interest Rate Ceiling of the pools in the
 Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
 23,Weighted Average Lifetime Interest Rate Floor,Numeric,6,2.3,,Weighted Average of the Lifetime Interest Rate Floors for the collateral pools in the Platinum pool weighted by (the Pool RPB multiplied by the “percentage” in the pool).,platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-24,"Maximum Lifetime Interest Rate
-Floor",Numeric,6,2.3,,"The maximum Lifetime Interest Rate Floor of the pools in the
+24,Maximum Lifetime Interest Rate Floor,Numeric,6,2.3,,"The maximum Lifetime Interest Rate Floor of the pools in the
 Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-25,"Minimum Lifetime Interest Rate
-Floor",Numeric,6,2.3,,"The minimum Lifetime Interest Rate Floor of the pools in the
+25,Minimum Lifetime Interest Rate Floor,Numeric,6,2.3,,"The minimum Lifetime Interest Rate Floor of the pools in the
 Platinum pool.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-26,"Minimum Adjustment Date
-(Collateral)",Date,8,YYYYMMDD,,"The next interest rate adjustment date that is nearest to the
+26,Minimum Adjustment Date (Collateral),Date,8,YYYYMMDD,,"The next interest rate adjustment date that is nearest to the
 present date (the Disclosure As-Of Date) of all the collateral
 pools.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-27,"Weighted Average Months to Next
-Interest Rate Adjustment",Numeric,3,,,"Weighted Average of the Months to Next Adjustment, of the
+27,Weighted Average Months to Next Interest Rate Adjustment,Numeric,3,,,"Weighted Average of the Months to Next Adjustment, of the
 collateral pools in the Platinum pool weighted by (the Pool
 RPB multiplied by the “percentage” in the pool).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,01,,
-28,"Weighted Average of Months to
-Maturity",Numeric,3,,,"Weighted Average of the Months to Maturity Date for the
+28,Weighted Average of Months to Maturity,Numeric,3,,,"Weighted Average of the Months to Maturity Date for the
 collateral pools in the Platinum pool weighted by (the Pool
 RPB multiplied by the “percentage” in the pool). The number
 of months for each collateral pool is based on the Maturity
@@ -213,8 +192,7 @@ of the loan) of the loans in the Platinum Pool for the Issuer.",platmonPPS_PLATI
 11,WA Interest Rate (WAC),Numeric,6,2.3,,"Weighted Average Interest Rate (Coupon) of loans in the
 Platinum Pool for the Issuer. This is the gross WA Interest Rate
 (not the Security Rate).",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,02,,
-12,"WA Remaining Months to Maturity
-(WARM)",Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to
+12,WA Remaining Months to Maturity (WARM),Numeric,3,,,"Weighted Average Remaining Maturity (remaining months to
 pay off the loans) for the loans in the Platinum Pool for the
 Issuer.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,02,,
 13,WA Loan Age (WALA),Numeric,3,,,"Weighted Average Loan Age (age of loans in months from the
@@ -257,8 +235,7 @@ pools.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 
 Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 08,Reset Percentage of RPB,Numeric,7,3.3,,"The Percentage of the Security RPB of the collateral in the
 Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-09,"Reset Weighted Average Security
-Rate",Numeric,6,2.3,,"The Weighted Average of the Security Rate of the collateral in
+09,Reset Weighted Average Security Rate,Numeric,6,2.3,,"The Weighted Average of the Security Rate of the collateral in
 the Platinum WAC ARM Pool for the reset period. This is the
 net rate.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 10,Reset Maximum Security Rate,Numeric,6,2.3,,"The Maximum Security Rate of the collateral in the Platinum
@@ -271,32 +248,25 @@ gross rate.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 
 13,Reset Maximum Pool Rate,Numeric,6,2.3,,The Maximum Pool Rate of the collateral in the Platinum WAC ARM Pool for the reset period.,platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 14,Reset Minimum Pool Rate,Numeric,6,2.3,,"The Minimum Pool Rate of the collateral in the Platinum WAC
 ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-15,"Reset Weighted Average Security
-Margin",Numeric,5,1.3,,"The Weighted Average of the Security Margins of the
+15,Reset Weighted Average Security Margin,Numeric,5,1.3,,"The Weighted Average of the Security Margins of the
 collateral in the Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 16,Reset Maximum Security Margin,Numeric,5,1.3,,"The Maximum Security Margin of the collateral in the
 Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 17,Reset Minimum Security Margin,Numeric,5,1.3,,"The Minimum Security Margin of the collateral in the
 Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-18,"Reset Weighted Average Lifetime
-Interest Rate Ceiling",Numeric,6,2.3,,"The Weighted Average of the Lifetime Interest Rate Ceilings
+18,Reset Weighted Average Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"The Weighted Average of the Lifetime Interest Rate Ceilings
 of the collateral in the Platinum WAC ARM Pool for the reset
 period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-19,"Reset Maximum Lifetime Interest
-Rate Ceiling",Numeric,6,2.3,,"The Maximum Lifetime Interest Rate Ceiling of the collateral
+19,Reset Maximum Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"The Maximum Lifetime Interest Rate Ceiling of the collateral
 in the Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-20,"Reset Minimum Lifetime Interest
-Rate Ceiling",Numeric,6,2.3,,"The Minimum Lifetime Interest Rate Ceiling of the collateral
+20,Reset Minimum Lifetime Interest Rate Ceiling,Numeric,6,2.3,,"The Minimum Lifetime Interest Rate Ceiling of the collateral
 in the Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-21,"Reset Weighted Average Lifetime
-Interest Rate Floor",Numeric,6,2.3,,"The Weighted Average of the Lifetime Interest Rate Floors of
+21,Reset Weighted Average Lifetime Interest Rate Floor,Numeric,6,2.3,,"The Weighted Average of the Lifetime Interest Rate Floors of
 the collateral in the Platinum WAC ARM Pool for the reset
 period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-22,"Reset Maximum Lifetime Interest
-Rate Floor",Numeric,6,2.3,,"The Maximum Lifetime Interest Rate Floor of the collateral in
+22,Reset Maximum Lifetime Interest Rate Floor,Numeric,6,2.3,,"The Maximum Lifetime Interest Rate Floor of the collateral in
 the Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
-23,"Reset Minimum Lifetime Interest
-Rate Floor",Numeric,6,2.3,,"The Minimum Lifetime Interest Rate Floor of the collateral in
+23,Reset Minimum Lifetime Interest Rate Floor,Numeric,6,2.3,,"The Minimum Lifetime Interest Rate Floor of the collateral in
 the Platinum WAC ARM Pool for the reset period.",platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,03,,
 01,Record Type = 05,Character,2,,,Loan Type Government Insured/Guarantee Stratification,platmonPPS_PLATINUM PORTFOLIO ENHANCED POOL_SECURITY Layout V2.1.3 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,05,,
 02,CUSIP,Character,9,,,"The unique identification number permanently assigned by

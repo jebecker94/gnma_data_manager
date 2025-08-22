@@ -37,8 +37,6 @@ Item,Data Item,Begin,End,Type,Length,Remarks,File,Min_Date,Max_Date,Record_Type,
 2,File Name,2,23,Character,22,X(22),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,string,String
 3,File Number,24,26,Numeric,3,9(3),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
 4,Count of Pools in this file (Control Total),27,33,Numeric,7,9(7),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
-5,"Count of Loans with Forbearance in this file
-(Control Total)",34,42,Numeric,9,9(9),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
+5,Count of Loans with Forbearance in this file (Control Total),34,42,Numeric,9,9(9),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64
 7,As of Date (CCYYMM),52,57,Numeric,6,9(6),llmonforb_LOAN LEVEL FORBEARANCE SUPPLEMENTAL Layout V 1.1 (Dec 2021 - Present).pdf,2021-12-01,2099-12-31,Z,Int64,Int64

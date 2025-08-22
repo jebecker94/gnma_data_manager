@@ -79,8 +79,7 @@ Item,Data Item,Begin,End,Type,Length,Remarks,File,Min_Date,Max_Date,Record_Type,
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V1.6 (Jul 2014 - Feb 2015).pdf,2014-07-01,2015-02-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,H,string,String
 2,File Name,2,23,Character,22,X(22),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,H,string,String
@@ -167,8 +166,7 @@ headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES 
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.0 (Mar 2015 - Mar 2015).pdf,2015-03-01,2015-03-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,H,string,String
 2,File Name,2,23,Character,22,X(22),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,H,string,String
@@ -255,8 +253,7 @@ headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES 
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,H,string,String
 2,File Name,2,23,Character,22,X(22),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,H,string,String
@@ -346,8 +343,7 @@ headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES 
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.3 (Dec 2017 - Feb 2018).pdf,2017-12-01,2018-02-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,H,string,String
 2,File Name,2,23,Character,22,X(22),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,H,string,String
@@ -437,8 +433,7 @@ headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES 
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.4 (Mar 2018 - Jun 2023).pdf,2018-03-01,2023-06-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,H,string,String
 2,File Name,2,23,Character,22,X(22),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,H,string,String
@@ -528,6 +523,5 @@ headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES 
 3,File Number,24,26,Numeric,3,9(3),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),hdailyllmni_HMBS MONTHLY NEW ISSUES - LOAN LEVEL Layout V2.5 (Jul 2023 - Present).pdf,2023-07-01,2099-12-31,Z,Int64,Int64

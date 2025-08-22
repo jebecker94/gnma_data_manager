@@ -77,8 +77,7 @@ Item,Data Item,Begin,End,Type,Length,Remarks,File,Min_Date,Max_Date,Record_Type,
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.0 (Jul 2013 - Jul 2013).pdf",2013-07-01,2013-07-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,H,string,String
@@ -159,8 +158,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.4 (Aug 2013 - Aug 2013).pdf",2013-08-01,2013-08-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,H,string,String
@@ -242,8 +240,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V1.6 (Sep 2013 - Feb 2015).pdf",2013-09-01,2015-02-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,H,string,String
@@ -330,8 +327,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.0 (Mar 2015 - Mar 2015).pdf",2015-03-01,2015-03-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,H,string,String
@@ -418,8 +414,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,H,string,String
@@ -509,8 +504,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.3 (Dec 2017 - Feb 2018).pdf",2017-12-01,2018-02-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,H,string,String
@@ -600,8 +594,7 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.4 (Mar 2018 - Jun 2023).pdf",2018-03-01,2023-06-01,Z,Int64,Int64
 1,Record Type (H = File Header),1,1,Character,1,X,"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,H,string,String
 2,File Name,2,23,Character,22,X(22),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,H,string,String
@@ -691,6 +684,5 @@ headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL
 3,File Number,24,26,Numeric,3,9(3),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon1_HMBS PORTFOLIO - LOAN LEVEL, MONTHLY ADJUSTABLE Layout V2.5 (Jul 2023 - Present).pdf",2023-07-01,2099-12-31,Z,Int64,Int64

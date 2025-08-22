@@ -84,6 +84,5 @@ Item,Data Item,Begin,End,Type,Length,Remarks,File,Min_Date,Max_Date,Record_Type,
 3,File Number,24,26,Numeric,3,9(3),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 4,Count of Pools in this File (Control Total),27,33,Numeric,7,9(7),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 5,Count of Loans in this File (Control Total),34,42,Numeric,9,9(9),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
-6,"Total Record Count (Control Total including all
-headers and trailers)",43,51,Numeric,9,9(9),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
+6,Total Record Count (Control Total including all headers and trailers),43,51,Numeric,9,9(9),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64
 7,As-Of Date (CCYYMM),52,57,Numeric,6,9(6),"hllmon2_HMBS PORTFOLIO - LOAN LEVEL, FIXED AND ANNUAL ADJUSTABLE Layout V2.1 (Apr 2015 - Nov 2017).pdf",2015-04-01,2017-11-01,Z,Int64,Int64

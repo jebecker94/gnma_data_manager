@@ -374,6 +374,12 @@ class GNMASchemaReader:
         
         # Note: Column names already standardized during individual table extraction
         
+        # Normalize newlines within key name columns
+        # Replace any \r/\n in 'Data Item' or 'Data Element' cell values with spaces
+        for _col in ['Data Item', 'Data Element']:
+            if _col in df.columns:
+                df[_col] = df[_col].apply(lambda _v: _v.replace('\r', ' ').replace('\n', ' ') if isinstance(_v, str) else _v)
+        
         # Step 1: Add grouping logic for when Item field resets to 1
         if 'Item' in df.columns:
             
@@ -1657,8 +1663,13 @@ if __name__ == "__main__":
     # Initialize reader
     reader = GNMASchemaReader(config)
 
+    # Extract all schemas
+    reader.extract_schemas_to_csv()
+    # reader.extract_schemas_to_csv(prefixes=['nimonSFPS'])
+
     # Read all schemas
     reader.read_all_schemas()
+    # reader.read_all_schemas(prefixes=['nimonSFPS'])
 
     # Perform temporal and format analysis
     reader.analyze_temporal_coverage()

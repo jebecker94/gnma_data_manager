@@ -21,58 +21,47 @@ It will be either CMT (Constant Maturity Treasury), LIBOR
 Overnight Financing Rate). (SOFR implementation TBD).",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 07,Pool Issue Date,Date,8,YYYYMMDD,,The date the pool was issued.,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 08,Pool Maturity Date,Date,8,YYYYMMDD,,The date that the HMBS Platinum Pool matures.,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-09,"Original Aggregate
-Amount",Numeric,16,13.2,,"The sum of the original principal amounts for the collateral
+09,Original Aggregate Amount,Numeric,16,13.2,,"The sum of the original principal amounts for the collateral
 pools in the HMBS Platinum pool at issuance; the starting
 balance of the HMBS Platinum pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-10,"Pool Unpaid Principal
-Balance",Numeric,16,13.2,,"The sum of the underlying collateral pool UPBs for the
+10,Pool Unpaid Principal Balance,Numeric,16,13.2,,"The sum of the underlying collateral pool UPBs for the
 HMBS Platinum Pool for the reporting month.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 11,Security RPB,Numeric,16,13.2,,The remaining principal balance for the Security.,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 12,RPB Factor,Numeric,10,1.8,,"The decimal value of the Security’s Remaining Principal
 Balance divided by the Original Aggregate Amount. The
 factor is 1 at issuance, and zero in the period of final
 payment.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-13,"Unpaid Principal Balance
-of Participations with
-Payments",Numeric,14,11.2,,"The sum of Pools with Participations UPBs with Payments
+13,Unpaid Principal Balance of Participations with Payments,Numeric,14,11.2,,"The sum of Pools with Participations UPBs with Payments
 for the pools included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 14,Percent of UPB Paid Off,Numeric,6,3.2,,"The Paid Off UPBs of the HMBS Platinum Pool expressed as
 a percentage of the HMBS Platinum Pool’s total UPB.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-15,"Average Original
-Participation Size (AOPS)",Numeric,9,6.2,,"The Weighted Average of the underlying collateral pool
+15,Average Original Participation Size (AOPS),Numeric,9,6.2,,"The Weighted Average of the underlying collateral pool
 average participation Original Principal Balance (OPB)
 values (based on original Participation size at issuance), for
 all the collateral pools in the HMBS Platinum.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-16,"Current Period Average
-Balance",Numeric,14,11.2,,"The current month’s Weighted Average of the underlying
+16,Current Period Average Balance,Numeric,14,11.2,,"The current month’s Weighted Average of the underlying
 collateral pool average participation current Unpaid Principal
 Balance (UPB) values, for all the collateral pools in the
 HMBS Platinum.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-17,"Original Security Interest
-Rate (WAC)",Numeric,6,2.3,,"The Weighted Average Security Interest Rate (WAC) of the
+17,Original Security Interest Rate (WAC),Numeric,6,2.3,,"The Weighted Average Security Interest Rate (WAC) of the
 HMBS Platinum pool at pool issuance. The HMBS Platinum
 Pool Weighted Average Security Interest Rate is calculated
 using the original RPB amount of collateral pool and the
 corresponding original security rate of the collateral pool of
 each of the HMBS pools (and if applicable HMBS Platinum
 pools) in the Platinum pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-18,"Current Security Interest
-Rate (WAC)",Numeric,6,2.3,,"The current month’s Weighted Average Security Interest
+18,Current Security Interest Rate (WAC),Numeric,6,2.3,,"The current month’s Weighted Average Security Interest
 Rate for the Platinum pool. The HMBS Platinum Pool
 Weighted Average Security Interest Rate is calculated using
 the current RPB amount of collateral pool and the",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
 Col0,Col1,Col2,Col3,Col4,,corresponding current security rate of the collateral pool of each of the HMBS pools (and if applicable HMBS Platinum pools) in the Platinum pool.,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-19,"Prospective Security
-Interest Rate",Numeric,6,2.3,,"The prospective WAC of the pool. This is the rate that will be
+19,Prospective Security Interest Rate,Numeric,6,2.3,,"The prospective WAC of the pool. This is the rate that will be
 in effect for the next report period.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
-20,"WA Loan Age (WALA) of
-the Participations",Numeric,3,9(3),,"The average Loan age (based on HECM Loan Origination
+20,WA Loan Age (WALA) of the Participations,Numeric,3,9(3),,"The average Loan age (based on HECM Loan Origination
 date) for all the participations in the collateral pools,
 weighted by the UPB of the participations that are in the
 collateral pools.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,Int64,Int64
-21,"WA Expected Mortgage
-Interest Rate",Numeric,6,2.3,,"Weighted Average of Expected Average Mortgage Interest
+21,WA Expected Mortgage Interest Rate,Numeric,6,2.3,,"Weighted Average of Expected Average Mortgage Interest
 Rate for each loan represented by the participations in the
 collateral pools. The Expected Average Mortgage Interest
 Rate is the original expected average mortgage interest.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,PPS,,
@@ -95,19 +84,15 @@ Pool; this is assigned by Ginnie Mae at pool issuance.",hplatmonS_HMBS PLATINUM 
 HMBS Platinum Pools.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,02,,
 05,Pool Type,Character,2,,,"The type of HMBS Platinum Pool. Appendix 1 provides a
 listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,02,,
-06,"Eligible Non-Borrowing Spouse
-UPB of Participations",Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
+06,Eligible Non-Borrowing Spouse UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
 participations that are associated with a loan that has one or
 more Eligible Non-Borrowing Spouses, for the pools included
 in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,02,,
 07,Eligible Non-Borrowing Spouse UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a loan that has one or more Eligible Non-Borrowing Spouses, expressed as a percentage of the HMBS Platinum Pool’s UPB. This UPB percentage is calculated by dividing the total participation UPB of the given condition (Eligible Non- Borrowing Spouse) by the HMBS Platinum Pool’s UPB.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,02,,
-08,"Remaining Property Charges Set
-Aside UPB of Participations",Numeric,14,11.2,,"Total UPB of the participations associated with a loan that has
+08,Remaining Property Charges Set Aside UPB of Participations,Numeric,14,11.2,,"Total UPB of the participations associated with a loan that has
 a non-zero Remaining Property Charges Set Aside amount, for
 the pools included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,02,,
-09,"Remaining Property Charges Set
-Aside UPB of Participations as %
-of Pool UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+09,Remaining Property Charges Set Aside UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has a non-zero Remaining Property Charges Set
 Aside amount, expressed as a percentage of the HMBS
 Platinum Pool’s UPB. This UPB percentage is calculated by
@@ -139,8 +124,7 @@ an FHA case number assigned on or after September 30, 2013)
 participations associated with a loan that has the Payment
 Option value, for the pools included in the HMBS Platinum
 Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,03,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Payment Option value, expressed as a
 percentage of the HMBS Platinum Pool’s UPB. This UPB
 percentage is calculated by dividing the total participation
@@ -166,8 +150,7 @@ listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL 
 participations associated with a loan that has the Property
 Type value, for the pools included in the HMBS Platinum
 Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,04,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Property Type value, expressed as a
 percentage of the HMBS Platinum Pool’s UPB. This UPB
 percentage is calculated by dividing the total participation
@@ -183,8 +166,7 @@ Pool; this is assigned by Ginnie Mae at pool issuance.",hplatmonS_HMBS PLATINUM 
 HMBS Platinum Pools.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,05,,
 05,Pool Type,Character,2,,,"The type of HMBS Platinum Pool. Appendix 1 provides a
 listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,05,,
-06,"Age of Youngest Borrower/Co-
-borrower",Numeric,2,,,"Age is computed from Birth Date, and is the age of the
+06,Age of Youngest Borrower/Co- borrower,Numeric,2,,,"Age is computed from Birth Date, and is the age of the
 youngest Borrower/Co-borrower who is at least 62 years old:
 1 = Age is 62-65
 2 = Age is 66-70
@@ -201,8 +183,7 @@ participations associated with a loan that has a youngest
 borrower/co-borrower with an age in the borrower/co-
 borrower grouping for the pools included in the HMBS
 Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,05,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has a youngest borrower/co-borrower with an age in
 the borrower/co-borrower grouping, expressed as a percentage
 of the HMBS Platinum Pool’s UPB. This UPB percentage is
@@ -220,8 +201,7 @@ Pool; this is assigned by Ginnie Mae at pool issuance.",hplatmonS_HMBS PLATINUM 
 HMBS Platinum Pools.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,06,,
 05,Pool Type,Character,2,,,"The type of HMBS Platinum Pool. Appendix 1 provides a
 listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,06,,
-06,"Age of Youngest Eligible Non-
-Borrowing Spouse",Numeric,2,,,"Age is computed from Birth Date and is the age of the
+06,Age of Youngest Eligible Non- Borrowing Spouse,Numeric,2,,,"Age is computed from Birth Date and is the age of the
 youngest eligible Non-Borrowing Spouse (if any):",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,06,,
 Col0,Col1,Col2,Col3,Col4,,1 = Age is under 40 2 = Age is 40-49 3 = Age is 50-59 4 = Age is 60-69 5 = Age is 70-79 6 = Age is 80+ 9 = Not Available,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,06,,
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
@@ -229,8 +209,7 @@ participations associated with a loan where the youngest
 eligible non-borrowing spouse has an age in the eligible non-
 borrowing spouse age grouping, for the pools included in the
 HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,06,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan where the youngest eligible non-borrowing spouse has an
 age in the eligible non-borrowing spouse age grouping,
 expressed as a percentage of the HMBS Platinum Pool’s UPB.
@@ -254,8 +233,7 @@ Values are:
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Balance (UPB) of the participations in the
 pool for the MSA Value, for the pools included in the HMBS
 Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,07,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool for the MSA value,
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool for the MSA value,
 expressed as a percentage of the HMBS Platinum Pool’s UPB.
 This UPB percentage is calculated by dividing the total
 participation UPB of the given condition (MSA value) by the
@@ -273,8 +251,7 @@ property exists. See Appendix 2 for a listing of state codes.",hplatmonS_HMBS PL
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Balance (UPB) of the participations in the
 pool for the State Code value, for the pools included in the
 HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,08,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool for the State Code
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool for the State Code
 value, expressed as a percentage of the HMBS Platinum
 Pool’s UPB. This UPB percentage is calculated by dividing
 the total participation UPB of the given condition (State Code
@@ -296,8 +273,7 @@ listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL 
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
 participations associated with a loan that has the Loan Purpose
 value, for the pools included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,09,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Loan Purpose value, expressed as a
 percentage of the HMBS Platinum Pool’s UPB. This UPB
 percentage is calculated by dividing the total participation
@@ -318,8 +294,7 @@ N = Standard",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
 participations associated with a loan that has the HECM Saver
 value, for the pools included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,10,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the HECM Saver value, expressed as a
 percentage of the HMBS Platinum Pool’s UPB. This UPB
 percentage is calculated by dividing the total participation
@@ -339,8 +314,7 @@ Pool; this is assigned by Ginnie Mae at pool issuance.",hplatmonS_HMBS PLATINUM 
 04,Pool Indicator,Character,1,Col4,,Identifies the Issue Type of the pool. This is always “H” for HMBS Platinum Pools.,hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,11,,
 05,Pool Type,Character,2,,,"The type of HMBS Platinum Pool. Appendix 1 provides a
 listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,11,,
-06,"Low and Moderate Borrower
-Income",Character,1,,,"Values are:
+06,Low and Moderate Borrower Income,Character,1,,,"Values are:
 Y = Borrower Income is Less than 80% of the FFIEC Median
 Family Income (MFI)
 N = Borrower Income is Greater than or Equal to 80% of the
@@ -350,8 +324,7 @@ FFIEC Median Family Income (MFI)
 participations associated with a loan that has the Low and
 Moderate Borrower Income value, for the pools included in
 the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,11,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Low and Moderate Borrower Income value,
 expressed as a percentage of the HMBS Platinum Pool’s UPB.
 This UPB percentage is calculated by dividing the total
@@ -373,8 +346,7 @@ listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL 
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
 participations associated with a loan that has the Not Available
 Value, for the pools included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,12,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Not Available Value, expressed as a
 percentage of the HMBS Platinum Pool’s UPB. This UPB
 percentage is calculated by dividing the total participation
@@ -394,8 +366,7 @@ listing of pool types.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL 
 06,Joint/Single Loan Indicator,Numeric,1,,,"Joint/Single Loan Indicator. Values are:
 1 = Single
 2 = Joint",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,13,,
-07,"Youngest Borrower/Co-borrower
-Sex",Character,1,,,"Sex of the youngest borrower/co-borrower. Values are:
+07,Youngest Borrower/Co-borrower Sex,Character,1,,,"Sex of the youngest borrower/co-borrower. Values are:
 F = Female
 M = Male
 9 = Not Available",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,13,,
@@ -403,8 +374,7 @@ M = Male
 participations associated with a loan that has the Joint-Single
 Loan Indicator value/Sex value combination, for the pools
 included in the HMBS Platinum Pool.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,13,,
-09,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+09,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Joint-Single Loan Indicator value/Sex value
 combination, expressed as a percentage of the HMBS
 Platinum Pool’s UPB. This UPB percentage is calculated by
@@ -431,8 +401,7 @@ N = Not Rural Area (RUCA Code 1-3)
 07,UPB of Participations,Numeric,14,11.2,,"The total Unpaid Principal Balance (UPB) of the
 participations in the pool associated with a loan that has the
 Rural Area value.",hplatmonS_HMBS PLATINUM PORTFOLIO – POOL SUPPLEMENTAL Layout V2.0 (Dec 2024 - Present).pdf,2024-12-01,2099-12-31,14,,
-08,"UPB of Participations as % of Pool
-UPB",Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
+08,UPB of Participations as % of Pool UPB,Numeric,6,3.2,,"Total UPB of the participations in the pool associated with a
 loan that has the Rural Area value, expressed as a percentage
 of the Pool’s UPB. This UPB percentage is calculated by
 dividing the total participation UPB of the given condition

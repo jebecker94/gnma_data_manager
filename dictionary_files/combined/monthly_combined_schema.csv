@@ -290,8 +290,7 @@ Item,Data Item,Begin,End,Type,Length,Remarks,File,Min_Date,Max_Date,Record_Type,
 19,Median Debt Income Ratio (Q2),78,81,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,float64,Float64
 20,25th Percentile Debt Income Ratio (Q1),82,85,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,float64,Float64
 21,Minimum Debt Income Ratio (Q0),86,89,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,float64,Float64
-22,"Debt Income Ratio Not Available Number of
-Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,Int64,Int64
+22,Debt Income Ratio Not Available Number of Loans,90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,Int64,Int64
 23,Debt Income Ratio Not Available UPB,96,108,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,float64,Float64
 24,Debt Income Ratio Not Available % of Total UPB,109,113,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,float64,Float64
 25,Down Payment Assistance Number of Loans,114,119,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,U,Int64,Int64
@@ -388,8 +387,7 @@ Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 
 10,Repurchase Delinquent Loan Number of Loans,48,53,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,Int64,Int64
 11,Repurchase Delinquent Loan UPPB of Loans,54,66,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,float64,Float64
 12,Repurchase Delinquent Loan % UPB,67,71,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,float64,Float64
-13,"Foreclosure with Claim Payment Number of
-Loans",72,77,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,Int64,Int64
+13,Foreclosure with Claim Payment Number of Loans,72,77,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,Int64,Int64
 14,Foreclosure with Claim Payment UPB of Loans,78,90,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,float64,Float64
 15,Foreclosure with Claim Payment % UPB,91,95,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,float64,Float64
 16,Repurchase Loss Mitigation Number of Loans,96,101,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,R,Int64,Int64
@@ -464,28 +462,20 @@ Loans",72,77,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 
 10,Median LAD (Q2),33,35,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
 11,25th Percentile LAD (Q1),36,38,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
 12,Minimum LAD (Q0),39,41,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
-13,"Unpaid Principal Balance for Pre-Modified
-First Payment Date Loans",42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
-14,"Percent of Pool UPB for Pre-Modified First
-Payment Date Loans",55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
-15,"Number of Pre-Modified First Payment Date
-Loans",60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
-16,"Percent of Pool Loans that are Pre-Modified
-First Payment Date Loans",66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
-17,"Pre-Modified Average Original Loan Size
-(AOLS) **",71,78,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+13,Unpaid Principal Balance for Pre-Modified First Payment Date Loans,42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+14,Percent of Pool UPB for Pre-Modified First Payment Date Loans,55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+15,Number of Pre-Modified First Payment Date Loans,60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
+16,Percent of Pool Loans that are Pre-Modified First Payment Date Loans,66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+17,Pre-Modified Average Original Loan Size (AOLS) **,71,78,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 18,Maximum Pre-Modified OLS (Q4),79,86,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 19,75th Percentile Pre-Modified OLS (Q3),87,94,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 20,Median Pre-Modified OLS (Q2),95,102,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 21,25th Percentile Pre-Modified OLS (Q1),103,110,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 22,Minimum Pre-Modified OLS (Q0),111,118,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
-23,"Unpaid Principal Balance for Loans with Pre-
-Modified OPB",119,131,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
-24,"Percent of Pool UPB for Loans with Pre-
-Modified OPB",132,136,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+23,Unpaid Principal Balance for Loans with Pre- Modified OPB,119,131,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+24,Percent of Pool UPB for Loans with Pre- Modified OPB,132,136,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 25,Number of Loans with Pre-Modified OPB,137,142,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
-26,"Percent of Pool Loans that Have Pre-Modified
-OPB",143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
+26,Percent of Pool Loans that Have Pre-Modified OPB,143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,float64,Float64
 27,As-Of Date (CCYYMM),148,153,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,P,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,L,string,String
 2,Pool Number,10,15,Character,6,X(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,L,string,String
@@ -614,11 +604,9 @@ OPB",143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 -
 73,Not First Time Homebuyer Number of Loans,552,557,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
 74,Not First Time Homebuyer UPB,558,570,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
 75,Not First Time Homebuyer % of UPB,571,575,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
-76,"First Time Homebuyer Not Available Number
-of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
+76,First Time Homebuyer Not Available Number of Loans,576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
 77,First Time Homebuyer Not Available UPB,582,594,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
-78,"First Time Homebuyer Not Available % of
-UPB",595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
+78,First Time Homebuyer Not Available % of UPB,595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
 79,Broker Number of Loans,600,605,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
 80,Broker UPB of Loans,606,618,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
 81,Broker % of Total UPB,619,623,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
@@ -628,12 +616,9 @@ UPB",595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 -
 85,Retail Number of Loans,648,653,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
 86,Retail UPB of Loans,654,666,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
 87,Retail % of Total UPB,667,671,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
-88,"Origination Type Not Available Number of
-Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
-89,"Origination Type Not Available UPB of
-Loans",678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
-90,"Origination Type Not Available % of Total
-UPB",691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
+88,Origination Type Not Available Number of Loans,672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
+89,Origination Type Not Available UPB of Loans,678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
+90,Origination Type Not Available % of Total UPB,691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,float64,Float64
 91,Filler,696,883,Character,188,X(188),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,string,String
 92,As-Of Date (CCYYMM),884,889,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 - Jun 2013).pdf,2012-09-01,2013-06-01,F,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,D,string,String
@@ -927,8 +912,7 @@ UPB",691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.1 (Sep 2012 -
 19,Median Debt Income Ratio (Q2),78,81,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,float64,Float64
 20,25th Percentile Debt Income Ratio (Q1),82,85,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,float64,Float64
 21,Minimum Debt Income Ratio (Q0),86,89,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,float64,Float64
-22,"Debt Income Ratio Not Available Number of
-Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,Int64,Int64
+22,Debt Income Ratio Not Available Number of Loans,90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,Int64,Int64
 23,Debt Income Ratio Not Available UPB,96,108,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,float64,Float64
 24,Debt Income Ratio Not Available % of Total UPB,109,113,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,float64,Float64
 25,Down Payment Assistance Number of Loans,114,119,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,U,Int64,Int64
@@ -1100,28 +1084,20 @@ Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 
 10,Median LAD (Q2),33,35,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
 11,25th Percentile LAD (Q1),36,38,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
 12,Minimum LAD (Q0),39,41,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
-13,"Unpaid Principal Balance for Pre-Modified
-First Payment Date Loans",42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
-14,"Percent of Pool UPB for Pre-Modified First
-Payment Date Loans",55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
-15,"Number of Pre-Modified First Payment Date
-Loans",60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
-16,"Percent of Pool Loans that are Pre-Modified
-First Payment Date Loans",66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
-17,"Pre-Modified Average Original Loan Size
-(AOLS) **",71,78,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+13,Unpaid Principal Balance for Pre-Modified First Payment Date Loans,42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+14,Percent of Pool UPB for Pre-Modified First Payment Date Loans,55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+15,Number of Pre-Modified First Payment Date Loans,60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
+16,Percent of Pool Loans that are Pre-Modified First Payment Date Loans,66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+17,Pre-Modified Average Original Loan Size (AOLS) **,71,78,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 18,Maximum Pre-Modified OLS (Q4),79,86,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 19,75th Percentile Pre-Modified OLS (Q3),87,94,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 20,Median Pre-Modified OLS (Q2),95,102,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 21,25th Percentile Pre-Modified OLS (Q1),103,110,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 22,Minimum Pre-Modified OLS (Q0),111,118,Numeric,8,9(6)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
-23,"Unpaid Principal Balance for Loans with Pre-
-Modified OPB",119,131,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
-24,"Percent of Pool UPB for Loans with Pre-
-Modified OPB",132,136,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+23,Unpaid Principal Balance for Loans with Pre- Modified OPB,119,131,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+24,Percent of Pool UPB for Loans with Pre- Modified OPB,132,136,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 25,Number of Loans with Pre-Modified OPB,137,142,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
-26,"Percent of Pool Loans that Have Pre-Modified
-OPB",143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
+26,Percent of Pool Loans that Have Pre-Modified OPB,143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,float64,Float64
 27,As-Of Date (CCYYMM),148,153,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,P,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,L,string,String
 2,Pool Number,10,15,Character,6,X(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,L,string,String
@@ -1250,8 +1226,7 @@ OPB",143,147,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 -
 73,Not First Time Homebuyer Number of Loans,552,557,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
 74,Not First Time Homebuyer UPB,558,570,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 75,Not First Time Homebuyer % of UPB,571,575,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
-76,"First Time Homebuyer Not Available Number
-of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
+76,First Time Homebuyer Not Available Number of Loans,576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
 77,First Time Homebuyer Not Available UPB,582,594,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 78,First Time Homebuyer Not Available % of UPB,595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 79,Broker Number of Loans,600,605,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
@@ -1263,8 +1238,7 @@ of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 -
 85,Retail Number of Loans,648,653,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
 86,Retail UPB of Loans,654,666,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 87,Retail % of Total UPB,667,671,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
-88,"Origination Type Not Available Number of
-Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
+88,Origination Type Not Available Number of Loans,672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
 89,Origination Type Not Available UPB of Loans,678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 90,Origination Type Not Available % of Total UPB,691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,float64,Float64
 91,MIP 000 Number of Loans,696,701,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Mar 2015).pdf,2013-07-01,2015-03-01,F,Int64,Int64
@@ -1596,8 +1570,7 @@ Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V1.3 (Jul 2013 - Ma
 19,Median Debt Income Ratio (Q2),78,81,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,float64,Float64
 20,25th Percentile Debt Income Ratio (Q1),82,85,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,float64,Float64
 21,Minimum Debt Income Ratio (Q0),86,89,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,float64,Float64
-22,"Debt Income Ratio Not Available Number of
-Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,Int64,Int64
+22,Debt Income Ratio Not Available Number of Loans,90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,Int64,Int64
 23,Debt Income Ratio Not Available UPB,96,108,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,float64,Float64
 24,Debt Income Ratio Not Available % of Total UPB,109,113,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,float64,Float64
 25,Down Payment Assistance Number of Loans,114,119,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,U,Int64,Int64
@@ -1769,28 +1742,20 @@ Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 
 10,Median LAD (Q2),33,35,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
 11,25th Percentile LAD (Q1),36,38,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
 12,Minimum LAD (Q0),39,41,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
-13,"Unpaid Principal Balance for Pre-Modified
-First Payment Date Loans",42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
-14,"Percent of Pool UPB for Pre-Modified First
-Payment Date Loans",55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
-15,"Number of Pre-Modified First Payment Date
-Loans",60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
-16,"Percent of Pool Loans that are Pre-Modified
-First Payment Date Loans",66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
-17,"Pre-Modified Average Original Loan Size
-(AOLS) **",71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+13,Unpaid Principal Balance for Pre-Modified First Payment Date Loans,42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+14,Percent of Pool UPB for Pre-Modified First Payment Date Loans,55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+15,Number of Pre-Modified First Payment Date Loans,60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
+16,Percent of Pool Loans that are Pre-Modified First Payment Date Loans,66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+17,Pre-Modified Average Original Loan Size (AOLS) **,71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 18,Maximum Pre-Modified OLS (Q4),81,90,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 19,75th Percentile Pre-Modified OLS (Q3),91,100,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 20,Median Pre-Modified OLS (Q2),101,110,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 21,25th Percentile Pre-Modified OLS (Q1),111,120,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 22,Minimum Pre-Modified OLS (Q0),121,130,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
-23,"Unpaid Principal Balance for Loans with Pre-
-Modified OPB",131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
-24,"Percent of Pool UPB for Loans with Pre-
-Modified OPB",144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+23,Unpaid Principal Balance for Loans with Pre- Modified OPB,131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+24,Percent of Pool UPB for Loans with Pre- Modified OPB,144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 25,Number of Loans with Pre-Modified OPB,149,154,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
-26,"Percent of Pool Loans that Have Pre-Modified
-OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
+26,Percent of Pool Loans that Have Pre-Modified OPB,155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,float64,Float64
 27,As-Of Date (CCYYMM),160,165,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,P,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,L,string,String
 2,Pool Number,10,15,Character,6,X(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,L,string,String
@@ -1919,8 +1884,7 @@ OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 -
 73,Not First Time Homebuyer Number of Loans,552,557,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
 74,Not First Time Homebuyer UPB,558,570,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 75,Not First Time Homebuyer % of UPB,571,575,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
-76,"First Time Homebuyer Not Available Number of
-Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
+76,First Time Homebuyer Not Available Number of Loans,576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
 77,First Time Homebuyer Not Available UPB,582,594,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 78,First Time Homebuyer Not Available % of UPB,595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 79,Broker Number of Loans,600,605,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
@@ -1932,8 +1896,7 @@ Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - No
 85,Retail Number of Loans,648,653,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
 86,Retail UPB of Loans,654,666,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 87,Retail % of Total UPB,667,671,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
-88,"Origination Type Not Available Number of
-Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
+88,Origination Type Not Available Number of Loans,672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
 89,Origination Type Not Available UPB of Loans,678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 90,Origination Type Not Available % of Total UPB,691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,float64,Float64
 91,MIP 000 Number of Loans,696,701,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - Nov 2017).pdf,2015-04-01,2017-11-01,F,Int64,Int64
@@ -2298,8 +2261,7 @@ Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.1 (Apr 2015 - No
 19,Median Debt Income Ratio (Q2),78,81,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,float64,Float64
 20,25th Percentile Debt Income Ratio (Q1),82,85,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,float64,Float64
 21,Minimum Debt Income Ratio (Q0),86,89,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,float64,Float64
-22,"Debt Income Ratio Not Available Number of
-Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,Int64,Int64
+22,Debt Income Ratio Not Available Number of Loans,90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,Int64,Int64
 23,Debt Income Ratio Not Available UPB,96,108,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,float64,Float64
 24,Debt Income Ratio Not Available % of Total UPB,109,113,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,float64,Float64
 25,Down Payment Assistance Number of Loans,114,119,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,U,Int64,Int64
@@ -2471,28 +2433,20 @@ Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 
 10,Median LAD (Q2),33,35,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
 11,25th Percentile LAD (Q1),36,38,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
 12,Minimum LAD (Q0),39,41,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
-13,"Unpaid Principal Balance for Pre-Modified
-First Payment Date Loans",42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
-14,"Percent of Pool UPB for Pre-Modified First
-Payment Date Loans",55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
-15,"Number of Pre-Modified First Payment Date
-Loans",60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
-16,"Percent of Pool Loans that are Pre-Modified
-First Payment Date Loans",66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
-17,"Pre-Modified Average Original Loan Size
-(AOLS) **",71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+13,Unpaid Principal Balance for Pre-Modified First Payment Date Loans,42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+14,Percent of Pool UPB for Pre-Modified First Payment Date Loans,55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+15,Number of Pre-Modified First Payment Date Loans,60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
+16,Percent of Pool Loans that are Pre-Modified First Payment Date Loans,66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+17,Pre-Modified Average Original Loan Size (AOLS) **,71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 18,Maximum Pre-Modified OLS (Q4),81,90,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 19,75th Percentile Pre-Modified OLS (Q3),91,100,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 20,Median Pre-Modified OLS (Q2),101,110,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 21,25th Percentile Pre-Modified OLS (Q1),111,120,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 22,Minimum Pre-Modified OLS (Q0),121,130,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
-23,"Unpaid Principal Balance for Loans with Pre-
-Modified OPB",131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
-24,"Percent of Pool UPB for Loans with Pre-
-Modified OPB",144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+23,Unpaid Principal Balance for Loans with Pre- Modified OPB,131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+24,Percent of Pool UPB for Loans with Pre- Modified OPB,144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 25,Number of Loans with Pre-Modified OPB,149,154,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
-26,"Percent of Pool Loans that Have Pre-Modified
-OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
+26,Percent of Pool Loans that Have Pre-Modified OPB,155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,float64,Float64
 27,As-Of Date (CCYYMM),160,165,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,P,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,L,string,String
 2,Pool Number,10,15,Character,6,X(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,L,string,String
@@ -2621,8 +2575,7 @@ OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 -
 73,Not First Time Homebuyer Number of Loans,552,557,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
 74,Not First Time Homebuyer UPB,558,570,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 75,Not First Time Homebuyer % of UPB,571,575,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
-76,"First Time Homebuyer Not Available Number
-of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
+76,First Time Homebuyer Not Available Number of Loans,576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
 77,First Time Homebuyer Not Available UPB,582,594,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 78,First Time Homebuyer Not Available % of UPB,595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 79,Broker Number of Loans,600,605,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
@@ -2634,8 +2587,7 @@ of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 -
 85,Retail Number of Loans,648,653,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
 86,Retail UPB of Loans,654,666,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 87,Retail % of Total UPB,667,671,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
-88,"Origination Type Not Available Number of
-Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
+88,Origination Type Not Available Number of Loans,672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
 89,Origination Type Not Available UPB of Loans,678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 90,Origination Type Not Available % of Total UPB,691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,float64,Float64
 91,MIP 000 Number of Loans,696,701,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - May 2018).pdf,2017-12-01,2018-05-01,F,Int64,Int64
@@ -3020,8 +2972,7 @@ Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Dec 2017 - Ma
 19,Median Debt Income Ratio (Q2),78,81,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,float64,Float64
 20,25th Percentile Debt Income Ratio (Q1),82,85,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,float64,Float64
 21,Minimum Debt Income Ratio (Q0),86,89,Numeric,4,9(1)v9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,float64,Float64
-22,"Debt Income Ratio Not Available Number of
-Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,Int64,Int64
+22,Debt Income Ratio Not Available Number of Loans,90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,Int64,Int64
 23,Debt Income Ratio Not Available UPB,96,108,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,float64,Float64
 24,Debt Income Ratio Not Available % of Total UPB,109,113,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,float64,Float64
 25,Down Payment Assistance Number of Loans,114,119,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,U,Int64,Int64
@@ -3193,28 +3144,20 @@ Loans",90,95,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 
 10,Median LAD (Q2),33,35,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
 11,25th Percentile LAD (Q1),36,38,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
 12,Minimum LAD (Q0),39,41,Numeric,3,9(3),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
-13,"Unpaid Principal Balance for Pre-Modified
-First Payment Date Loans",42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
-14,"Percent of Pool UPB for Pre-Modified First
-Payment Date Loans",55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
-15,"Number of Pre-Modified First Payment Date
-Loans",60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
-16,"Percent of Pool Loans that are Pre-Modified
-First Payment Date Loans",66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
-17,"Pre-Modified Average Original Loan Size
-(AOLS) **",71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+13,Unpaid Principal Balance for Pre-Modified First Payment Date Loans,42,54,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+14,Percent of Pool UPB for Pre-Modified First Payment Date Loans,55,59,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+15,Number of Pre-Modified First Payment Date Loans,60,65,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
+16,Percent of Pool Loans that are Pre-Modified First Payment Date Loans,66,70,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+17,Pre-Modified Average Original Loan Size (AOLS) **,71,80,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 18,Maximum Pre-Modified OLS (Q4),81,90,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 19,75th Percentile Pre-Modified OLS (Q3),91,100,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 20,Median Pre-Modified OLS (Q2),101,110,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 21,25th Percentile Pre-Modified OLS (Q1),111,120,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 22,Minimum Pre-Modified OLS (Q0),121,130,Numeric,10,9(8)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
-23,"Unpaid Principal Balance for Loans with Pre-
-Modified OPB",131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
-24,"Percent of Pool UPB for Loans with Pre-
-Modified OPB",144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+23,Unpaid Principal Balance for Loans with Pre- Modified OPB,131,143,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+24,Percent of Pool UPB for Loans with Pre- Modified OPB,144,148,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 25,Number of Loans with Pre-Modified OPB,149,154,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
-26,"Percent of Pool Loans that Have Pre-Modified
-OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
+26,Percent of Pool Loans that Have Pre-Modified OPB,155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,float64,Float64
 27,As-Of Date (CCYYMM),160,165,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,P,Int64,Int64
 1,CUSIP Number,1,9,Character,9,X(9),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,L,string,String
 2,Pool Number,10,15,Character,6,X(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,L,string,String
@@ -3343,8 +3286,7 @@ OPB",155,159,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 -
 73,Not First Time Homebuyer Number of Loans,552,557,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
 74,Not First Time Homebuyer UPB,558,570,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 75,Not First Time Homebuyer % of UPB,571,575,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
-76,"First Time Homebuyer Not Available Number
-of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
+76,First Time Homebuyer Not Available Number of Loans,576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
 77,First Time Homebuyer Not Available UPB,582,594,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 78,First Time Homebuyer Not Available % of UPB,595,599,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 79,Broker Number of Loans,600,605,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
@@ -3356,8 +3298,7 @@ of Loans",576,581,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 -
 85,Retail Number of Loans,648,653,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
 86,Retail UPB of Loans,654,666,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 87,Retail % of Total UPB,667,671,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
-88,"Origination Type Not Available Number of
-Loans",672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
+88,Origination Type Not Available Number of Loans,672,677,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64
 89,Origination Type Not Available UPB of Loans,678,690,Numeric,13,9(11)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 90,Origination Type Not Available % of Total UPB,691,695,Numeric,5,9(3)v9(2),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,float64,Float64
 91,MIP 000 Number of Loans,696,701,Numeric,6,9(6),monthly_MBS (PORTFOLIO) Layout V2.2 (Jun 2018 - Oct 2020).pdf,2018-06-01,2020-10-01,F,Int64,Int64

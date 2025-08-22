@@ -151,14 +151,12 @@ P2,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V
 P3,,,,1,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Pool Indicator (X),String,"Pool Indicator: Designates whether a pool is a Ginnie Mae I or
 Ginnie Mae II pool. Always equal to “X” (Ginnie Mae I)."
 P4,,,,2,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Pool Type,String,Pool Type: The two-character pool type for the pool.
-P5,,,2.3,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Security Interest
-Rate",Numeric,"Security Interest Rate: The current interest rate associated with the
+P5,,,2.3,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Security Interest Rate,Numeric,"Security Interest Rate: The current interest rate associated with the
 Security."
 P6,,,CCYYMMDD,8,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Pool Issue Date,Date,Pool Issue Date: The date the pool was issued.
 P7,,,CCYYMMDD,8,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Pool Maturity Date,Date,"Pool Maturity Date: The date the pool matures, i.e., the pool last
 payment date."
-P8,,,13.2,16,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Original Aggregate
-Amount",Numeric,"Original Aggregate Amount: The pool principal balance at
+P8,,,13.2,16,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Original Aggregate Amount,Numeric,"Original Aggregate Amount: The pool principal balance at
 origination. This is the sum of the mortgage outstanding balances."
 P9,,,,4,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Issuer Number,Numeric,"Issuer Number: The number assigned by Ginnie Mae to the issuer
 organization."
@@ -171,44 +169,29 @@ P15,,,,5,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout 
 P16,,,,4,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Issuer Zip Code 2,Numeric,"Issuer Zip Code 2: The four additional digits to identify a
 geographic segment within the five-digit delivery area."
 P17,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Pool UPB,Numeric,Pool UPB: The sum of the loan UPB balances for the loans in this pool.
-P18,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Number of loans in
-pool",Numeric,Number of loans in pool: The number of loans in the pool.
-P19,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Number of Loans 30
-days delinquent",Numeric,"Number of Loans 30 days delinquent: The number of loans that are
+P18,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Number of loans in pool,Numeric,Number of loans in pool: The number of loans in the pool.
+P19,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Number of Loans 30 days delinquent,Numeric,"Number of Loans 30 days delinquent: The number of loans that are
 30 days delinquent."
-P20,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"UPB of Loans 30
-days delinquent",Numeric,"UPB of Loans 30 days delinquent: The UPB of loans that are 30
+P20,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,UPB of Loans 30 days delinquent,Numeric,"UPB of Loans 30 days delinquent: The UPB of loans that are 30
 days delinquent."
-P21,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Percentage of UPB
-of Loans 30 days
-delinquent",Numeric,"Percentage of UPB of Loans 30 days delinquent: The percentage of
+P21,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Percentage of UPB of Loans 30 days delinquent,Numeric,"Percentage of UPB of Loans 30 days delinquent: The percentage of
 UPB of loans that are 30 days delinquent."
-P22,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Number of Loans 60
-days delinquent",Numeric,"Number of Loans 60 days delinquent: The number of loans that are
+P22,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Number of Loans 60 days delinquent,Numeric,"Number of Loans 60 days delinquent: The number of loans that are
 60 days delinquent."
-P23,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"UPB of Loans 60
-days delinquent",Numeric,"UPB of Loans 60 days delinquent: The UPB of loans that are 60
+P23,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,UPB of Loans 60 days delinquent,Numeric,"UPB of Loans 60 days delinquent: The UPB of loans that are 60
 days delinquent."
-P24,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Percentage of UPB
-of Loans 60 days
-delinquent",Numeric,"Percentage of UPB of Loans 60 days delinquent: The percentage of
+P24,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Percentage of UPB of Loans 60 days delinquent,Numeric,"Percentage of UPB of Loans 60 days delinquent: The percentage of
 UPB of loans that are 60 days delinquent."
-P25,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Number of Loans
-90+ days delinquent",Numeric,"Number of Loans 90+ days delinquent: The number of loans that
+P25,,,,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Number of Loans 90+ days delinquent,Numeric,"Number of Loans 90+ days delinquent: The number of loans that
 are 90 days delinquent."
-P26,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"UPB of Loans 90+
-days delinquent",Numeric,"UPB of Loans 90+ days delinquent: The UPB of loans that are 90
+P26,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,UPB of Loans 90+ days delinquent,Numeric,"UPB of Loans 90+ days delinquent: The UPB of loans that are 90
 days delinquent."
-P27,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Percentage of UPB
-of Loans 90+ days
-delinquent",Numeric,"Percentage of UPB of Loans 90+ days delinquent: The percentage
+P27,,,3.2,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Percentage of UPB of Loans 90+ days delinquent,Numeric,"Percentage of UPB of Loans 90+ days delinquent: The percentage
 of UPB of loans that are 90 days delinquent."
 P28,,,11.2,14,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Security RPB,Numeric,"Security RPB: The Security remaining unpaid principal dollar
 amount of this pool as of the end of this reporting period."
 P29,,,1.8,10,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,RPB Factor,Numeric,"RPB Factor: Outstanding principal balance / original principal
 balance."
-P30,,,2.3,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,"Project Loan
-Security Interest
-Rate",Numeric,"Project Loan Security Interest Rate: The interest rate associated
+P30,,,2.3,6,mfplmon3_MULTIFAMILY POOL AND LOAN MONTHLY PORTFOLIO DISCLOSURE Layout V3.3 (Jun 2023 - Present).pdf,2023-06-01,2099-12-31,,,,Project Loan Security Interest Rate,Numeric,"Project Loan Security Interest Rate: The interest rate associated
 with the Permanent Project Loan Security, from the Prospectus.
 Will only be populated for CS Pool Types."

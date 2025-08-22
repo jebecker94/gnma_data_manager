@@ -36,8 +36,7 @@ place.",llmonliq_MBS SF LOAN LIQUIDATIONS MONTHLY Layout V1.0 (Sep 2018 - Feb 20
 LR-013,Unpaid Principal Balance (UPB),Numeric,16,13.2,"The Unpaid Principal Balance (UPB) of the loan as of
 the reporting period. This field will be blank if the loan
 is removed within 6 months of pool issuance.",llmonliq_MBS SF LOAN LIQUIDATIONS MONTHLY Layout V1.0 (Sep 2018 - Feb 2019).pdf,2018-09-01,2019-02-01,LR,,
-LR-014,"Liquidation Balance (principal
-pass through)",Numeric,16,13.2,"The unscheduled remaining principal of the loan that
+LR-014,Liquidation Balance (principal pass through),Numeric,16,13.2,"The unscheduled remaining principal of the loan that
 is being passed through, after taking into account
 scheduled principal remitted. This field will be blank if
 the loan is removed within 6 months of pool issuance.",llmonliq_MBS SF LOAN LIQUIDATIONS MONTHLY Layout V1.0 (Sep 2018 - Feb 2019).pdf,2018-09-01,2019-02-01,LR,,

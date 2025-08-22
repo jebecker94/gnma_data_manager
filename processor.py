@@ -122,8 +122,8 @@ class GNMADataProcessor:
     # ==========================================
     def _create_embedded_parser(self):
         class _Parser:
-            def __init__(self, verbose: bool = False):
-                self.verbose = verbose
+            def __init__(self, config: ProcessorConfig):
+                self.config = config
                 self.schema_cache = {}
                 self._format_cache = {}
 
@@ -148,20 +148,19 @@ class GNMADataProcessor:
                 else:
                     return 'UNKNOWN'
 
-            def analyze_prefix_format(self, prefix: str, schema_folder: Union[str, Path]) -> Dict:
+            def analyze_prefix_format(self, prefix: str) -> Dict:
                 """
                 Parse a GNMA data file using its corresponding schema.
                 
                 Args:
                     data_file_path: Path to the data file
-                    schema_file_path: Path to the schema CSV file
                     
                 Returns:
                     pd.DataFrame: Parsed data
                 """
                 if prefix in self._format_cache:
                     return self._format_cache[prefix]
-                schema_file = Path(schema_folder) / f"{prefix}_combined_schema.csv"
+                schema_file = Path(self.config.schema_folder) / f"{prefix}_combined_schema.csv"
                 if not schema_file.exists():
                     result = {
                         'prefix': prefix,
@@ -214,7 +213,7 @@ class GNMADataProcessor:
                     self._format_cache[prefix] = result
                     return result
 
-        return _Parser(verbose=getattr(self.config, 'verbose', False))
+        return _Parser(config=self.config)
 
     # ==========================================
     # Formatting (migrated from GNMADataFormatter)
@@ -1059,6 +1058,11 @@ if __name__ == "__main__":
 
     processor.create_prefix_subfolders()
 
-    # Process the LoanPerf Prefix
-    # result = processor.format_prefix("nissues")
-    # processor.process_multiple_prefixes(prefixes=['nissues'])
+    # Process the nimonSFPS Prefix
+    result = processor.stage_prefix("nimonSFPS")
+
+    # Stage all prefixes
+    processor.stage_all()
+
+    # Transform all prefixes
+    processor.transform_all()
